@@ -13,6 +13,9 @@
 		A636A03C272452E100BAD6E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A636A03A272452E100BAD6E8 /* Main.storyboard */; };
 		A636A03E272452E200BAD6E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A636A03D272452E200BAD6E8 /* Assets.xcassets */; };
 		A636A041272452E200BAD6E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A636A03F272452E200BAD6E8 /* LaunchScreen.storyboard */; };
+		A636A04927248F9D00BAD6E8 /* config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A04827248F9D00BAD6E8 /* config.swift */; };
+		A636A04C2724910B00BAD6E8 /* VehicleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A04A2724910B00BAD6E8 /* VehicleTableViewCell.swift */; };
+		A636A04D2724910B00BAD6E8 /* VehicleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A636A04B2724910B00BAD6E8 /* VehicleTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		A636A03D272452E200BAD6E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A636A040272452E200BAD6E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A636A042272452E200BAD6E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A636A04827248F9D00BAD6E8 /* config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = config.swift; sourceTree = "<group>"; };
+		A636A04A2724910B00BAD6E8 /* VehicleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleTableViewCell.swift; sourceTree = "<group>"; };
+		A636A04B2724910B00BAD6E8 /* VehicleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VehicleTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +46,7 @@
 		A636A028272452E100BAD6E8 = {
 			isa = PBXGroup;
 			children = (
+				A636A04827248F9D00BAD6E8 /* config.swift */,
 				A636A033272452E100BAD6E8 /* CarManager */,
 				A636A032272452E100BAD6E8 /* Products */,
 			);
@@ -63,6 +70,8 @@
 				A636A03D272452E200BAD6E8 /* Assets.xcassets */,
 				A636A03F272452E200BAD6E8 /* LaunchScreen.storyboard */,
 				A636A042272452E200BAD6E8 /* Info.plist */,
+				A636A04A2724910B00BAD6E8 /* VehicleTableViewCell.swift */,
+				A636A04B2724910B00BAD6E8 /* VehicleTableViewCell.xib */,
 			);
 			path = CarManager;
 			sourceTree = "<group>";
@@ -125,6 +134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A636A04D2724910B00BAD6E8 /* VehicleTableViewCell.xib in Resources */,
 				A636A041272452E200BAD6E8 /* LaunchScreen.storyboard in Resources */,
 				A636A03E272452E200BAD6E8 /* Assets.xcassets in Resources */,
 				A636A03C272452E100BAD6E8 /* Main.storyboard in Resources */,
@@ -139,6 +149,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A636A039272452E100BAD6E8 /* ViewController.swift in Sources */,
+				A636A04C2724910B00BAD6E8 /* VehicleTableViewCell.swift in Sources */,
+				A636A04927248F9D00BAD6E8 /* config.swift in Sources */,
 				A636A035272452E100BAD6E8 /* AppDelegate.swift in Sources */,
 				A636A037272452E100BAD6E8 /* SceneDelegate.swift in Sources */,
 			);
