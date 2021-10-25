@@ -11,14 +11,16 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var VehicleListTableView: UITableView!
     
+    let cars = ["octaha1", "octaha2", "octaha3"]
     let vehicleTableViewCellIdentifier = "VehicleTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.title = "My Garage"
         VehicleListTableView.delegate = self
         VehicleListTableView.dataSource = self
         VehicleListTableView.register(UINib(nibName: "VehicleTableViewCell", bundle: nil), forCellReuseIdentifier: vehicleTableViewCellIdentifier)
+        VehicleListTableView.separatorStyle = .none
     }
 
 
@@ -26,18 +28,22 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: vehicleTableViewCellIdentifier, for: indexPath) as? VehicleTableViewCell else {
             return UITableViewCell()
         }
-        cell.setup(vehicleName: "SomeName")
+        cell.setup(vehicleName: cars[indexPath.item])
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = VehicleDetailViewController()
+        vc.vehicleName = cars[indexPath.item]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension ViewController: UITableViewDelegate {
