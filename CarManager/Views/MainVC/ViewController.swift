@@ -28,21 +28,31 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return cars.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: vehicleTableViewCellIdentifier, for: indexPath) as? VehicleTableViewCell else {
             return UITableViewCell()
         }
-        cell.setup(vehicleName: cars[indexPath.item])
+        if indexPath.item == cars.count {
+            cell.setup(vehicleName: "Добавить новую машину")
+        } else {
+            cell.setup(vehicleName: cars[indexPath.item])
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = VehicleDetailViewController()
-        vc.vehicleName = cars[indexPath.item]
-        self.navigationController?.pushViewController(vc, animated: true)
+        if indexPath.item == cars.count {
+            let vc = NewVehicleViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+//            self.present(vc, animated: true, completion: nil)
+        } else {
+            let vc = VehicleDetailViewController()
+            vc.vehicleName = cars[indexPath.item]
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
 

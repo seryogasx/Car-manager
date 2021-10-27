@@ -20,6 +20,13 @@
 		A687A51027271DFC00C18EB7 /* VehicleInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A687A50E27271DFC00C18EB7 /* VehicleInfoTableViewCell.xib */; };
 		A687A513272720AC00C18EB7 /* VehicleTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A687A511272720AC00C18EB7 /* VehicleTitleTableViewCell.swift */; };
 		A687A514272720AC00C18EB7 /* VehicleTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A687A512272720AC00C18EB7 /* VehicleTitleTableViewCell.xib */; };
+		A6A549DC2729A0F000534A8F /* NewVehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549DA2729A0F000534A8F /* NewVehicleViewController.swift */; };
+		A6A549DD2729A0F000534A8F /* NewVehicleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A549DB2729A0F000534A8F /* NewVehicleViewController.xib */; };
+		A6A549E02729C33D00534A8F /* VehicleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549DF2729C33D00534A8F /* VehicleInfo.swift */; };
+		A6A549E32729CC7800534A8F /* NewVehicleTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549E12729CC7800534A8F /* NewVehicleTestViewController.swift */; };
+		A6A549E42729CC7800534A8F /* NewVehicleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A549E22729CC7800534A8F /* NewVehicleTestViewController.xib */; };
+		A6A549E72729CCD600534A8F /* NewVehicleManualAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549E52729CCD600534A8F /* NewVehicleManualAddViewController.swift */; };
+		A6A549E82729CCD600534A8F /* NewVehicleManualAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A549E62729CCD600534A8F /* NewVehicleManualAddViewController.xib */; };
 		A6EEB04C2726FFB200715F3A /* VehicleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EEB04A2726FFB200715F3A /* VehicleDetailViewController.swift */; };
 		A6EEB04D2726FFB200715F3A /* VehicleDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6EEB04B2726FFB200715F3A /* VehicleDetailViewController.xib */; };
 		A6EEB053272702A900715F3A /* VehicleNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EEB051272702A900715F3A /* VehicleNoteTableViewCell.swift */; };
@@ -42,6 +49,13 @@
 		A687A50E27271DFC00C18EB7 /* VehicleInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VehicleInfoTableViewCell.xib; sourceTree = "<group>"; };
 		A687A511272720AC00C18EB7 /* VehicleTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleTitleTableViewCell.swift; sourceTree = "<group>"; };
 		A687A512272720AC00C18EB7 /* VehicleTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VehicleTitleTableViewCell.xib; sourceTree = "<group>"; };
+		A6A549DA2729A0F000534A8F /* NewVehicleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewVehicleViewController.swift; sourceTree = "<group>"; };
+		A6A549DB2729A0F000534A8F /* NewVehicleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewVehicleViewController.xib; sourceTree = "<group>"; };
+		A6A549DF2729C33D00534A8F /* VehicleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleInfo.swift; sourceTree = "<group>"; };
+		A6A549E12729CC7800534A8F /* NewVehicleTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewVehicleTestViewController.swift; sourceTree = "<group>"; };
+		A6A549E22729CC7800534A8F /* NewVehicleTestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewVehicleTestViewController.xib; sourceTree = "<group>"; };
+		A6A549E52729CCD600534A8F /* NewVehicleManualAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewVehicleManualAddViewController.swift; sourceTree = "<group>"; };
+		A6A549E62729CCD600534A8F /* NewVehicleManualAddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewVehicleManualAddViewController.xib; sourceTree = "<group>"; };
 		A6EEB04A2726FFB200715F3A /* VehicleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleDetailViewController.swift; sourceTree = "<group>"; };
 		A6EEB04B2726FFB200715F3A /* VehicleDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VehicleDetailViewController.xib; sourceTree = "<group>"; };
 		A6EEB051272702A900715F3A /* VehicleNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleNoteTableViewCell.swift; sourceTree = "<group>"; };
@@ -79,6 +93,7 @@
 		A636A033272452E100BAD6E8 /* CarManager */ = {
 			isa = PBXGroup;
 			children = (
+				A6A549DE2729C33300534A8F /* Model */,
 				A6EEB04E2727021500715F3A /* Views */,
 				A636A034272452E100BAD6E8 /* AppDelegate.swift */,
 				A636A036272452E100BAD6E8 /* SceneDelegate.swift */,
@@ -89,9 +104,31 @@
 			path = CarManager;
 			sourceTree = "<group>";
 		};
+		A6A549D92729943900534A8F /* NewVehicleVC */ = {
+			isa = PBXGroup;
+			children = (
+				A6A549DA2729A0F000534A8F /* NewVehicleViewController.swift */,
+				A6A549DB2729A0F000534A8F /* NewVehicleViewController.xib */,
+				A6A549E12729CC7800534A8F /* NewVehicleTestViewController.swift */,
+				A6A549E22729CC7800534A8F /* NewVehicleTestViewController.xib */,
+				A6A549E52729CCD600534A8F /* NewVehicleManualAddViewController.swift */,
+				A6A549E62729CCD600534A8F /* NewVehicleManualAddViewController.xib */,
+			);
+			path = NewVehicleVC;
+			sourceTree = "<group>";
+		};
+		A6A549DE2729C33300534A8F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A6A549DF2729C33D00534A8F /* VehicleInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A6EEB04E2727021500715F3A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A6A549D92729943900534A8F /* NewVehicleVC */,
 				A6EEB0502727026100715F3A /* VehicleDetailVC */,
 				A6EEB04F2727024900715F3A /* MainVC */,
 			);
@@ -184,9 +221,12 @@
 			files = (
 				A636A04D2724910B00BAD6E8 /* VehicleTableViewCell.xib in Resources */,
 				A636A041272452E200BAD6E8 /* LaunchScreen.storyboard in Resources */,
+				A6A549E42729CC7800534A8F /* NewVehicleTestViewController.xib in Resources */,
+				A6A549E82729CCD600534A8F /* NewVehicleManualAddViewController.xib in Resources */,
 				A636A03E272452E200BAD6E8 /* Assets.xcassets in Resources */,
 				A687A514272720AC00C18EB7 /* VehicleTitleTableViewCell.xib in Resources */,
 				A636A03C272452E100BAD6E8 /* Main.storyboard in Resources */,
+				A6A549DD2729A0F000534A8F /* NewVehicleViewController.xib in Resources */,
 				A6EEB054272702A900715F3A /* VehicleNoteTableViewCell.xib in Resources */,
 				A687A51027271DFC00C18EB7 /* VehicleInfoTableViewCell.xib in Resources */,
 				A6EEB04D2726FFB200715F3A /* VehicleDetailViewController.xib in Resources */,
@@ -202,12 +242,16 @@
 			files = (
 				A687A50F27271DFC00C18EB7 /* VehicleInfoTableViewCell.swift in Sources */,
 				A687A513272720AC00C18EB7 /* VehicleTitleTableViewCell.swift in Sources */,
+				A6A549E32729CC7800534A8F /* NewVehicleTestViewController.swift in Sources */,
+				A6A549DC2729A0F000534A8F /* NewVehicleViewController.swift in Sources */,
 				A6EEB04C2726FFB200715F3A /* VehicleDetailViewController.swift in Sources */,
 				A636A039272452E100BAD6E8 /* ViewController.swift in Sources */,
 				A6EEB053272702A900715F3A /* VehicleNoteTableViewCell.swift in Sources */,
 				A636A04C2724910B00BAD6E8 /* VehicleTableViewCell.swift in Sources */,
 				A636A04927248F9D00BAD6E8 /* config.swift in Sources */,
 				A636A035272452E100BAD6E8 /* AppDelegate.swift in Sources */,
+				A6A549E02729C33D00534A8F /* VehicleInfo.swift in Sources */,
+				A6A549E72729CCD600534A8F /* NewVehicleManualAddViewController.swift in Sources */,
 				A636A037272452E100BAD6E8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
