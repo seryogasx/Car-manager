@@ -11,7 +11,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var VehicleListTableView: UITableView!
     
-    let cars = ["octaha1", "octaha2", "octaha3"]
+    let cars = ["octaha1", "octaha2"]
     let vehicleTableViewCellIdentifier = "VehicleTableViewCell"
     
     override func viewDidLoad() {

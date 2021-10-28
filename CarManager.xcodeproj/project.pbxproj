@@ -27,6 +27,8 @@
 		A6A549E42729CC7800534A8F /* NewVehicleTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A549E22729CC7800534A8F /* NewVehicleTestViewController.xib */; };
 		A6A549E72729CCD600534A8F /* NewVehicleManualAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549E52729CCD600534A8F /* NewVehicleManualAddViewController.swift */; };
 		A6A549E82729CCD600534A8F /* NewVehicleManualAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A549E62729CCD600534A8F /* NewVehicleManualAddViewController.xib */; };
+		A6A549EB272A823100534A8F /* NewVehicleManualAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549E9272A823100534A8F /* NewVehicleManualAddTableViewCell.swift */; };
+		A6A549EC272A823100534A8F /* NewVehicleManualAddTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A549EA272A823100534A8F /* NewVehicleManualAddTableViewCell.xib */; };
 		A6EEB04C2726FFB200715F3A /* VehicleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EEB04A2726FFB200715F3A /* VehicleDetailViewController.swift */; };
 		A6EEB04D2726FFB200715F3A /* VehicleDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6EEB04B2726FFB200715F3A /* VehicleDetailViewController.xib */; };
 		A6EEB053272702A900715F3A /* VehicleNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EEB051272702A900715F3A /* VehicleNoteTableViewCell.swift */; };
@@ -56,6 +58,8 @@
 		A6A549E22729CC7800534A8F /* NewVehicleTestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewVehicleTestViewController.xib; sourceTree = "<group>"; };
 		A6A549E52729CCD600534A8F /* NewVehicleManualAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewVehicleManualAddViewController.swift; sourceTree = "<group>"; };
 		A6A549E62729CCD600534A8F /* NewVehicleManualAddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewVehicleManualAddViewController.xib; sourceTree = "<group>"; };
+		A6A549E9272A823100534A8F /* NewVehicleManualAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewVehicleManualAddTableViewCell.swift; sourceTree = "<group>"; };
+		A6A549EA272A823100534A8F /* NewVehicleManualAddTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewVehicleManualAddTableViewCell.xib; sourceTree = "<group>"; };
 		A6EEB04A2726FFB200715F3A /* VehicleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleDetailViewController.swift; sourceTree = "<group>"; };
 		A6EEB04B2726FFB200715F3A /* VehicleDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VehicleDetailViewController.xib; sourceTree = "<group>"; };
 		A6EEB051272702A900715F3A /* VehicleNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleNoteTableViewCell.swift; sourceTree = "<group>"; };
@@ -107,12 +111,10 @@
 		A6A549D92729943900534A8F /* NewVehicleVC */ = {
 			isa = PBXGroup;
 			children = (
+				A6A549EE272A824900534A8F /* Add by test */,
+				A6A549ED272A823900534A8F /* Manual Add */,
 				A6A549DA2729A0F000534A8F /* NewVehicleViewController.swift */,
 				A6A549DB2729A0F000534A8F /* NewVehicleViewController.xib */,
-				A6A549E12729CC7800534A8F /* NewVehicleTestViewController.swift */,
-				A6A549E22729CC7800534A8F /* NewVehicleTestViewController.xib */,
-				A6A549E52729CCD600534A8F /* NewVehicleManualAddViewController.swift */,
-				A6A549E62729CCD600534A8F /* NewVehicleManualAddViewController.xib */,
 			);
 			path = NewVehicleVC;
 			sourceTree = "<group>";
@@ -123,6 +125,26 @@
 				A6A549DF2729C33D00534A8F /* VehicleInfo.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A6A549ED272A823900534A8F /* Manual Add */ = {
+			isa = PBXGroup;
+			children = (
+				A6A549E52729CCD600534A8F /* NewVehicleManualAddViewController.swift */,
+				A6A549E62729CCD600534A8F /* NewVehicleManualAddViewController.xib */,
+				A6A549E9272A823100534A8F /* NewVehicleManualAddTableViewCell.swift */,
+				A6A549EA272A823100534A8F /* NewVehicleManualAddTableViewCell.xib */,
+			);
+			path = "Manual Add";
+			sourceTree = "<group>";
+		};
+		A6A549EE272A824900534A8F /* Add by test */ = {
+			isa = PBXGroup;
+			children = (
+				A6A549E12729CC7800534A8F /* NewVehicleTestViewController.swift */,
+				A6A549E22729CC7800534A8F /* NewVehicleTestViewController.xib */,
+			);
+			path = "Add by test";
 			sourceTree = "<group>";
 		};
 		A6EEB04E2727021500715F3A /* Views */ = {
@@ -224,6 +246,7 @@
 				A6A549E42729CC7800534A8F /* NewVehicleTestViewController.xib in Resources */,
 				A6A549E82729CCD600534A8F /* NewVehicleManualAddViewController.xib in Resources */,
 				A636A03E272452E200BAD6E8 /* Assets.xcassets in Resources */,
+				A6A549EC272A823100534A8F /* NewVehicleManualAddTableViewCell.xib in Resources */,
 				A687A514272720AC00C18EB7 /* VehicleTitleTableViewCell.xib in Resources */,
 				A636A03C272452E100BAD6E8 /* Main.storyboard in Resources */,
 				A6A549DD2729A0F000534A8F /* NewVehicleViewController.xib in Resources */,
@@ -241,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A687A50F27271DFC00C18EB7 /* VehicleInfoTableViewCell.swift in Sources */,
+				A6A549EB272A823100534A8F /* NewVehicleManualAddTableViewCell.swift in Sources */,
 				A687A513272720AC00C18EB7 /* VehicleTitleTableViewCell.swift in Sources */,
 				A6A549E32729CC7800534A8F /* NewVehicleTestViewController.swift in Sources */,
 				A6A549DC2729A0F000534A8F /* NewVehicleViewController.swift in Sources */,
