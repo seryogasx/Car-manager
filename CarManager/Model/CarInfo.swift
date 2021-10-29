@@ -8,19 +8,28 @@
 import Foundation
 
 struct CarData {
+    
+    // Photo params first
+    let photo: String
+    
+    // Input params
+    let nickName: String
     let mark: String
     let model: String
     let year: UInt16
-    let photo: Data
     let mileage: UInt32
+    
+    // Select params
     let engineType: EngineType
     let transmissionType: TransmissionType
-    let wheelsSize: UInt8
+    let wheelsSize: Int16
     let tireType: TireType
-    let antifreezeAge: UInt8
-    let brakeFluidAge: UInt8
+    let antifreezeAge: Int16
+    let brakeFluidAge: Int16
+    let extinguisherAge: Int16
+    let aidKitAge: Int16
     
-    let aidKitAge: UInt8
+    // Bool params
     let reflectiveVestExists: Bool
     let warningTriangleExists: Bool
     let scraperExists: Bool
@@ -28,11 +37,19 @@ struct CarData {
     let compressorExists: Bool
     let startingWiresExists: Bool
     let ragsExists: Bool
-    let videRecorderExists: Bool
+    let videoRecorderExists: Bool
     let fusesExists: Bool
     let spareWheelExists: Bool
     let jackExists: Bool
     let spannersExists: Bool
+    
+    static var paramsCount: Int {
+        paramTypes.reduce(0) { $0 + $1.1 }
+    }
+    
+    static var paramTypes: [(String, Int)] {
+        [("Photo", 1), ("Input", 5), ("Select", 8), ("Bool", 12)]
+    }
 }
 
 enum EngineType {

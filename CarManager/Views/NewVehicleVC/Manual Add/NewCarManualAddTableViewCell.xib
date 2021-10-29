@@ -5,55 +5,86 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="210" id="KGk-i7-Jjw" customClass="NewCarManualAddTableViewCell" customModule="CarManager" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="363" height="210"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="283" id="KGk-i7-Jjw" customClass="NewCarManualAddTableViewCell" customModule="CarManager" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="370" height="283"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="363" height="210"/>
+                <rect key="frame" x="0.0" y="0.0" width="370" height="283"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Sga-1J-Fmr">
-                        <rect key="frame" x="10" y="5" width="343" height="200"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8w-Wu-Bo7">
-                                <rect key="frame" x="0.0" y="0.0" width="41.5" height="69"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CbV-dY-Xq6">
-                                <rect key="frame" x="0.0" y="71.5" width="104" height="0.0"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Добавить авто"/>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HZm-6t-dhx">
-                                <rect key="frame" x="0.0" y="74" width="32" height="126"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8w-Wu-Bo7">
+                        <rect key="frame" x="5" y="5" width="41.5" height="273"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CbV-dY-Xq6">
+                        <rect key="frame" x="133" y="126.5" width="104" height="30"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="Добавить авто"/>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfC-NQ-l79">
+                        <rect key="frame" x="5" y="278" width="360" height="5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="5" id="tVt-gd-fcL"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c0O-Wf-R0r">
+                        <rect key="frame" x="5" y="0.0" width="360" height="5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="5" id="yl1-bq-PZD"/>
+                        </constraints>
+                    </view>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HZm-6t-dhx">
+                        <rect key="frame" x="333" y="5" width="32" height="273"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DXN-Kb-A1z">
+                        <rect key="frame" x="307" y="5" width="51" height="273"/>
+                    </switch>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Sga-1J-Fmr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Vfg-Wu-MDh"/>
-                    <constraint firstAttribute="bottom" secondItem="Sga-1J-Fmr" secondAttribute="bottom" constant="5" id="Y1v-wc-7dO"/>
-                    <constraint firstAttribute="trailing" secondItem="Sga-1J-Fmr" secondAttribute="trailing" constant="10" id="fFM-ZT-cCq"/>
-                    <constraint firstItem="Sga-1J-Fmr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="tQD-Ge-2wG"/>
+                    <constraint firstItem="vfC-NQ-l79" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="3Kh-7N-NNf"/>
+                    <constraint firstAttribute="trailing" secondItem="HZm-6t-dhx" secondAttribute="trailing" constant="5" id="Gd2-Vd-AcK"/>
+                    <constraint firstAttribute="bottom" secondItem="vfC-NQ-l79" secondAttribute="bottom" id="KAl-pC-4ts"/>
+                    <constraint firstItem="t8w-Wu-Bo7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="MNU-WD-jJG"/>
+                    <constraint firstItem="t8w-Wu-Bo7" firstAttribute="top" secondItem="c0O-Wf-R0r" secondAttribute="bottom" id="OhT-pu-8mH"/>
+                    <constraint firstItem="vfC-NQ-l79" firstAttribute="top" secondItem="DXN-Kb-A1z" secondAttribute="bottom" id="QU1-dy-63k"/>
+                    <constraint firstItem="CbV-dY-Xq6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="T3l-og-1oh"/>
+                    <constraint firstItem="c0O-Wf-R0r" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="WCc-DU-H1s"/>
+                    <constraint firstAttribute="trailing" secondItem="DXN-Kb-A1z" secondAttribute="trailing" constant="14" id="Z2N-wO-5Jn"/>
+                    <constraint firstItem="CbV-dY-Xq6" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ams-i7-hLl"/>
+                    <constraint firstItem="vfC-NQ-l79" firstAttribute="top" secondItem="HZm-6t-dhx" secondAttribute="bottom" id="bwN-HY-Jdu"/>
+                    <constraint firstItem="c0O-Wf-R0r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="eJG-DX-e2a"/>
+                    <constraint firstItem="HZm-6t-dhx" firstAttribute="top" secondItem="c0O-Wf-R0r" secondAttribute="bottom" id="fhE-Zp-LDl"/>
+                    <constraint firstItem="vfC-NQ-l79" firstAttribute="top" secondItem="t8w-Wu-Bo7" secondAttribute="bottom" id="hoA-JQ-SwX"/>
+                    <constraint firstAttribute="trailing" secondItem="vfC-NQ-l79" secondAttribute="trailing" constant="5" id="ke5-C4-h0W"/>
+                    <constraint firstAttribute="trailing" secondItem="c0O-Wf-R0r" secondAttribute="trailing" constant="5" id="kvv-0j-Z7l"/>
+                    <constraint firstItem="DXN-Kb-A1z" firstAttribute="top" secondItem="c0O-Wf-R0r" secondAttribute="bottom" id="nbd-cg-m2P"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="boolSwitch" destination="DXN-Kb-A1z" id="gyH-PN-No1"/>
                 <outlet property="headerLabel" destination="t8w-Wu-Bo7" id="XP0-dg-L5S"/>
-                <outlet property="stackView" destination="Sga-1J-Fmr" id="sI7-oP-uEV"/>
                 <outlet property="submitButton" destination="CbV-dY-Xq6" id="mdK-ii-9IV"/>
                 <outlet property="textField" destination="HZm-6t-dhx" id="5ru-d1-XZQ"/>
             </connections>
-            <point key="canvasLocation" x="167.39130434782609" y="82.366071428571431"/>
+            <point key="canvasLocation" x="172.46376811594203" y="106.80803571428571"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

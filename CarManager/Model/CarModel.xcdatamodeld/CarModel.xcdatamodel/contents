@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Car" representedClassName="Car" syncable="YES" codeGenerationType="class">
+        <attribute name="aidKitAge" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="antifreezeAge" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="brainageBasinExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="brakeFluidAge" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="compressorExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="extinguisherAge" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fusesExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="jackExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="mark" optional="YES" attributeType="String"/>
+        <attribute name="mileage" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="model" optional="YES" attributeType="String"/>
+        <attribute name="motorType" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="photoURL" optional="YES" attributeType="String"/>
+        <attribute name="ragsExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="reflectiveVestExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="scraperExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="spannersExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="spareWheelExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="startingWiresExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="tireType" optional="YES" attributeType="String"/>
+        <attribute name="transmissionType" optional="YES" attributeType="String"/>
+        <attribute name="videoRecorderExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="warningTriangleExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="wheelsSize" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="Car" positionX="-63" positionY="-18" width="128" height="419"/>
+    </elements>
+</model>

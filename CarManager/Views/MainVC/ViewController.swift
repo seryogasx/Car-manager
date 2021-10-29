@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var CarListTableView: UITableView!
     
-    let cars = ["octaha1", "octaha2"]
+    let cars = StorageManager.shared.getCars()
     let CarTableViewCellIdentifier = "CarTableViewCell"
     
     override func viewDidLoad() {
@@ -38,7 +39,7 @@ extension ViewController: UITableViewDataSource {
         if indexPath.item == cars.count {
             cell.setup(vehicleName: "Добавить новую машину")
         } else {
-            cell.setup(vehicleName: cars[indexPath.item])
+            cell.setup(vehicleName: cars[indexPath.item].value(forKey: "name") as! String)
         }
         return cell
     }
@@ -50,7 +51,7 @@ extension ViewController: UITableViewDataSource {
 //            self.present(vc, animated: true, completion: nil)
         } else {
             let vc = CarDetailViewController()
-            vc.carName = cars[indexPath.item]
+            vc.carName = cars[indexPath.item].value(forKey: "name") as! String
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
