@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VehicleInfoTableViewCell: UITableViewCell {
+class CarInfoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var ModelLabel: UILabel!
     @IBOutlet weak var MarkLabel: UILabel!

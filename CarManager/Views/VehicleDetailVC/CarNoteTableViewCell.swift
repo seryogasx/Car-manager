@@ -8,10 +8,10 @@
 import UIKit
 
 protocol NoteCellDelegate: AnyObject {
-    func updateHeightForRow(_ cell: VehicleNoteTableViewCell, _ textView: UITextView)
+    func updateHeightForRow(_ cell: CarNoteTableViewCell, _ textView: UITextView)
 }
 
-class VehicleNoteTableViewCell: UITableViewCell {
+class CarNoteTableViewCell: UITableViewCell {
 
     @IBOutlet weak var DoneButton: UIButton!
     @IBOutlet weak var NoteTextView: UITextView!
@@ -32,7 +32,7 @@ class VehicleNoteTableViewCell: UITableViewCell {
     }
 }
 
-extension VehicleNoteTableViewCell: UITextViewDelegate {
+extension CarNoteTableViewCell: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         if let delegate = rowHeightDelegate {
             delegate.updateHeightForRow(self, NoteTextView)

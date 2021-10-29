@@ -1,5 +1,5 @@
 //
-//  NewVehicleViewController.swift
+//  NewVehicleTestViewController.swift
 //  CarManager
 //
 //  Created by Сергей Петров on 27.10.2021.
@@ -7,11 +7,10 @@
 
 import UIKit
 
-class NewVehicleViewController: UIViewController {
+class NewCarTestViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Добавить новую машину"
         // Do any additional setup after loading the view.
     }
 
@@ -25,15 +24,5 @@ class NewVehicleViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
-    @IBAction func TestAddSelected(_ sender: Any) {
-        let vc = NewVehicleTestViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @IBAction func ManualAddSelected(_ sender: Any) {
-        let vc = NewVehicleManualAddViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
+
 }

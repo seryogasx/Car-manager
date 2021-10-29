@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VehicleData {
+struct CarData {
     let mark: String
     let model: String
     let year: UInt16

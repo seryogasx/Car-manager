@@ -7,17 +7,17 @@
 
 import UIKit
 
-class VehicleTableViewCell: UITableViewCell {
+class CarTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var VehicleImageView: UIImageView!
-    @IBOutlet weak var VehicleNameLabel: UILabel!
-    @IBOutlet weak var VehicleImageViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var VehicleImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var CarImageView: UIImageView!
+    @IBOutlet weak var CarNameLabel: UILabel!
+    @IBOutlet weak var CarImageViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var CarImageViewHeightConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        VehicleImageViewWidthConstraint.constant = UIScreen.main.bounds.width / 3
-        VehicleImageViewHeightConstraint.constant = UIScreen.main.bounds.height / 4
+        CarImageViewWidthConstraint.constant = UIScreen.main.bounds.width / 3
+        CarImageViewHeightConstraint.constant = UIScreen.main.bounds.height / 4
         self.contentView.layer.cornerRadius = 20
     }
 
@@ -26,9 +26,9 @@ class VehicleTableViewCell: UITableViewCell {
     }
     
     func setup(vehicleName: String) {
-        self.VehicleNameLabel.text = vehicleName
+        self.CarNameLabel.text = vehicleName
         let image = UIImage(named: "octaha")!
-        self.VehicleImageView.image = image
+        self.CarImageView.image = image
 //        setLayer()
     }
     
@@ -48,8 +48,8 @@ class VehicleTableViewCell: UITableViewCell {
 //        UIGraphicsEndImageContext()
 //        layer.contents = imageBuffer?.cgImage
         
-        self.VehicleImageView.contentMode = .scaleAspectFill
-        self.VehicleImageView.layer.cornerRadius = 20
+        self.CarImageView.contentMode = .scaleAspectFill
+        self.CarImageView.layer.cornerRadius = 20
 //
         self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 20))
         

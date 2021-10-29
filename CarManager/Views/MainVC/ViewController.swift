@@ -9,18 +9,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var VehicleListTableView: UITableView!
+    @IBOutlet weak var CarListTableView: UITableView!
     
     let cars = ["octaha1", "octaha2"]
-    let vehicleTableViewCellIdentifier = "VehicleTableViewCell"
+    let CarTableViewCellIdentifier = "CarTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "My Garage"
-        VehicleListTableView.delegate = self
-        VehicleListTableView.dataSource = self
-        VehicleListTableView.register(UINib(nibName: "VehicleTableViewCell", bundle: nil), forCellReuseIdentifier: vehicleTableViewCellIdentifier)
-        VehicleListTableView.separatorStyle = .none
+        CarListTableView.delegate = self
+        CarListTableView.dataSource = self
+        CarListTableView.register(UINib(nibName: "CarTableViewCell", bundle: nil), forCellReuseIdentifier: CarTableViewCellIdentifier)
+        CarListTableView.separatorStyle = .none
     }
 
 
@@ -32,7 +32,7 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: vehicleTableViewCellIdentifier, for: indexPath) as? VehicleTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CarTableViewCellIdentifier, for: indexPath) as? CarTableViewCell else {
             return UITableViewCell()
         }
         if indexPath.item == cars.count {
@@ -45,12 +45,12 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.item == cars.count {
-            let vc = NewVehicleViewController()
+            let vc = NewCarViewController()
             self.navigationController?.pushViewController(vc, animated: true)
 //            self.present(vc, animated: true, completion: nil)
         } else {
-            let vc = VehicleDetailViewController()
-            vc.vehicleName = cars[indexPath.item]
+            let vc = CarDetailViewController()
+            vc.carName = cars[indexPath.item]
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
