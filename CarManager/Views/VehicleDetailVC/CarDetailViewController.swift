@@ -14,12 +14,12 @@ class CarDetailViewController: UIViewController {
     let carNoteIdentifier = "CarNoteTableViewCell"
     let carTitleIdentifier = "CarTitleTableViewCell"
     let carInfoIdentifier = "CarInfoTableViewCell"
-    var carName = ""
+    var car: Car?
     let notes = ["bla-bla1", "bla-bla2", "bla-bla3"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = carName
+        title = car?.value(forKey: "nickName") as? String ?? car?.value(forKey: "model") as? String ?? car?.value(forKey: "mark") as? String
         CarDetailTableView.register(UINib(nibName: "CarNoteTableViewCell", bundle: nil), forCellReuseIdentifier: carNoteIdentifier)
         CarDetailTableView.register(UINib(nibName: "CarTitleTableViewCell", bundle: nil), forCellReuseIdentifier: carTitleIdentifier)
         CarDetailTableView.register(UINib(nibName: "CarInfoTableViewCell", bundle: nil), forCellReuseIdentifier: carInfoIdentifier)
@@ -40,13 +40,14 @@ extension CarDetailViewController: UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: carTitleIdentifier, for: indexPath) as? CarTitleTableViewCell else {
                     return UITableViewCell()
                 }
-                cell.setup(name: "octavia")
+                cell.setup(name: title!)
                 return cell
             case 1:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: carInfoIdentifier, for: indexPath) as? CarInfoTableViewCell else {
                     return UITableViewCell()
                 }
-                cell.setup(mark: "Skoda", model: "Octavia", year: "2018", mileage: "90.000km")
+                
+                cell.setup(mark: car?.value(forKey: "mark") as? String, model: car?.value(forKey: "model") as? String, year: car?.value(forKey: "year") as? String, mileage: car?.value(forKey: "mark") as? String)
                 return cell
             default:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: carNoteIdentifier, for: indexPath) as? CarNoteTableViewCell else {

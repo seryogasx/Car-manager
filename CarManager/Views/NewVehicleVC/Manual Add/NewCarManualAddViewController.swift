@@ -20,8 +20,8 @@ class NewCarManualAddViewController: UIViewController {
     @IBOutlet weak var newCarManualAddTableView: UITableView!
     var dataToAdd: [String: Any] = [:]
     
-    let newVehicleCellIdentifier = "NewCarManualAddTableViewCell"
     var rowsCount: Int = 0
+    let sectionNumber = CarData.paramTypes.count + 1
     let propertyNames: [String] = {
         let someVehicle = CarData(photo: "Some url", nickName: "name", mark: "mark", model: "model", year: 1998, mileage: 100, engineType: .atmo, transmissionType: .AMT, wheelsSize: 10, tireType: .allSeason, antifreezeAge: 10, brakeFluidAge: 10, extinguisherAge: 1, aidKitAge: 10, reflectiveVestExists: true, warningTriangleExists: true, scraperExists: true, brainageBasinExists: true, compressorExists: true, startingWiresExists: true, ragsExists: true, videoRecorderExists: true, fusesExists: true, spareWheelExists: true, jackExists: true, spannersExists: true)
         let mirror = Mirror(reflecting: someVehicle)
@@ -36,15 +36,20 @@ class NewCarManualAddViewController: UIViewController {
         super.viewDidLoad()
         newCarManualAddTableView.delegate = self
         newCarManualAddTableView.dataSource = self
-        newCarManualAddTableView.register(UINib(nibName: "NewCarManualAddTableViewCell", bundle: nil), forCellReuseIdentifier: newVehicleCellIdentifier)
+        newCarManualAddTableView.register(UINib(nibName: "NewCarManualAddTableViewCell", bundle: nil), forCellReuseIdentifier: NewCarManualAddTableViewCell.reuseIdentifier)
+        newCarManualAddTableView.register(NewCarManualAddTableViewHeader.self, forHeaderFooterViewReuseIdentifier: NewCarManualAddTableViewHeader.reuseIdentifier)
         rowsCount = CarData.paramsCount + 1
+    }
+    
+    func createHeader() {
+        
     }
 }
 
 extension NewCarManualAddViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return CarData.paramTypes.count + 1
+        return sectionNumber
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -52,7 +57,7 @@ extension NewCarManualAddViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: newVehicleCellIdentifier, for: indexPath) as? NewCarManualAddTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewCarManualAddTableViewCell.reuseIdentifier, for: indexPath) as? NewCarManualAddTableViewCell else {
             return UITableViewCell()
         }
         switch indexPath.section {
@@ -70,11 +75,34 @@ extension NewCarManualAddViewController: UITableViewDataSource {
                 let index = CarData.paramTypes[0].1 + CarData.paramTypes[1].1 + CarData.paramTypes[2].1 + indexPath.item
                 print(index, propertyNames[index])
                 cell.setup(type: .bool, header: propertyNames[index], text: nil, delegate: self)
+                dataToAdd[propertyNames[index]] = false
             default:
                 cell.setup(type: .confirm, header: nil, text: nil, delegate: self)
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 || section == sectionNumber - 1 {
+            return nil
+        }
+        return section == 1 ? "Введите основные данные" : section == 2 ? "Выберете дополнительные данные" : "Дополнительные сведения"
+    }
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if section == 0 || section == sectionNumber - 1 {
+//            return UIView()
+//        }
+//
+//        let text = section == 1 ? "Введите основные данные" : section == 2 ? "Выберете дополнительные данные" : "Дополнительные сведения"
+//        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewCarManualAddTableViewHeader.reuseIdentifier) as? NewCarManualAddTableViewHeader else {
+//            let label = UILabel()
+//            label.text = text
+//            return label
+//        }
+//        header.setup(header: text)
+//        return header
+//    }
 }
 
 extension NewCarManualAddViewController: UITableViewDelegate {
@@ -86,8 +114,9 @@ extension NewCarManualAddViewController: NewCarManualAddDelegate {
     }
     
     func confirmChanges() {
-        if dataToAdd.keys.count == propertyNames.count {
+//        if dataToAdd.keys.count == propertyNames.count - 1 {
             StorageManager.shared.saveNewCar(properties: dataToAdd)
-        }
+//        }
+        print(dataToAdd)
     }
 }

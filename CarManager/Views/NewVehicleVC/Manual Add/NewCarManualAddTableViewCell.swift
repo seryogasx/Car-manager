@@ -18,8 +18,13 @@ class NewCarManualAddTableViewCell: UITableViewCell {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var boolSwitch: UISwitch!
+    @IBOutlet weak var carImageView: UIImageView!
+    
+    static let reuseIdentifier = String(describing: self)
     
     weak var delegate: NewCarManualAddDelegate?
+    
+    var propertyName = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,41 +40,45 @@ class NewCarManualAddTableViewCell: UITableViewCell {
     
     func setup(type: NewCarContentType, header: String?, text: String?, delegate: NewCarManualAddDelegate) {
         self.delegate = delegate
-        
+        self.propertyName = header ?? ""
         switch type {
             case .photo:
                 boolSwitch.isHidden = true
                 headerLabel.isHidden = true
-                textField.isHidden = false
+                textField.isHidden = true
                 textField.text = "Photo"
                 submitButton.isHidden = true
                 boolSwitch.isHidden = true
+                
+                carImageView.isHidden = false
             case .input:
                 let labelHintText = getHintText(header!)
                 headerLabel.isHidden = false
                 textField.isHidden = false
                 submitButton.isHidden = true
                 boolSwitch.isHidden = true
+                carImageView.isHidden = true
                 
                 headerLabel.text = labelHintText
                 if let text = text {
                     textField.text = text
                 }
                 
-                textField.addTarget(self, action: #selector(textHasBeenChanged), for: .editingChanged)
+                textField.addTarget(self, action: #selector(dataHasBeenChanged(sender:)), for: .editingChanged)
             case .select:
                 let labelHintText = getHintText(header!)
                 headerLabel.isHidden = false
                 textField.isHidden = false
                 submitButton.isHidden = true
                 boolSwitch.isHidden = true
+                carImageView.isHidden = true
                 
                 headerLabel.text = labelHintText
                 if let text = text {
                     textField.text = text
                 }
                 
-                textField.addTarget(self, action: #selector(textHasBeenChanged), for: .editingChanged)
+                textField.addTarget(self, action: #selector(dataHasBeenChanged(sender:)), for: .editingChanged)
             case .bool:
                 let labelHintText = getHintText(header!)
                 headerLabel.isHidden = false
@@ -78,21 +87,29 @@ class NewCarManualAddTableViewCell: UITableViewCell {
                 textField.isHidden = true
                 submitButton.isHidden = true
                 boolSwitch.isHidden = false
+                carImageView.isHidden = true
+                
+                boolSwitch.addTarget(self, action: #selector(dataHasBeenChanged(sender:)), for: .valueChanged)
+                boolSwitch.setOn(false, animated: false)
             case .confirm:
                 headerLabel.isHidden = true
                 textField.isHidden = true
                 submitButton.isHidden = false
                 boolSwitch.isHidden = true
+                carImageView.isHidden = true
 
                 submitButton.titleLabel?.textColor = .white
                 submitButton.layer.cornerRadius = 2
                 submitButton.addTarget(self, action: #selector(confirmButtonPressed), for: .touchUpInside)
-
         }
     }
     
-    @objc func textHasBeenChanged() {
-        self.delegate?.updateInfo(key: headerLabel.text!, value: textField.text!)
+    @objc func dataHasBeenChanged(sender: Any) {
+        if let textField = sender as? UITextField {
+            self.delegate?.updateInfo(key: propertyName, value: textField.text!)
+        } else if let switcher = sender as? UISwitch {
+            self.delegate?.updateInfo(key: propertyName, value: String(switcher.isOn))
+        }
     }
     
     @objc func confirmButtonPressed() {
@@ -102,7 +119,7 @@ class NewCarManualAddTableViewCell: UITableViewCell {
     private func getHintText(_ header: String) -> String {
         switch header {
             case "nickName":
-                return "Введите псевдоним"
+                return "Псевдоним"
             case "mark":
                 return "Марка авто"
             case "model":
@@ -122,11 +139,11 @@ class NewCarManualAddTableViewCell: UITableViewCell {
             case "tireType":
                 return "Тип резины"
             case "antifreezeAge":
-                return "Замена антифриза?"
+                return "Последняя замена антифриза"
             case "brakeFluidAge":
-                return "Замена тормозной жидкости?"
+                return "Последняя замена тормозной жидкости"
             case "aidKitAge":
-                return "Сколько лет аптечке?"
+                return "Возраст аптечки"
             case "reflectiveVestExists":
                 return "Светоотражающий жилет"
             case "warningTriangleExists":
@@ -152,7 +169,7 @@ class NewCarManualAddTableViewCell: UITableViewCell {
             case "spannersExists":
                 return "Инструменты"
             case "extinguisherAge":
-                return "Сколько лет огнетушителю?"
+                return "Возраст огнетушителя"
             default:
                 return "UNKNOWN"
         }

@@ -11,7 +11,7 @@ class NewCarViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Добавить новую машину"
+        title = "Добавить новое авто"
         // Do any additional setup after loading the view.
     }
 

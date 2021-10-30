@@ -38,11 +38,35 @@ class StorageManager {
     
     public func saveNewCar(properties: [String: Any]) {
         guard let entity = NSEntityDescription.entity(forEntityName: "Car", in: mainContext) else { return }
-        let newCarManagedObject = NSManagedObject(entity: entity, insertInto: mainContext)
         
-        properties.forEach { key, value in
-            newCarManagedObject.setValue(value, forKey: key)
-        }
+        var car = Car(entity: entity, insertInto: mainContext)
+        
+        car.photoURL = ""
+        car.nickName = "octaha"
+        car.mark = "skoda"
+        car.model = "octavia"
+        car.year = 2018
+        car.mileage = 94000
+        car.engineType = "turbo"
+        car.transmissionType = "amt"
+        car.wheelsSize = 18
+        car.tireType = "summer"
+        car.antifreezeAge = 2
+        car.brakeFluidAge = 2
+        car.aidKitAge = 0
+        car.extinguisherAge = 0
+        car.reflectiveVestExists = true
+        car.warningTriangleExists = true
+        car.scraperExists = true
+        car.brainageBasinExists = true
+        car.compressorExists = true
+        car.startingWiresExists = true
+        car.ragsExists = true
+        car.videoRecorderExists = true
+        car.fusesExists = true
+        car.spannersExists = true
+        car.jackExists = true
+        car.spannersExists = true
         do {
             try mainContext.save()
         } catch {
@@ -63,7 +87,19 @@ class StorageManager {
     }
     
     public func getCars() -> [Car] {
-        return []
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Car")
+        var cars: [Car] = []
+        do {
+            let result = try mainContext.fetch(fetchRequest)
+            for data in result {
+                if let car = data as? Car {
+                    cars.append(car)
+                }
+            }
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        return cars
     }
     
     

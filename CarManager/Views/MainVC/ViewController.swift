@@ -39,7 +39,7 @@ extension ViewController: UITableViewDataSource {
         if indexPath.item == cars.count {
             cell.setup(vehicleName: "Добавить новую машину")
         } else {
-            cell.setup(vehicleName: cars[indexPath.item].value(forKey: "name") as! String)
+            cell.setup(vehicleName: cars[indexPath.item].value(forKey: "nickName") as! String)
         }
         return cell
     }
@@ -51,7 +51,7 @@ extension ViewController: UITableViewDataSource {
 //            self.present(vc, animated: true, completion: nil)
         } else {
             let vc = CarDetailViewController()
-            vc.carName = cars[indexPath.item].value(forKey: "name") as! String
+            vc.car = cars[indexPath.item]
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

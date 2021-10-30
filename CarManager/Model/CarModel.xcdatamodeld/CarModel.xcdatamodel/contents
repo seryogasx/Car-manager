@@ -6,6 +6,7 @@
         <attribute name="brainageBasinExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="brakeFluidAge" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="compressorExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="engineType" optional="YES" attributeType="String"/>
         <attribute name="extinguisherAge" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="fusesExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="jackExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -13,7 +14,7 @@
         <attribute name="mileage" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="model" optional="YES" attributeType="String"/>
         <attribute name="motorType" optional="YES" attributeType="String"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nickName" optional="YES" attributeType="String"/>
         <attribute name="photoURL" optional="YES" attributeType="String"/>
         <attribute name="ragsExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="reflectiveVestExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -29,6 +30,6 @@
         <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Car" positionX="-63" positionY="-18" width="128" height="419"/>
+        <element name="Car" positionX="-63" positionY="-18" width="128" height="434"/>
     </elements>
 </model>

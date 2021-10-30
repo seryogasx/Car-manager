@@ -51,13 +51,20 @@
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DXN-Kb-A1z">
                         <rect key="frame" x="307" y="5" width="51" height="273"/>
                     </switch>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ENa-F1-HBn">
+                        <rect key="frame" x="20" y="5" width="330" height="273"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="vfC-NQ-l79" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="3Kh-7N-NNf"/>
+                    <constraint firstItem="vfC-NQ-l79" firstAttribute="top" secondItem="ENa-F1-HBn" secondAttribute="bottom" id="Dlr-pv-2Tz"/>
                     <constraint firstAttribute="trailing" secondItem="HZm-6t-dhx" secondAttribute="trailing" constant="5" id="Gd2-Vd-AcK"/>
+                    <constraint firstItem="ENa-F1-HBn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Ge1-fs-ToC"/>
                     <constraint firstAttribute="bottom" secondItem="vfC-NQ-l79" secondAttribute="bottom" id="KAl-pC-4ts"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ENa-F1-HBn" secondAttribute="trailing" id="KAs-8J-6oj"/>
                     <constraint firstItem="t8w-Wu-Bo7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="MNU-WD-jJG"/>
                     <constraint firstItem="t8w-Wu-Bo7" firstAttribute="top" secondItem="c0O-Wf-R0r" secondAttribute="bottom" id="OhT-pu-8mH"/>
+                    <constraint firstItem="ENa-F1-HBn" firstAttribute="top" secondItem="c0O-Wf-R0r" secondAttribute="bottom" id="PrC-cU-Glf"/>
                     <constraint firstItem="vfC-NQ-l79" firstAttribute="top" secondItem="DXN-Kb-A1z" secondAttribute="bottom" id="QU1-dy-63k"/>
                     <constraint firstItem="CbV-dY-Xq6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="T3l-og-1oh"/>
                     <constraint firstItem="c0O-Wf-R0r" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="WCc-DU-H1s"/>
@@ -75,6 +82,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="boolSwitch" destination="DXN-Kb-A1z" id="gyH-PN-No1"/>
+                <outlet property="carImageView" destination="ENa-F1-HBn" id="A21-Al-ACo"/>
                 <outlet property="headerLabel" destination="t8w-Wu-Bo7" id="XP0-dg-L5S"/>
                 <outlet property="submitButton" destination="CbV-dY-Xq6" id="mdK-ii-9IV"/>
                 <outlet property="textField" destination="HZm-6t-dhx" id="5ru-d1-XZQ"/>
