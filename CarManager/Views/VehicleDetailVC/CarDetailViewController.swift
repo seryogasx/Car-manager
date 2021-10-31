@@ -10,21 +10,21 @@ import UIKit
 class CarDetailViewController: UIViewController {
     
     @IBOutlet weak var CarDetailTableView: UITableView!
-    
-    let carNoteIdentifier = "CarNoteTableViewCell"
-    let carTitleIdentifier = "CarTitleTableViewCell"
-    let carInfoIdentifier = "CarInfoTableViewCell"
+
     var car: Car?
     let notes = ["bla-bla1", "bla-bla2", "bla-bla3"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = car?.value(forKey: "nickName") as? String ?? car?.value(forKey: "model") as? String ?? car?.value(forKey: "mark") as? String
-        CarDetailTableView.register(UINib(nibName: "CarNoteTableViewCell", bundle: nil), forCellReuseIdentifier: carNoteIdentifier)
-        CarDetailTableView.register(UINib(nibName: "CarTitleTableViewCell", bundle: nil), forCellReuseIdentifier: carTitleIdentifier)
-        CarDetailTableView.register(UINib(nibName: "CarInfoTableViewCell", bundle: nil), forCellReuseIdentifier: carInfoIdentifier)
+        CarDetailTableView.register(UINib(nibName: CarNoteTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CarNoteTableViewCell.reuseIdentifier)
+        CarDetailTableView.register(UINib(nibName: CarTitleTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CarTitleTableViewCell.reuseIdentifier)
+        CarDetailTableView.register(UINib(nibName: CarInfoTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CarInfoTableViewCell.reuseIdentifier)
         CarDetailTableView.delegate = self
         CarDetailTableView.dataSource = self
+        print("BLET:", CarTitleTableViewCell.reuseIdentifier)
+        print("BLET:", CarNoteTableViewCell.reuseIdentifier)
+        print("BLET:", CarInfoTableViewCell.reuseIdentifier)
     }
 
 }
@@ -37,20 +37,20 @@ extension CarDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
             case 0:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: carTitleIdentifier, for: indexPath) as? CarTitleTableViewCell else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: CarTitleTableViewCell.reuseIdentifier, for: indexPath) as? CarTitleTableViewCell else {
                     return UITableViewCell()
                 }
                 cell.setup(name: title!)
                 return cell
             case 1:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: carInfoIdentifier, for: indexPath) as? CarInfoTableViewCell else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: CarInfoTableViewCell.reuseIdentifier, for: indexPath) as? CarInfoTableViewCell else {
                     return UITableViewCell()
                 }
                 
-                cell.setup(mark: car?.value(forKey: "mark") as? String, model: car?.value(forKey: "model") as? String, year: car?.value(forKey: "year") as? String, mileage: car?.value(forKey: "mark") as? String)
+                cell.setup(mark: car?.value(forKey: "mark") as? String, model: car?.value(forKey: "model") as? String, year: car?.value(forKey: "year") as? Int16, mileage: car?.value(forKey: "mileage") as? Int)
                 return cell
             default:
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: carNoteIdentifier, for: indexPath) as? CarNoteTableViewCell else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: CarNoteTableViewCell.reuseIdentifier, for: indexPath) as? CarNoteTableViewCell else {
                     return UITableViewCell()
                 }
                 cell.setup(text: notes[indexPath.item])

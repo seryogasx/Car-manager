@@ -12,7 +12,7 @@ protocol NewCarManualAddDelegate: AnyObject {
     func confirmChanges()
 }
 
-class NewCarManualAddTableViewCell: UITableViewCell {
+class NewCarManualAddTableViewCell: UITableViewCell, ReuseIdentifying {
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var headerLabel: UILabel!
@@ -20,14 +20,16 @@ class NewCarManualAddTableViewCell: UITableViewCell {
     @IBOutlet weak var boolSwitch: UISwitch!
     @IBOutlet weak var carImageView: UIImageView!
     
-    static let reuseIdentifier = String(describing: self)
-    
     weak var delegate: NewCarManualAddDelegate?
     
     var propertyName = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
     }
     
     override func prepareForReuse() {

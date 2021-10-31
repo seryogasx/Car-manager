@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CarTitleTableViewCell: UITableViewCell {
+class CarTitleTableViewCell: UITableViewCell, ReuseIdentifying {
 
     @IBOutlet weak var CarImageView: UIImageView!
     @IBOutlet weak var CarNameLabel: UILabel!
@@ -20,7 +20,7 @@ class CarTitleTableViewCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+//        super.setSelected(selected, animated: animated)
     }
     
     func setup(name: String) {

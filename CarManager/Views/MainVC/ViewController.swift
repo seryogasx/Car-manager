@@ -6,21 +6,30 @@
 //
 
 import UIKit
-import CoreData
+
+protocol ReuseIdentifying {
+    static var reuseIdentifier: String { get }
+}
+
+extension ReuseIdentifying {
+    static var reuseIdentifier: String {
+        return String(describing: Self.self)
+    }
+}
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var CarListTableView: UITableView!
     
     let cars = StorageManager.shared.getCars()
-    let CarTableViewCellIdentifier = "CarTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "My Garage"
         CarListTableView.delegate = self
         CarListTableView.dataSource = self
-        CarListTableView.register(UINib(nibName: "CarTableViewCell", bundle: nil), forCellReuseIdentifier: CarTableViewCellIdentifier)
+        CarListTableView.register(UINib(nibName: CarTableViewCell.reuseIdentifier, bundle: nil
+                                       ), forCellReuseIdentifier: CarTableViewCell.reuseIdentifier)
         CarListTableView.separatorStyle = .none
     }
 
@@ -33,7 +42,7 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CarTableViewCellIdentifier, for: indexPath) as? CarTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CarTableViewCell.reuseIdentifier, for: indexPath) as? CarTableViewCell else {
             return UITableViewCell()
         }
         if indexPath.item == cars.count {

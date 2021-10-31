@@ -36,8 +36,8 @@ class NewCarManualAddViewController: UIViewController {
         super.viewDidLoad()
         newCarManualAddTableView.delegate = self
         newCarManualAddTableView.dataSource = self
-        newCarManualAddTableView.register(UINib(nibName: "NewCarManualAddTableViewCell", bundle: nil), forCellReuseIdentifier: NewCarManualAddTableViewCell.reuseIdentifier)
-        newCarManualAddTableView.register(NewCarManualAddTableViewHeader.self, forHeaderFooterViewReuseIdentifier: NewCarManualAddTableViewHeader.reuseIdentifier)
+        newCarManualAddTableView.register(UINib(nibName: NewCarManualAddTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: NewCarManualAddTableViewCell.reuseIdentifier)
+        newCarManualAddTableView.register(UINib(nibName: NewCarManualAddTableViewHeader.reuseIdentifier, bundle: nil), forHeaderFooterViewReuseIdentifier: NewCarManualAddTableViewHeader.reuseIdentifier)
         rowsCount = CarData.paramsCount + 1
     }
     

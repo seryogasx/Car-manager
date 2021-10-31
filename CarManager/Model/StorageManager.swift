@@ -39,7 +39,7 @@ class StorageManager {
     public func saveNewCar(properties: [String: Any]) {
         guard let entity = NSEntityDescription.entity(forEntityName: "Car", in: mainContext) else { return }
         
-        var car = Car(entity: entity, insertInto: mainContext)
+        let car = Car(entity: entity, insertInto: mainContext)
         
         car.photoURL = ""
         car.nickName = "octaha"

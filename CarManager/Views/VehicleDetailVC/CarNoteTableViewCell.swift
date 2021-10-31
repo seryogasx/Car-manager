@@ -11,7 +11,7 @@ protocol NoteCellDelegate: AnyObject {
     func updateHeightForRow(_ cell: CarNoteTableViewCell, _ textView: UITextView)
 }
 
-class CarNoteTableViewCell: UITableViewCell {
+class CarNoteTableViewCell: UITableViewCell, ReuseIdentifying {
 
     @IBOutlet weak var DoneButton: UIButton!
     @IBOutlet weak var NoteTextView: UITextView!
@@ -24,7 +24,7 @@ class CarNoteTableViewCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+//        super.setSelected(selected, animated: animated)
     }
     
     func setup(text: String) {
