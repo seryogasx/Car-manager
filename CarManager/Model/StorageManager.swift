@@ -36,10 +36,43 @@ class StorageManager {
     
     private init() {  }
     
+    private func saveContext(errorMessage: String, context: NSManagedObjectContext) {
+        do {
+            try context.save()
+        } catch {
+            print(errorMessage)
+        }
+    }
+    
+    public func updateStorage() {
+        saveContext(errorMessage: "StorageManager error! Can't update storage!", context: mainContext)
+    }
+}
+
+// MARK: Car functions
+extension StorageManager {
+    
+    public func getCars() -> [Car] {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Car")
+        var cars: [Car] = []
+        do {
+            let result = try mainContext.fetch(fetchRequest)
+            for data in result {
+                if let car = data as? Car {
+                    cars.append(car)
+                }
+            }
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        return cars
+    }
+    
     public func saveNewCar(properties: [String: Any]) {
         guard let entity = NSEntityDescription.entity(forEntityName: "Car", in: mainContext) else { return }
-        
         let car = Car(entity: entity, insertInto: mainContext)
+        
+        car.setValuesForKeys(properties)
         
         car.photoURL = ""
         car.nickName = "octaha"
@@ -67,40 +100,33 @@ class StorageManager {
         car.spannersExists = true
         car.jackExists = true
         car.spannersExists = true
-        do {
-            try mainContext.save()
-        } catch {
-            print("StorageManager error! Can't save new car!")
+        
+        guard let noteEntity = NSEntityDescription.entity(forEntityName: "Note", in: mainContext) else { return }
+        
+        for i in 0...3 {
+            let note = Note(entity: noteEntity, insertInto: mainContext)
+            note.text = "kek\(i)"
+            car.addToNotes(note)
         }
+        saveContext(errorMessage: "StorageManager error! Can't save new car!", context: mainContext)
+    }
+}
+
+// MARK: Note functions
+extension StorageManager {
+    public func saveNewNote(note: Note, to car: Car) {
+        car.addToNotes(note)
+        saveContext(errorMessage: "StorageManager error! Can't save new note", context: mainContext)
     }
     
-    public func saveNewNote() {
-        
+    public func createNewNote() -> Note? {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Note", in: mainContext) else { return nil }
+        let note = Note(entity: entity, insertInto: mainContext)
+        return note
     }
     
-    public func editCar() {
-        
+    public func deleteNote(note: Note) {
+        mainContext.delete(note)
+        saveContext(errorMessage: "StorageManager error! Can't delete object in storage!", context: mainContext)
     }
-    
-    public func editNote() {
-        
-    }
-    
-    public func getCars() -> [Car] {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Car")
-        var cars: [Car] = []
-        do {
-            let result = try mainContext.fetch(fetchRequest)
-            for data in result {
-                if let car = data as? Car {
-                    cars.append(car)
-                }
-            }
-        } catch let error {
-            print(error.localizedDescription)
-        }
-        return cars
-    }
-    
-    
 }

@@ -11,27 +11,34 @@ class CarDetailViewController: UIViewController {
     
     @IBOutlet weak var CarDetailTableView: UITableView!
 
-    var car: Car?
-    let notes = ["bla-bla1", "bla-bla2", "bla-bla3"]
+    var car: Car!
+    
+    let sectionIndex: [String: Int] = ["Photo": 0, "Info": 1, "Note": 2, "Delete": 3]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = car?.value(forKey: "nickName") as? String ?? car?.value(forKey: "model") as? String ?? car?.value(forKey: "mark") as? String
+        title = car.nickName ?? car.model ?? car.mark
         CarDetailTableView.register(UINib(nibName: CarNoteTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CarNoteTableViewCell.reuseIdentifier)
         CarDetailTableView.register(UINib(nibName: CarTitleTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CarTitleTableViewCell.reuseIdentifier)
         CarDetailTableView.register(UINib(nibName: CarInfoTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CarInfoTableViewCell.reuseIdentifier)
+        CarDetailTableView.register(UINib(nibName: AddNoteTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: AddNoteTableViewCell.reuseIdentifier)
         CarDetailTableView.delegate = self
         CarDetailTableView.dataSource = self
-        print("BLET:", CarTitleTableViewCell.reuseIdentifier)
-        print("BLET:", CarNoteTableViewCell.reuseIdentifier)
-        print("BLET:", CarInfoTableViewCell.reuseIdentifier)
     }
-
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let notesToDelete = car.notes?.filter({ ($0 as! Note).text == "" }) {
+            for note in notesToDelete {
+                StorageManager.shared.deleteNote(note: note as! Note)
+            }
+        }
+    }
 }
 
-extension CarDetailViewController: UITableViewDataSource {
+extension CarDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 2 ? notes.count : 1
+        return section == 2 ? car.notes?.count ?? 0 : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,28 +53,34 @@ extension CarDetailViewController: UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: CarInfoTableViewCell.reuseIdentifier, for: indexPath) as? CarInfoTableViewCell else {
                     return UITableViewCell()
                 }
-                
-                cell.setup(mark: car?.value(forKey: "mark") as? String, model: car?.value(forKey: "model") as? String, year: car?.value(forKey: "year") as? Int16, mileage: car?.value(forKey: "mileage") as? Int)
+                cell.setup(mark: car.mark, model: car.model, year: car.year, mileage: car.mileage)
                 return cell
-            default:
+            case 2:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: CarNoteTableViewCell.reuseIdentifier, for: indexPath) as? CarNoteTableViewCell else {
                     return UITableViewCell()
                 }
-                cell.setup(text: notes[indexPath.item])
+                let note = car.notes![indexPath.item] as! Note
+                cell.setup(note: note, delegate: self)
+                return cell
+            default:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: AddNoteTableViewCell.reuseIdentifier) as? AddNoteTableViewCell else { return UITableViewCell() }
+                cell.setup(delegate: self)
                 return cell
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return sectionIndex.count
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            StorageManager.shared.deleteNote(note: self.car.notes![indexPath.item] as! Note)
+        }
     }
 }
 
-extension CarDetailViewController: UITableViewDelegate {
-    
-}
-
-extension CarDetailViewController: NoteCellDelegate {
+extension CarDetailViewController: CarNoteCellDelegate {
     func updateHeightForRow(_ cell: CarNoteTableViewCell, _ textView: UITextView) {
         let size = textView.bounds.size
         let newSize = CarDetailTableView.sizeThatFits(CGSize(width: size.width, height: CGFloat.greatestFiniteMagnitude))
@@ -81,5 +94,22 @@ extension CarDetailViewController: NoteCellDelegate {
                 CarDetailTableView.scrollToRow(at: thisIndexPath, at: .bottom, animated: false)
             }
         }
+    }
+    
+    func deleteAction(note: Note) {
+        print(#function)
+        let index = (car.notes?.index(of: note))!
+        StorageManager.shared.deleteNote(note: note)
+        CarDetailTableView.deleteRows(at: [IndexPath(row: index, section: sectionIndex["Note"]!)], with: .bottom)
+    }
+}
+
+extension CarDetailViewController: AddNoteProtocol {
+    func addAction() {
+        guard let newNote = StorageManager.shared.createNewNote() else { return }
+        newNote.isComplete = false
+        newNote.text = ""
+        car.addToNotes(newNote)
+        CarDetailTableView.insertRows(at: [IndexPath(row: car.notes!.count - 1, section: sectionIndex["Note"]!)], with: .top)
     }
 }

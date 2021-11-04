@@ -22,7 +22,7 @@ class CarInfoTableViewCell: UITableViewCell, ReuseIdentifying {
 //        super.setSelected(selected, animated: animated)
     }
     
-    func setup(mark: String?, model: String?, year: Int16?, mileage: Int?) {
+    func setup(mark: String?, model: String?, year: Int16?, mileage: Int32?) {
         self.MarkLabel.text = mark ?? "-"
         self.ModelLabel.text = model ?? "-"
         if let year = year {
