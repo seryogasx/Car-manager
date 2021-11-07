@@ -114,9 +114,20 @@ extension NewCarManualAddViewController: NewCarManualAddDelegate {
     }
     
     func confirmChanges() {
-//        if dataToAdd.keys.count == propertyNames.count - 1 {
+        if newCarPropertiesCheck() {
             StorageManager.shared.saveNewCar(properties: dataToAdd)
-//        }
+//            self.navigationController?.popViewController(animated: true)?.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
+        } else {
+            let alert = UIAlertController(title: "Ошибка", message: "Не все данные введены", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
         print(dataToAdd)
+    }
+    
+    private func newCarPropertiesCheck() -> Bool {
+        guard (dataToAdd["nickName"] != nil) || (dataToAdd["mark"] != nil) || (dataToAdd["model"] != nil) else { return false }
+        return true
     }
 }

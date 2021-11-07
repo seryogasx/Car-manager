@@ -35,6 +35,25 @@ class CarNoteTableViewCell: UITableViewCell, ReuseIdentifying {
         NoteTextView.text = note.text
         NoteTextView.isUserInteractionEnabled = true
         self.delegate = delegate
+        DoneButton.addTarget(self, action: #selector(endNoteButtonPressed), for: .touchUpInside)
+        DoneButton.titleLabel?.text = "Finish"
+    }
+    
+    @objc private func endNoteButtonPressed() {
+        note.isComplete = !note.isComplete
+//        DoneButton.titleLabel?.text = note.isComplete ? "Done" : "Finish"
+        DoneButton.setTitle(note.isComplete ? "Done" : "Finish", for: .normal)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            if self?.note.isComplete == true {
+                self?.deleteNote(delay: 0.0)
+            }
+        }
+    }
+    
+    private func deleteNote(delay: Double) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+            self?.delegate?.deleteAction(note: (self?.note)!)
+        }
     }
 }
 
@@ -48,10 +67,7 @@ extension CarNoteTableViewCell: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text == "" {
             note.text = ""
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-                print("delete start")
-                self?.delegate?.deleteAction(note: (self?.note)!)
-            }
+            deleteNote(delay: 0.5)
         }
         if textView.text != note.text {
             note.text = textView.text

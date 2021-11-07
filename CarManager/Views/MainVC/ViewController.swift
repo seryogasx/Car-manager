@@ -21,19 +21,22 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var CarListTableView: UITableView!
     
-    let cars = StorageManager.shared.getCars()
+    var cars = StorageManager.shared.getCars()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "My Garage"
         CarListTableView.delegate = self
         CarListTableView.dataSource = self
-        CarListTableView.register(UINib(nibName: CarTableViewCell.reuseIdentifier, bundle: nil
-                                       ), forCellReuseIdentifier: CarTableViewCell.reuseIdentifier)
+        CarListTableView.register(UINib(nibName: CarTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CarTableViewCell.reuseIdentifier)
         CarListTableView.separatorStyle = .none
     }
-
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        cars = StorageManager.shared.getCars()
+        CarListTableView.reloadData()
+    }
 }
 
 extension ViewController: UITableViewDataSource {
@@ -48,7 +51,7 @@ extension ViewController: UITableViewDataSource {
         if indexPath.item == cars.count {
             cell.setup(vehicleName: "Добавить новую машину")
         } else {
-            cell.setup(vehicleName: cars[indexPath.item].value(forKey: "nickName") as! String)
+            cell.setup(vehicleName: (cars[indexPath.item].nickName ?? cars[indexPath.item].mark ?? cars[indexPath.item].model) ?? "UNKNOWN")
         }
         return cell
     }
@@ -57,7 +60,6 @@ extension ViewController: UITableViewDataSource {
         if indexPath.item == cars.count {
             let vc = NewCarViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-//            self.present(vc, animated: true, completion: nil)
         } else {
             let vc = CarDetailViewController()
             vc.car = cars[indexPath.item]

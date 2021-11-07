@@ -74,50 +74,47 @@ extension StorageManager {
         
         car.setValuesForKeys(properties)
         
-        car.photoURL = ""
-        car.nickName = "octaha"
-        car.mark = "skoda"
-        car.model = "octavia"
-        car.year = 2018
-        car.mileage = 94000
-        car.engineType = "turbo"
-        car.transmissionType = "amt"
-        car.wheelsSize = 18
-        car.tireType = "summer"
-        car.antifreezeAge = 2
-        car.brakeFluidAge = 2
-        car.aidKitAge = 0
-        car.extinguisherAge = 0
-        car.reflectiveVestExists = true
-        car.warningTriangleExists = true
-        car.scraperExists = true
-        car.brainageBasinExists = true
-        car.compressorExists = true
-        car.startingWiresExists = true
-        car.ragsExists = true
-        car.videoRecorderExists = true
-        car.fusesExists = true
-        car.spannersExists = true
-        car.jackExists = true
-        car.spannersExists = true
+//        car.photoURL = ""
+//        car.nickName = "octaha"
+//        car.mark = "skoda"
+//        car.model = "octavia"
+//        car.year = 2018
+//        car.mileage = 94000
+//        car.engineType = "turbo"
+//        car.transmissionType = "amt"
+//        car.wheelsSize = 18
+//        car.tireType = "summer"
+//        car.antifreezeAge = 2
+//        car.brakeFluidAge = 2
+//        car.aidKitAge = 0
+//        car.extinguisherAge = 0
+//        car.reflectiveVestExists = true
+//        car.warningTriangleExists = true
+//        car.scraperExists = true
+//        car.brainageBasinExists = true
+//        car.compressorExists = true
+//        car.startingWiresExists = true
+//        car.ragsExists = true
+//        car.videoRecorderExists = true
+//        car.fusesExists = true
+//        car.spannersExists = true
+//        car.jackExists = true
+//        car.spannersExists = true
         
-        guard let noteEntity = NSEntityDescription.entity(forEntityName: "Note", in: mainContext) else { return }
+//        guard let noteEntity = NSEntityDescription.entity(forEntityName: "Note", in: mainContext) else { return }
         
-        for i in 0...3 {
-            let note = Note(entity: noteEntity, insertInto: mainContext)
-            note.text = "kek\(i)"
-            car.addToNotes(note)
-        }
+//        for i in 0...3 {
+//            let note = Note(entity: noteEntity, insertInto: mainContext)
+//            note.text = "kek\(i)"
+//            car.addToNotes(note)
+//        }
+        
         saveContext(errorMessage: "StorageManager error! Can't save new car!", context: mainContext)
     }
 }
 
 // MARK: Note functions
 extension StorageManager {
-    public func saveNewNote(note: Note, to car: Car) {
-        car.addToNotes(note)
-        saveContext(errorMessage: "StorageManager error! Can't save new note", context: mainContext)
-    }
     
     public func createNewNote() -> Note? {
         guard let entity = NSEntityDescription.entity(forEntityName: "Note", in: mainContext) else { return nil }

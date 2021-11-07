@@ -71,10 +71,7 @@ enum TransmissionType {
 }
 
 enum TireType {
-    enum Winter {
-        case spiked
-        case sticked
-    }
+    case winter
     case summer
     case allSeason
 }

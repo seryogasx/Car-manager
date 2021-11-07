@@ -1,4 +1,5 @@
 config.swift
+config.plist
 
 # OS X
 .DS_Store
