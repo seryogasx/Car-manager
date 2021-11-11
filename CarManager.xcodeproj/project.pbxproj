@@ -35,6 +35,8 @@
 		A6A549E82729CCD600534A8F /* NewCarManualAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A549E62729CCD600534A8F /* NewCarManualAddViewController.xib */; };
 		A6A549EB272A823100534A8F /* NewCarManualAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549E9272A823100534A8F /* NewCarManualAddTableViewCell.swift */; };
 		A6A549EC272A823100534A8F /* NewCarManualAddTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A549EA272A823100534A8F /* NewCarManualAddTableViewCell.xib */; };
+		A6BE0D7527399EDF005B1DEC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BE0D7427399EDF005B1DEC /* NetworkManager.swift */; };
+		A6BE0D78273A77B2005B1DEC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BE0D77273A77B2005B1DEC /* LocationManager.swift */; };
 		A6EEB04C2726FFB200715F3A /* CarDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EEB04A2726FFB200715F3A /* CarDetailViewController.swift */; };
 		A6EEB04D2726FFB200715F3A /* CarDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6EEB04B2726FFB200715F3A /* CarDetailViewController.xib */; };
 		A6EEB053272702A900715F3A /* CarNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EEB051272702A900715F3A /* CarNoteTableViewCell.swift */; };
@@ -72,6 +74,8 @@
 		A6A549E62729CCD600534A8F /* NewCarManualAddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewCarManualAddViewController.xib; sourceTree = "<group>"; };
 		A6A549E9272A823100534A8F /* NewCarManualAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarManualAddTableViewCell.swift; sourceTree = "<group>"; };
 		A6A549EA272A823100534A8F /* NewCarManualAddTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewCarManualAddTableViewCell.xib; sourceTree = "<group>"; };
+		A6BE0D7427399EDF005B1DEC /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A6BE0D77273A77B2005B1DEC /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		A6EEB04A2726FFB200715F3A /* CarDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailViewController.swift; sourceTree = "<group>"; };
 		A6EEB04B2726FFB200715F3A /* CarDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarDetailViewController.xib; sourceTree = "<group>"; };
 		A6EEB051272702A900715F3A /* CarNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarNoteTableViewCell.swift; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 				A6548A8B272C3BB7008FBF2C /* StorageManager.swift */,
 				A6548A8D272C3F64008FBF2C /* CarModel.xcdatamodeld */,
 				A63B477A2735778200B33295 /* NotificationManager.swift */,
+				A6BE0D7427399EDF005B1DEC /* NetworkManager.swift */,
+				A6BE0D77273A77B2005B1DEC /* LocationManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -294,10 +300,12 @@
 				A636A039272452E100BAD6E8 /* ViewController.swift in Sources */,
 				A6EEB053272702A900715F3A /* CarNoteTableViewCell.swift in Sources */,
 				A636A04C2724910B00BAD6E8 /* CarTableViewCell.swift in Sources */,
+				A6BE0D7527399EDF005B1DEC /* NetworkManager.swift in Sources */,
 				A636A04927248F9D00BAD6E8 /* config.swift in Sources */,
 				A636A035272452E100BAD6E8 /* AppDelegate.swift in Sources */,
 				A6A549E02729C33D00534A8F /* CarInfo.swift in Sources */,
 				A63B477B2735778200B33295 /* NotificationManager.swift in Sources */,
+				A6BE0D78273A77B2005B1DEC /* LocationManager.swift in Sources */,
 				A6548A8C272C3BB7008FBF2C /* StorageManager.swift in Sources */,
 				A6A549E72729CCD600534A8F /* NewCarManualAddViewController.swift in Sources */,
 				A636A037272452E100BAD6E8 /* SceneDelegate.swift in Sources */,

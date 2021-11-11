@@ -34,14 +34,31 @@ class NotificationManager: NSObject {
         }
     }
     
-    public func changeTiresNotification(carNickName: String, to tiresType: TireType = .summer) {
+    public func changeTiresNotification(carNickName: String, to tiresType: CarInputData.TireTypes = .summer, delay: Double = 1) {
         let content = UNMutableNotificationContent()
         content.title = "Смените резину"
         content.body = "В ближайшее время на \(carNickName) необходимо сменить резину на \(tiresType == .summer ? "летнюю" : "зимнюю")!"
         content.sound = UNNotificationSound.default
         content.badge = 1
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
+        let identifier = "set\(tiresType == .summer ? "Summer" : "Winter")TiresIdentifier"
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        notificationCenter.add(request) { error in
+            if let error = error {
+                print("NotificationManager error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    public func changeTiresNotification(carNickNames: [String], to tiresType: CarInputData.TireTypes = .summer, delay: Double = 1) {
+        let content = UNMutableNotificationContent()
+        content.title = "Смените резину"
+        content.body = "В ближайшее время на нескольких машинах необходимо сменить резину на \(tiresType == .summer ? "летнюю" : "зимнюю")!"
+        content.sound = UNNotificationSound.default
+        content.badge = 1
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
         let identifier = "set\(tiresType == .summer ? "Summer" : "Winter")TiresIdentifier"
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         notificationCenter.add(request) { error in

@@ -20,10 +20,10 @@ struct CarData {
     let mileage: UInt32
     
     // Select params
-    let engineType: EngineType
-    let transmissionType: TransmissionType
+    let engineType: CarInputData.EngineTypes
+    let transmissionType: CarInputData.TransmissionTypes
     let wheelsSize: Int16
-    let tireType: TireType
+    let tireType: CarInputData.TireTypes
     let antifreezeAge: Int16
     let brakeFluidAge: Int16
     let extinguisherAge: Int16
@@ -52,26 +52,47 @@ struct CarData {
     }
 }
 
-enum EngineType {
-    case atmo
-    case turbo
-    case hybrid
-    case gas
-    case hydrogen
-    case electic
-    case none
-}
-
-enum TransmissionType {
-    case MT
-    case AT
-    case AMT
-    case CVT
-    case none
-}
-
-enum TireType {
-    case winter
-    case summer
-    case allSeason
+enum CarInputData {
+    enum EngineTypes {
+        case atmo
+        case turbo
+        case hybrid
+        case hydrogen
+        case electric
+        case other
+    }
+    
+    enum TransmissionTypes {
+        case mt
+        case amt
+        case at
+        case cvt
+        case none
+    }
+    
+    enum TireTypes {
+        case winter
+        case summer
+        case allSeason
+    }
+    
+    static var wheelSizes: [Int16] {
+        return Array<Int16>(13...23)
+    }
+    
+    static var antifreezeAges: [Int16] {
+        return Array<Int16>(0...2)
+    }
+    
+    static var brakeFluidAges: [Int16] {
+        return Array<Int16>(0...2)
+    }
+    
+    static var aidKitAges: [Int16] {
+        return Array<Int16>(0...4)
+    }
+    
+    static var extinguisherAge: [Int16] {
+        return Array<Int16>(0...10)
+    }
 }

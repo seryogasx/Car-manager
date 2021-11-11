@@ -13,6 +13,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         NotificationManager.shared.requestAuth()
+//        LocationManager.shared.requestAccess()
+        
+        let currentDate = Date()
+        let calendar = Calendar.current
+        if let lastWeatherUpdateDate = UserDefaults.standard.value(forKey: "lastWeatherUpdate") as? Date {
+            if calendar.dateComponents([.day], from: calendar.startOfDay(for: lastWeatherUpdateDate), to: calendar.startOfDay(for: currentDate)).day ?? 0 > 3 {
+                NetworkManager.shared.checkWeather()
+            }
+        } else {
+            NetworkManager.shared.checkWeather()
+        }
+        UserDefaults.standard.set(currentDate, forKey: "lastWeatherUpdate")
+        
         return true
     }
     // MARK: UISceneSession Lifecycle

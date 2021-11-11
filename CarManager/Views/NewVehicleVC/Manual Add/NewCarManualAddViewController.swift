@@ -20,10 +20,11 @@ class NewCarManualAddViewController: UIViewController {
     @IBOutlet weak var newCarManualAddTableView: UITableView!
     var dataToAdd: [String: Any] = [:]
     
+    var carImage: UIImage?
     var rowsCount: Int = 0
     let sectionNumber = CarData.paramTypes.count + 1
     let propertyNames: [String] = {
-        let someVehicle = CarData(photo: "Some url", nickName: "name", mark: "mark", model: "model", year: 1998, mileage: 100, engineType: .atmo, transmissionType: .AMT, wheelsSize: 10, tireType: .allSeason, antifreezeAge: 10, brakeFluidAge: 10, extinguisherAge: 1, aidKitAge: 10, reflectiveVestExists: true, warningTriangleExists: true, scraperExists: true, brainageBasinExists: true, compressorExists: true, startingWiresExists: true, ragsExists: true, videoRecorderExists: true, fusesExists: true, spareWheelExists: true, jackExists: true, spannersExists: true)
+        let someVehicle = CarData(photo: "Some url", nickName: "name", mark: "mark", model: "model", year: 1998, mileage: 100, engineType: .atmo, transmissionType: .amt, wheelsSize: 10, tireType: .allSeason, antifreezeAge: 10, brakeFluidAge: 10, extinguisherAge: 1, aidKitAge: 10, reflectiveVestExists: true, warningTriangleExists: true, scraperExists: true, brainageBasinExists: true, compressorExists: true, startingWiresExists: true, ragsExists: true, videoRecorderExists: true, fusesExists: true, spareWheelExists: true, jackExists: true, spannersExists: true)
         let mirror = Mirror(reflecting: someVehicle)
         var properties: [String] = []
         for child in mirror.children {
@@ -41,8 +42,9 @@ class NewCarManualAddViewController: UIViewController {
         rowsCount = CarData.paramsCount + 1
     }
     
-    func createHeader() {
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(#function)
     }
 }
 
@@ -62,7 +64,7 @@ extension NewCarManualAddViewController: UITableViewDataSource {
         }
         switch indexPath.section {
             case 0:
-                cell.setup(type: .photo, header: nil, text: nil, delegate: self)
+                cell.setup(type: .photo, header: nil, text: nil, delegate: self, image: self.carImage)
             case 1:
                 let index = CarData.paramTypes[0].1 + indexPath.item
                 print(index, propertyNames[index])
@@ -116,7 +118,6 @@ extension NewCarManualAddViewController: NewCarManualAddDelegate {
     func confirmChanges() {
         if newCarPropertiesCheck() {
             StorageManager.shared.saveNewCar(properties: dataToAdd)
-//            self.navigationController?.popViewController(animated: true)?.navigationController?.popViewController(animated: true)
             self.navigationController?.popToRootViewController(animated: true)
         } else {
             let alert = UIAlertController(title: "Ошибка", message: "Не все данные введены", preferredStyle: .alert)
@@ -128,6 +129,48 @@ extension NewCarManualAddViewController: NewCarManualAddDelegate {
     
     private func newCarPropertiesCheck() -> Bool {
         guard (dataToAdd["nickName"] != nil) || (dataToAdd["mark"] != nil) || (dataToAdd["model"] != nil) else { return false }
+        if !checkImage() {
+            dataToAdd["photo"] = nil
+        }
         return true
+    }
+    
+    private func checkImage() -> Bool {
+        if let url = URL(string: dataToAdd["photo"] as? String ?? ""),
+           let jpegImage = carImage!.jpegData(compressionQuality: 0.8),
+           (try? jpegImage.write(to: url)) != nil {
+            return true
+        }
+        return false
+    }
+    
+    func photoHasBeenPressed() {
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
+    }
+}
+
+extension NewCarManualAddViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.editedImage] as? UIImage else { return }
+        
+        let imageName = UUID().uuidString
+        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName).absoluteString
+        self.carImage = image
+        dataToAdd["photo"] = imagePath
+        self.dismiss(animated: true, completion: nil)
+        newCarManualAddTableView.reloadSections([0], with: .automatic)
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dataToAdd["photo"] = nil
+        self.dismiss(animated: true, completion: nil)
     }
 }

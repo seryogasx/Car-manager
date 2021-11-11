@@ -10,6 +10,7 @@ import UIKit
 protocol NewCarManualAddDelegate: AnyObject {
     func updateInfo(key: String, value: String)
     func confirmChanges()
+    func photoHasBeenPressed()
 }
 
 class NewCarManualAddTableViewCell: UITableViewCell, ReuseIdentifying {
@@ -40,7 +41,7 @@ class NewCarManualAddTableViewCell: UITableViewCell, ReuseIdentifying {
         submitButton.titleLabel?.textColor = .white
     }
     
-    func setup(type: NewCarContentType, header: String?, text: String?, delegate: NewCarManualAddDelegate) {
+    func setup(type: NewCarContentType, header: String?, text: String?, delegate: NewCarManualAddDelegate, image: UIImage? = nil) {
         self.delegate = delegate
         self.propertyName = header ?? ""
         switch type {
@@ -53,6 +54,9 @@ class NewCarManualAddTableViewCell: UITableViewCell, ReuseIdentifying {
                 boolSwitch.isHidden = true
                 
                 carImageView.isHidden = false
+                carImageView.setCarImage(image: image)
+                carImageView.isUserInteractionEnabled = true
+                carImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(photoHasBeenPressed)))
             case .input:
                 let labelHintText = getHintText(header!)
                 headerLabel.isHidden = false
@@ -118,6 +122,10 @@ class NewCarManualAddTableViewCell: UITableViewCell, ReuseIdentifying {
         delegate?.confirmChanges()
     }
     
+    @objc private func photoHasBeenPressed() {
+        delegate?.photoHasBeenPressed()
+    }
+    
     private func getHintText(_ header: String) -> String {
         switch header {
             case "nickName":
@@ -175,5 +183,11 @@ class NewCarManualAddTableViewCell: UITableViewCell, ReuseIdentifying {
             default:
                 return "UNKNOWN"
         }
+    }
+}
+
+extension UIImageView {
+    func setCarImage(image: UIImage?) {
+        self.image = image ?? UIImage(named: "DefaultCarImage")
     }
 }

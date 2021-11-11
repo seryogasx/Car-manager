@@ -25,10 +25,9 @@ class CarTableViewCell: UITableViewCell, ReuseIdentifying {
 //        super.setSelected(selected, animated: animated)
     }
     
-    func setup(vehicleName: String) {
-        self.CarNameLabel.text = vehicleName
-        let image = UIImage(named: "octaha")!
-        self.CarImageView.image = image
+    func setup(carName: String, image: UIImage? = nil) {
+        self.CarNameLabel.text = carName
+        self.CarImageView.image = image ?? UIImage(named: "DefaultCarImage")
 //        setLayer()
     }
     

@@ -47,7 +47,11 @@ extension CarDetailViewController: UITableViewDataSource, UITableViewDelegate {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: CarTitleTableViewCell.reuseIdentifier, for: indexPath) as? CarTitleTableViewCell else {
                     return UITableViewCell()
                 }
-                cell.setup(name: title!)
+                if let str = car.photoURL, let url = URL(string: str) {
+                    cell.setup(name: title!, image: try? UIImage(data: Data(contentsOf: url)))
+                } else {
+                    cell.setup(name: title!, image: nil)
+                }
                 return cell
             case 1:
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: CarInfoTableViewCell.reuseIdentifier, for: indexPath) as? CarInfoTableViewCell else {

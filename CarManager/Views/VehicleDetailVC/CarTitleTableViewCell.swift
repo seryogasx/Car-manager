@@ -23,10 +23,10 @@ class CarTitleTableViewCell: UITableViewCell, ReuseIdentifying {
 //        super.setSelected(selected, animated: animated)
     }
     
-    func setup(name: String) {
+    func setup(name: String, image: UIImage?) {
         CarNameLabel.text = name
         CarImageView.contentMode = .scaleAspectFill
         CarImageView.layer.cornerRadius = 20
-        CarImageView.image = UIImage(named: "octaha")
+        CarImageView.image = image ?? UIImage(named: "DefaultCarImage")
     }
 }

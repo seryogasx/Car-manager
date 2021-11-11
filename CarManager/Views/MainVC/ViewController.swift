@@ -30,6 +30,8 @@ class ViewController: UIViewController {
         CarListTableView.dataSource = self
         CarListTableView.register(UINib(nibName: CarTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CarTableViewCell.reuseIdentifier)
         CarListTableView.separatorStyle = .none
+        
+        NetworkManager.shared.checkWeather()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,9 +51,15 @@ extension ViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         if indexPath.item == cars.count {
-            cell.setup(vehicleName: "Добавить новую машину")
+            cell.setup(carName: "Добавить новую машину")
         } else {
-            cell.setup(vehicleName: (cars[indexPath.item].nickName ?? cars[indexPath.item].mark ?? cars[indexPath.item].model) ?? "UNKNOWN")
+            let carName = cars[indexPath.item].nickName ?? cars[indexPath.item].mark ?? cars[indexPath.item].model ?? "UNKNOWN"
+            guard let photoURL = cars[indexPath.item].photoURL, let imageURL = URL(string: photoURL) else {
+                cell.setup(carName: carName)
+                return cell
+            }
+            let image = try? UIImage(data: Data(contentsOf: imageURL))
+            cell.setup(carName: carName, image: image)
         }
         return cell
     }
