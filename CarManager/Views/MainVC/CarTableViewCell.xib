@@ -10,38 +10,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="264" id="KGk-i7-Jjw" customClass="CarTableViewCell" customModule="CarManager" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="560" height="264"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="305" id="KGk-i7-Jjw" customClass="CarTableViewCell" customModule="CarManager" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="614" height="305"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="560" height="264"/>
+                <rect key="frame" x="0.0" y="0.0" width="614" height="305"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mpk-PL-4VW">
-                        <rect key="frame" x="10" y="10" width="300" height="250"/>
+                        <rect key="frame" x="157" y="10" width="300" height="250"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="300" id="f4r-xo-gjG"/>
                             <constraint firstAttribute="height" constant="250" id="hfn-Lz-BaT"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qg1-B6-gNC">
-                        <rect key="frame" x="320" y="110" width="210" height="50"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="RY5-Gk-gOF"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qg1-B6-gNC">
+                        <rect key="frame" x="286.5" y="265" width="41.5" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="mpk-PL-4VW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="5Hs-p2-mZl"/>
-                    <constraint firstItem="qg1-B6-gNC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="6cA-OT-WgM"/>
-                    <constraint firstItem="mpk-PL-4VW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="D2h-Fl-ujA"/>
-                    <constraint firstItem="mpk-PL-4VW" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Kqk-Yn-zWq"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="qg1-B6-gNC" secondAttribute="trailing" constant="10" id="bEn-cq-1zn"/>
-                    <constraint firstItem="qg1-B6-gNC" firstAttribute="leading" secondItem="mpk-PL-4VW" secondAttribute="trailing" constant="10" id="ff9-Gg-GHb"/>
-                    <constraint firstAttribute="bottom" secondItem="mpk-PL-4VW" secondAttribute="bottom" constant="10" id="ncx-YZ-8kI"/>
+                    <constraint firstAttribute="bottom" secondItem="qg1-B6-gNC" secondAttribute="bottom" constant="10" id="0qV-Ou-f0y"/>
+                    <constraint firstItem="qg1-B6-gNC" firstAttribute="top" secondItem="mpk-PL-4VW" secondAttribute="bottom" constant="5" id="7q4-Hq-JUc"/>
+                    <constraint firstItem="qg1-B6-gNC" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="8oq-AM-s6B"/>
+                    <constraint firstItem="mpk-PL-4VW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Jd6-L9-PSL"/>
+                    <constraint firstItem="mpk-PL-4VW" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ZNA-7o-EcH"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -51,7 +46,7 @@
                 <outlet property="CarImageViewWidthConstraint" destination="f4r-xo-gjG" id="8BN-Ba-7eK"/>
                 <outlet property="CarNameLabel" destination="qg1-B6-gNC" id="8Eh-4z-oHP"/>
             </connections>
-            <point key="canvasLocation" x="280" y="197"/>
+            <point key="canvasLocation" x="318.84057971014494" y="210.60267857142856"/>
         </tableViewCell>
     </objects>
 </document>

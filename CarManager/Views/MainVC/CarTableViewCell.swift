@@ -16,13 +16,14 @@ class CarTableViewCell: UITableViewCell, ReuseIdentifying {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        CarImageViewWidthConstraint.constant = UIScreen.main.bounds.width / 3
-        CarImageViewHeightConstraint.constant = UIScreen.main.bounds.height / 4
+//        CarImageViewWidthConstraint.constant = UIScreen.main.bounds.width / 3
+//        CarImageViewHeightConstraint.constant = UIScreen.main.bounds.height / 4
+        
         self.contentView.layer.cornerRadius = 20
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
+        super.setSelected(selected, animated: animated)
     }
     
     func setup(carName: String, image: UIImage? = nil) {
@@ -48,9 +49,14 @@ class CarTableViewCell: UITableViewCell, ReuseIdentifying {
 //        layer.contents = imageBuffer?.cgImage
         
         self.CarImageView.contentMode = .scaleAspectFill
-        self.CarImageView.layer.cornerRadius = 20
+//        self.CarImageView.layer.borderColor = UIColor.black.cgColor
+//        self.CarImageView.layer.borderWidth = 1
+//        self.CarImageView.layer.masksToBounds = false
+//        self.CarImageView.layer.cornerRadius = self.CarImageView.frame.height / 2
+        self.CarImageView.layer.cornerRadius = self.CarImageView.frame.height / 10
+//        self.CarImageView.clipsToBounds = true
 //
-        self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 20))
+//        self.contentView.frame = self.contentView.frame.inset(by: UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 20))
         
 //        self.layer.shadowColor = UIColor.gray.cgColor
 //        self.layer.shadowRadius = 0
