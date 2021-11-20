@@ -23,18 +23,21 @@ class NewCarTestIdentityInfoCollectionViewCell: UICollectionViewCell, ReuseIdent
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
-        carPhotoImageView.image = UIImage(named: "DefaultCarImage")
-        carPhotoImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(photoHasBeenPressed)))
-        carNickNameTextField.addTarget(self, action: #selector(dataHasBeenChanged(sender:)), for: .editingChanged)
     }
     
-    func setup(properties: [String], delegate: NewCarAddDelegate) {
-        titleLabel.text = "Добавим новое авто!"
+    func setup(properties: [String], delegate: NewCarAddDelegate, textFieldText: String?, image: UIImage?) {
+        titleLabel.attributedText = NSAttributedString(string: "")//AppFonts.mainTitle(string: "Добавим новое авто!")
         carNickNameLabel.text = "Как назовем авто?"
         carPhotoLabel.text = "Добавим фото?"
         nextPageButton.setTitle("Далее", for: .normal)
+        carNickNameTextField.text = textFieldText
+        
+        carPhotoImageView.contentMode = .scaleToFill
+        carPhotoImageView.layer.cornerRadius = carPhotoImageView.frame.height / 5
+        carPhotoImageView.isUserInteractionEnabled = true
+        carPhotoImageView.image = image ?? UIImage(named: "DefaultCarImage")
+        carPhotoImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(photoHasBeenPressed)))
+        carNickNameTextField.addTarget(self, action: #selector(dataHasBeenChanged(sender:)), for: .editingChanged)
         
         self.delegate = delegate
         self.properties = properties

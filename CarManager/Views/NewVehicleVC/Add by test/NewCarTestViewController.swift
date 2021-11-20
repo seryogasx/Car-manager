@@ -24,6 +24,9 @@ class NewCarTestViewController: UIViewController {
     let additionalProperties = Car.getAdditionalProperties()
     let boolProperties = Car.getBoolProperties()
     
+    var selectedOptions: [String] = []
+    var currentPropertyNameSetting: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollection()
@@ -57,7 +60,7 @@ extension NewCarTestViewController: UICollectionViewDelegate, UICollectionViewDa
                     print("wrong cell!")
                     return UICollectionViewCell()
                 }
-                cell.setup(properties: identityProperties, delegate: self)
+                cell.setup(properties: identityProperties, delegate: self, textFieldText: dataToAdd["nickName"] as? String, image: carImage)
                 cell.nextPageButton.addTarget(self, action: #selector(toMainInfo), for: .touchUpInside)
                 return cell
             case 1:
@@ -73,7 +76,19 @@ extension NewCarTestViewController: UICollectionViewDelegate, UICollectionViewDa
                     print("wrong cell!")
                     return UICollectionViewCell()
                 }
-                cell.setup(additionalProperties: additionalProperties, boolProperties: boolProperties, delegate: self)
+                boolProperties.forEach { property in
+                    if dataToAdd[property] == nil {
+                        dataToAdd[property] = false
+                    }
+                }
+                let additionalPropertiesValues = additionalProperties.map { propertyName in
+                    dataToAdd[propertyName] as? String ?? ""
+                }
+                let boolPropertiesValues = boolProperties.map { propertyName in
+                    dataToAdd[propertyName] as! Bool
+                }
+//                cell.setup(additionalProperties: additionalProperties, additionalPropertiesValues: additionalPropertiesValues), boolProperties: boolProperties, delegate: self)
+                cell.setup(additionalProperties: additionalProperties, additionalPropertiesValues: additionalPropertiesValues, boolProperties: boolProperties, boolPropertiesValues: boolPropertiesValues, delegate: self)
                 return cell
         }
     }
@@ -111,6 +126,7 @@ extension NewCarTestViewController: NewCarAddDelegate {
     }
     
     func confirmChanges() {
+        print(dataToAdd)
         if newCarPropertiesCheck() {
             StorageManager.shared.saveNewCar(properties: dataToAdd)
             self.navigationController?.popToRootViewController(animated: true)
@@ -146,22 +162,27 @@ extension NewCarTestViewController: NewCarAddDelegate {
     }
     
     func showOverlay(baseFrame: CGRect, propertyName: String) {
-        let options = getOptionsForProperty(propertyName: propertyName)
+        selectedOptions = getOptionsForProperty(propertyName: propertyName)
+        guard selectedOptions.count > 0 else { return }
         
+        currentPropertyNameSetting = propertyName
         overlayView.frame = self.view.frame
         overlayView.backgroundColor = UIColor.black
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeTransparentView))
-        overlayView.addGestureRecognizer(tapGesture)
+        overlayView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeTransparentView)))
         overlayView.alpha = 0
         self.view.addSubview(overlayView)
-        
-        tableView.frame = CGRect(x: baseFrame.origin.x, y: baseFrame.origin.y + baseFrame.height + 50, width: baseFrame.width, height: 0)
+
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        tableView.frame = CGRect(x: baseFrame.origin.x, y: baseFrame.origin.y + baseFrame.height, width: baseFrame.width, height: 0)
         self.view.addSubview(tableView)
-        
+
         UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: { [self] in
-            let maxTableViewHeight = min(CGFloat(options.count) * self.cellHeight, UIScreen.main.bounds.height - (baseFrame.origin.y + baseFrame.height + 50))
+            let maxTableViewHeight = min(CGFloat(selectedOptions.count) * self.cellHeight, UIScreen.main.bounds.height - (baseFrame.origin.y + baseFrame.height + 50))
             self.tableView.frame = CGRect(x: baseFrame.origin.x, y: baseFrame.origin.y + baseFrame.height + 50, width: baseFrame.width, height: maxTableViewHeight)
-            self.overlayView.alpha = 0.5
+            self.tableView.layer.cornerRadius = self.tableView.frame.height / 5
+            self.overlayView.alpha = 0.3
         }, completion: nil)
     }
     
@@ -194,4 +215,34 @@ extension NewCarTestViewController: UIImagePickerControllerDelegate, UINavigatio
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
+}
+
+extension NewCarTestViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ["kek", "cheburek"].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
+        cell.textLabel?.text = "kek\(indexPath.item)"
+//        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeTransparentView(baseFrame:))))
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        updateInfo(key: currentPropertyNameSetting!, value: selectedOptions[indexPath.item])
+        collectionView.reloadSections([2])
+    }
+}
+
+extension NewCarTestViewController: UITableViewDelegate {
+    
 }

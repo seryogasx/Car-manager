@@ -125,19 +125,23 @@ extension Car: Identifiable {
     static func getHintForProperty(property: String) -> String {
         switch property {
             case "aidKitAge":
-                return "Есть аптечка?"
+                return "Аптечка"
             case "antifreezeAge":
-                return "Когда менялся антифриз?"
+                return "Замена антифриза"
             case "brainageBasinExists":
-                return "Есть водосгон?"
+                return "Водосгон"
             case "brakeFluidAge":
-                return "Когда менялась тормозная жидкость?"
+                return "Замена тормозной жидкости"
             case "compressorExists":
-                return "Есть компрессор или насос?"
+                return "Компрессор или насос"
+            case "engineType":
+                return "Укажите тип двигателя"
             case "extinguisherAge":
-                return "Срок огнетушителя?"
+                return "Срок огнетушителя"
             case "fusesExists":
-                return "Есть запасные предохранители?"
+                return "Запасные предохранители"
+            case "jackExists":
+                return "Домкрат"
             case "mark":
                 return "Укажите марку авто"
             case "mileage":
@@ -149,30 +153,31 @@ extension Car: Identifiable {
             case "photoURL":
                 return "Укажите иконку авто"
             case "ragsExists":
-                return "Есть тряпки для сушки авто?"
+                return "Тряпки для сушки авто?"
             case "reflectiveVestExists":
-                return "Есть светоотражающий жилет?"
+                return "Светоотражающий жилет"
             case "scraperExists":
-                return "Есть скребок?"
+                return "Скребок"
             case "spannersExists":
-                return "Есть гаечные ключи?"
+                return "Гаечные ключи"
             case "spareWheelExists":
-                return "Есть запасное колесо?"
+                return "Запасное колесо"
             case "startingWiresExists":
-                return "Есть пусковые провода?"
+                return "Пусковые провода"
             case "tireType":
                 return "Укажите тип резины"
             case "transmissionType":
                 return "Укажите тип трансмиссии"
             case "videoRecorderExists":
-                return "Есть видеорегистратор?"
+                return "Видеорегистратор"
             case "warningTriangleExists":
-                return "Есть знак аварийной остановки?"
+                return "Знак аварийной остановки"
             case "wheelsSize":
                 return "Укажите размер колес"
             case "year":
                 return "Укажите год выпуска авто"
             default:
+//                print(property)
                 return ""
         }
     }

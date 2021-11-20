@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A623E7AC274917C600DAA850 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A623E7AB274917C600DAA850 /* AppFonts.swift */; };
 		A636A035272452E100BAD6E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A034272452E100BAD6E8 /* AppDelegate.swift */; };
 		A636A037272452E100BAD6E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A036272452E100BAD6E8 /* SceneDelegate.swift */; };
 		A636A039272452E100BAD6E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A038272452E100BAD6E8 /* ViewController.swift */; };
@@ -71,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A623E7AB274917C600DAA850 /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		A636A031272452E100BAD6E8 /* CarManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A636A034272452E100BAD6E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A636A036272452E100BAD6E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				A63B477A2735778200B33295 /* NotificationManager.swift */,
 				A6BE0D7427399EDF005B1DEC /* NetworkManager.swift */,
 				A6BE0D77273A77B2005B1DEC /* LocationManager.swift */,
+				A623E7AB274917C600DAA850 /* AppFonts.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				A687A513272720AC00C18EB7 /* CarTitleTableViewCell.swift in Sources */,
 				A6C6A2C3274650D500841F2A /* Note+CoreDataProperties.swift in Sources */,
 				A6A549E32729CC7800534A8F /* NewCarTestViewController.swift in Sources */,
+				A623E7AC274917C600DAA850 /* AppFonts.swift in Sources */,
 				A6548A8F272C3F64008FBF2C /* CarModel.xcdatamodeld in Sources */,
 				A6A2D1A72734304C008D08AB /* AddNoteTableViewCell.swift in Sources */,
 				A64DF51C272D2575008182B6 /* NewCarManualAddTableViewHeader.swift in Sources */,

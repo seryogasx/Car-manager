@@ -32,7 +32,7 @@ class NewCarTestMainInfoCollectionViewCell: UICollectionViewCell, ReuseIdentifyi
         self.delegate = delegate
         self.properties = properties
         
-        titleLabel.text = "О новой машине"
+        titleLabel.attributedText = AppFonts.mainTitle(string: "О новой машине")
         
         markLabel.text = Car.getHintForProperty(property: "mark")
         markTextField.placeholder = "Mercedes, Skoda и др."
