@@ -15,17 +15,10 @@ class NewCarTestViewController: UIViewController {
     var dataToAdd: [String: Any] = [:]
     var carImage: UIImage?
     
-    let overlayView = UIView()
-    let tableView = UITableView()
-    let cellHeight: CGFloat = 50
-    
     let identityProperties = Car.getIdentityProperties()
     let mainProperties = Car.getMainProperties()
     let additionalProperties = Car.getAdditionalProperties()
     let boolProperties = Car.getBoolProperties()
-    
-    var selectedOptions: [String] = []
-    var currentPropertyNameSetting: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,14 +74,14 @@ extension NewCarTestViewController: UICollectionViewDelegate, UICollectionViewDa
                         dataToAdd[property] = false
                     }
                 }
-                let additionalPropertiesValues = additionalProperties.map { propertyName in
-                    dataToAdd[propertyName] as? String ?? ""
-                }
-                let boolPropertiesValues = boolProperties.map { propertyName in
-                    dataToAdd[propertyName] as! Bool
-                }
+//                let additionalPropertiesValues = additionalProperties.map { propertyName in
+//                    dataToAdd[propertyName] as? String ?? ""
+//                }
+//                let boolPropertiesValues = boolProperties.map { propertyName in
+//                    dataToAdd[propertyName] as! Bool
+//                }
 //                cell.setup(additionalProperties: additionalProperties, additionalPropertiesValues: additionalPropertiesValues), boolProperties: boolProperties, delegate: self)
-                cell.setup(additionalProperties: additionalProperties, additionalPropertiesValues: additionalPropertiesValues, boolProperties: boolProperties, boolPropertiesValues: boolPropertiesValues, delegate: self)
+                cell.setup(additionalProperties: additionalProperties, boolProperties: boolProperties, delegate: self)
                 return cell
         }
     }
@@ -160,42 +153,6 @@ extension NewCarTestViewController: NewCarAddDelegate {
         }
         return false
     }
-    
-    func showOverlay(baseFrame: CGRect, propertyName: String) {
-        selectedOptions = getOptionsForProperty(propertyName: propertyName)
-        guard selectedOptions.count > 0 else { return }
-        
-        currentPropertyNameSetting = propertyName
-        overlayView.frame = self.view.frame
-        overlayView.backgroundColor = UIColor.black
-        overlayView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeTransparentView)))
-        overlayView.alpha = 0
-        self.view.addSubview(overlayView)
-
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-        tableView.frame = CGRect(x: baseFrame.origin.x, y: baseFrame.origin.y + baseFrame.height, width: baseFrame.width, height: 0)
-        self.view.addSubview(tableView)
-
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: { [self] in
-            let maxTableViewHeight = min(CGFloat(selectedOptions.count) * self.cellHeight, UIScreen.main.bounds.height - (baseFrame.origin.y + baseFrame.height + 50))
-            self.tableView.frame = CGRect(x: baseFrame.origin.x, y: baseFrame.origin.y + baseFrame.height + 50, width: baseFrame.width, height: maxTableViewHeight)
-            self.tableView.layer.cornerRadius = self.tableView.frame.height / 5
-            self.overlayView.alpha = 0.3
-        }, completion: nil)
-    }
-    
-    func getOptionsForProperty(propertyName: String) -> [String] {
-        return ["kek", "cheburek"]
-    }
-    
-    @objc private func removeTransparentView(baseFrame: CGRect) {
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseIn, animations: {
-            self.tableView.frame = CGRect(x: baseFrame.origin.x, y: baseFrame.origin.y + baseFrame.height + 50, width: baseFrame.width, height: 0)
-            self.overlayView.alpha = 0
-        }, completion: nil)
-    }
 }
 
 extension NewCarTestViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -215,34 +172,4 @@ extension NewCarTestViewController: UIImagePickerControllerDelegate, UINavigatio
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
-}
-
-extension NewCarTestViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ["kek", "cheburek"].count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
-        cell.textLabel?.text = "kek\(indexPath.item)"
-//        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeTransparentView(baseFrame:))))
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.cellHeight
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        updateInfo(key: currentPropertyNameSetting!, value: selectedOptions[indexPath.item])
-        collectionView.reloadSections([2])
-    }
-}
-
-extension NewCarTestViewController: UITableViewDelegate {
-    
 }

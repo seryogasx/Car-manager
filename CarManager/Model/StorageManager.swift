@@ -68,34 +68,34 @@ extension StorageManager {
         guard let entity = NSEntityDescription.entity(forEntityName: "Car", in: mainContext) else { return }
         let car = Car(entity: entity, insertInto: mainContext)
         
-//        car.setValuesForKeys(properties)
+        car.setValuesForKeys(properties)
         
-        car.photoURL = properties["photo"] as? String
-        car.nickName = "octaha"
-        car.mark = "skoda"
-        car.model = "octavia"
-        car.year = 2018
-        car.mileage = 94000
-        car.engineType = "turbo"
-        car.transmissionType = "amt"
-        car.wheelsSize = 18
-        car.tireType = "summer"
-        car.antifreezeAge = 2
-        car.brakeFluidAge = 2
-        car.aidKitAge = 0
-        car.extinguisherAge = 0
-        car.reflectiveVestExists = true
-        car.warningTriangleExists = true
-        car.scraperExists = true
-        car.brainageBasinExists = true
-        car.compressorExists = true
-        car.startingWiresExists = true
-        car.ragsExists = true
-        car.videoRecorderExists = true
-        car.fusesExists = true
-        car.spannersExists = true
-        car.jackExists = true
-        car.spannersExists = true
+//        car.photoURL = properties["photo"] as? String
+//        car.nickName = "octaha"
+//        car.mark = "skoda"
+//        car.model = "octavia"
+//        car.year = 2018
+//        car.mileage = 94000
+//        car.engineType = "turbo"
+//        car.transmissionType = "amt"
+//        car.wheelsSize = 18
+//        car.tireType = "summer"
+//        car.antifreezeAge = 2
+//        car.brakeFluidAge = 2
+//        car.aidKitAge = 0
+//        car.extinguisherAge = 0
+//        car.reflectiveVestExists = true
+//        car.warningTriangleExists = true
+//        car.scraperExists = true
+//        car.brainageBasinExists = true
+//        car.compressorExists = true
+//        car.startingWiresExists = true
+//        car.ragsExists = true
+//        car.videoRecorderExists = true
+//        car.fusesExists = true
+//        car.spannersExists = true
+//        car.jackExists = true
+//        car.spannersExists = true
         
         guard let noteEntity = NSEntityDescription.entity(forEntityName: "Note", in: mainContext) else { return }
         

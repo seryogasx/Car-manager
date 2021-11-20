@@ -11,7 +11,7 @@ protocol NewCarAddDelegate: AnyObject {
     func updateInfo(key: String, value: String)
     func confirmChanges()
     func photoHasBeenPressed()
-    func showOverlay(baseFrame: CGRect, propertyName: String)
+    func showOverlay(overlayView: UIView)
 }
 
 extension NewCarAddDelegate {
@@ -19,7 +19,7 @@ extension NewCarAddDelegate {
     
     func photoHasBeenPressed() { }
     
-    func showOverlay(baseFrame: CGRect, propertyName: String) { }
+    func showOverlay(overlayView: UIView) { }
 }
 
 class NewCarManualAddTableViewCell: UITableViewCell, ReuseIdentifying {

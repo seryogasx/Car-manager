@@ -12,12 +12,8 @@ class NewCarTestAdditionalInfoCollectionViewCell: UICollectionViewCell, ReuseIde
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var infoView: UIView!
-//    var labels: [UILabel] = []
-//    var textFields: [UITextField] = []
-//    var switchers: [UISwitch] = []
     let finishButton = UIButton()
     let titleLabel = UILabel()
-//    let additionalTitleLabel = UILabel()
     let boolTitleLabel = UILabel()
     var offsettedView: UIView!
     
@@ -28,25 +24,43 @@ class NewCarTestAdditionalInfoCollectionViewCell: UICollectionViewCell, ReuseIde
     
     let secondaryLabelHeight: CGFloat = 30
     let textFieldHeight: CGFloat = 30
+    let tableCellHeight: CGFloat = 50
     
     weak var delegate: NewCarAddDelegate?
     
     var additionalProperties = Array<String>()
-    var additionalPropertiesValues = Array<String>()
     var boolProperties = Array<String>()
-    var boolPropertiesValues = Array<Bool>()
+    
+    var selectedOptions: [String] = []
+    var currentPropertyNameSetting: String?
+    var currentPropertyTextFieldSetting: UITextField?
+    let overlayView = UIView()
+    let tableView = UITableView()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    func setup(additionalProperties: [String], additionalPropertiesValues: [String], boolProperties: [String], boolPropertiesValues: [Bool], delegate: NewCarAddDelegate) {
+    func setup(additionalProperties: [String], boolProperties: [String], delegate: NewCarAddDelegate) {
         self.delegate = delegate
         self.additionalProperties = additionalProperties
-        self.additionalPropertiesValues = additionalPropertiesValues
         self.boolProperties = boolProperties
         createLayout()
+        setupOverlayView()
+    }
+    
+    private func setupOverlayView() {
+        overlayView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        overlayView.backgroundColor = UIColor.black
+        overlayView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeTransparentView)))
+        overlayView.alpha = 0
+        self.contentView.addSubview(overlayView)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        self.contentView.addSubview(tableView)
     }
     
     private func createLayout() {
@@ -77,7 +91,6 @@ class NewCarTestAdditionalInfoCollectionViewCell: UICollectionViewCell, ReuseIde
     private func createAdditionalPropertiesUI() {
         additionalProperties.enumerated().forEach { (index, propertyName) in
             let newPropertyLabel = UILabel()
-//            labels.append(newPropertyLabel)
             infoView.addSubview(newPropertyLabel)
             newPropertyLabel.text = Car.getHintForProperty(property: propertyName)
             newPropertyLabel.snp.makeConstraints { make in
@@ -93,8 +106,6 @@ class NewCarTestAdditionalInfoCollectionViewCell: UICollectionViewCell, ReuseIde
             newPropertyLabel.tag = index
             
             let newPropertyTextField = UITextField()
-//            newPropertyTextField.isUserInteractionEnabled = false
-//            textFields.append(newPropertyTextField)
             infoView.addSubview(newPropertyTextField)
 
             newPropertyTextField.placeholder = "Выберете из списка"
@@ -112,16 +123,18 @@ class NewCarTestAdditionalInfoCollectionViewCell: UICollectionViewCell, ReuseIde
     
     @objc private func propertyLabelTapped(sender: UITapGestureRecognizer) {
         if let selectorView = sender.view {
+            print(selectorView.frame)
+            print(selectorView.bounds)
             let newPosition = CGPoint(x: 0.0, y: selectorView.frame.origin.y - selectorView.frame.height - secondaryYConstraint)
             scrollView.setContentOffset(newPosition, animated: true)
-            delegate?.showOverlay(baseFrame: CGRect(x: newPosition.x + secondaryXConstraint, y: secondaryLabelHeight + secondaryYConstraint + textFieldHeight, width: selectorView.frame.width, height: selectorView.frame.height), propertyName: additionalProperties[selectorView.tag])
+            currentPropertyTextFieldSetting = selectorView as? UITextField
+            showOverlay(baseFrame: CGRect(x: newPosition.x + secondaryXConstraint, y: secondaryLabelHeight + secondaryYConstraint, width: selectorView.frame.width, height: selectorView.frame.height), propertyName: additionalProperties[selectorView.tag])
         }
     }
     
     private func createBoolPropertiesUI() {
         boolProperties.forEach { propertyName in
             let newPropertyLabel = UILabel()
-//            labels.append(newPropertyLabel)
             infoView.addSubview(newPropertyLabel)
             newPropertyLabel.text = Car.getHintForProperty(property: propertyName)
             newPropertyLabel.snp.makeConstraints { make in
@@ -132,7 +145,6 @@ class NewCarTestAdditionalInfoCollectionViewCell: UICollectionViewCell, ReuseIde
             }
             
             let newPropertySwitcher = UISwitch()
-//            switchers.append(newPropertySwitcher)
             infoView.addSubview(newPropertySwitcher)
             newPropertySwitcher.snp.makeConstraints { make in
                 make.centerY.equalTo(offsettedView)
@@ -158,4 +170,75 @@ class NewCarTestAdditionalInfoCollectionViewCell: UICollectionViewCell, ReuseIde
     @objc private func finishButtonPressed() {
         delegate?.confirmChanges()
     }
+}
+
+extension NewCarTestAdditionalInfoCollectionViewCell {
+    
+    private func getOptionsForProperty(propertyName: String) -> [String] {
+        return ["kek", "cheburek"]
+    }
+    func showOverlay(baseFrame: CGRect, propertyName: String) {
+        selectedOptions = getOptionsForProperty(propertyName: propertyName)
+        guard selectedOptions.count > 0 else { return }
+        currentPropertyNameSetting = propertyName
+
+        currentPropertyTextFieldSetting?.layer.borderWidth = 1
+        tableView.frame = CGRect(x: baseFrame.origin.x, y: baseFrame.origin.y + baseFrame.height, width: baseFrame.width, height: 0)
+        tableView.layer.borderWidth = 1
+        let maxTableViewHeight = min(CGFloat(selectedOptions.count) * self.tableCellHeight, UIScreen.main.bounds.height - (baseFrame.origin.y + baseFrame.height + mainYConstraint))
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveLinear, animations: { [weak self] in
+            self?.tableView.frame = CGRect(x: baseFrame.origin.x, y: baseFrame.origin.y + baseFrame.height, width: baseFrame.width, height: maxTableViewHeight)
+            self?.tableView.layer.cornerRadius = (self?.tableView.frame.height ?? 0) / 5
+            self?.overlayView.alpha = 0.0001
+            self?.currentPropertyTextFieldSetting?.layer.borderWidth = 1
+            self?.currentPropertyTextFieldSetting?.layer.cornerRadius = (self?.currentPropertyTextFieldSetting?.frame.height ?? 25) / 5
+        }, completion: nil)
+    }
+    
+    @objc private func removeTransparentView(baseFrame: CGRect) {
+        let tableFrame = tableView.frame
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveLinear
+                       , animations: { [weak self] in
+            self?.tableView.frame = CGRect(x: tableFrame.origin.x, y: tableFrame.origin.y, width: tableFrame.width, height: 0)
+            self?.overlayView.alpha = 0
+            self?.currentPropertyTextFieldSetting?.layer.borderWidth = 0
+            self?.currentPropertyTextFieldSetting?.layer.cornerRadius = 0
+        }, completion: nil)
+        currentPropertyNameSetting = nil
+        currentPropertyTextFieldSetting = nil
+    }
+}
+
+
+extension NewCarTestAdditionalInfoCollectionViewCell: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return selectedOptions.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
+        cell.textLabel?.text = selectedOptions[indexPath.item]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.tableCellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newOption = selectedOptions[indexPath.item]
+        delegate?.updateInfo(key: currentPropertyNameSetting!, value: newOption)
+        currentPropertyTextFieldSetting?.placeholder = ""
+        currentPropertyTextFieldSetting?.text = newOption
+        removeTransparentView(baseFrame: currentPropertyTextFieldSetting!.frame)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension NewCarTestAdditionalInfoCollectionViewCell: UITableViewDelegate {
+    
 }
