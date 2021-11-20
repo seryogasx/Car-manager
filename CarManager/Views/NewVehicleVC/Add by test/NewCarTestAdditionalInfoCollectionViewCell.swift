@@ -58,7 +58,7 @@ class NewCarTestAdditionalInfoCollectionViewCell: UICollectionViewCell, ReuseIde
             let newPropertyLabel = UILabel()
             labels.append(newPropertyLabel)
             infoView.addSubview(newPropertyLabel)
-            newPropertyLabel.text = propertyName
+            newPropertyLabel.text = Car.getHintForProperty(property: propertyName)
             newPropertyLabel.snp.makeConstraints { make in
                 if offsettedView == titleLabel {
                     make.top.equalTo(offsettedView.snp.bottom).offset(20)
@@ -89,7 +89,7 @@ class NewCarTestAdditionalInfoCollectionViewCell: UICollectionViewCell, ReuseIde
             let newPropertyLabel = UILabel()
             labels.append(newPropertyLabel)
             infoView.addSubview(newPropertyLabel)
-            newPropertyLabel.text = propertyName
+            newPropertyLabel.text = Car.getHintForProperty(property: propertyName)
             newPropertyLabel.snp.makeConstraints { make in
 //                if offsettedView == titleLabel {
 //                    make.top.equalTo(offsettedView).offset(20)

@@ -28,7 +28,6 @@ extension Car {
     @NSManaged public var mark: String?
     @NSManaged public var mileage: Int32
     @NSManaged public var model: String?
-    @NSManaged public var motorType: String?
     @NSManaged public var nickName: String?
     @NSManaged public var photoURL: String?
     @NSManaged public var ragsExists: Bool
@@ -104,19 +103,6 @@ extension Car: Identifiable {
                 "extinguisherAge", "aidKitAge"]
     }
     
-//    static func getPhotoProperties() -> [String] {
-//        return ["photoURL"]
-//    }
-
-//    static func getInputProperties() -> [String] {
-//        return ["nickName", "mark", "model", "year", "mileage"]
-//    }
-//
-//    static func getSelectProperties() -> [String] {
-//        return ["engineType", "transmissionType", "wheelsSize", "tireType", "antifreezeAge", "brakeFluidAge",
-//                "extinguisherAge", "aidKitAge"]
-//    }
-//
     static func getBoolProperties() -> [String] {
         return ["reflectiveVestExists", "warningTriangleExists", "scraperExists", "brainageBasinExists", "compressorExists",
                 "startingWiresExists", "ragsExists", "videoRecorderExists", "fusesExists", "spareWheelExists",
@@ -134,5 +120,60 @@ extension Car: Identifiable {
         let someCar = Car(entity: entity, insertInto: StorageManager.shared.mainContext)
         let arr = someCar.entity.attributesByName.enumerated().map { $0.element.key }
         return arr
+    }
+    
+    static func getHintForProperty(property: String) -> String {
+        switch property {
+            case "aidKitAge":
+                return "Есть аптечка?"
+            case "antifreezeAge":
+                return "Когда менялся антифриз?"
+            case "brainageBasinExists":
+                return "Есть водосгон?"
+            case "brakeFluidAge":
+                return "Когда менялась тормозная жидкость?"
+            case "compressorExists":
+                return "Есть компрессор или насос?"
+            case "extinguisherAge":
+                return "Срок огнетушителя?"
+            case "fusesExists":
+                return "Есть запасные предохранители?"
+            case "mark":
+                return "Укажите марку авто"
+            case "mileage":
+                return "Укажите пробег"
+            case "model":
+                return "Укажите модель авто"
+            case "nickName":
+                return "Укажите псевдоним авто"
+            case "photoURL":
+                return "Укажите иконку авто"
+            case "ragsExists":
+                return "Есть тряпки для сушки авто?"
+            case "reflectiveVestExists":
+                return "Есть светоотражающий жилет?"
+            case "scraperExists":
+                return "Есть скребок?"
+            case "spannersExists":
+                return "Есть гаечные ключи?"
+            case "spareWheelExists":
+                return "Есть запасное колесо?"
+            case "startingWiresExists":
+                return "Есть пусковые провода?"
+            case "tireType":
+                return "Укажите тип резины"
+            case "transmissionType":
+                return "Укажите тип трансмиссии"
+            case "videoRecorderExists":
+                return "Есть видеорегистратор?"
+            case "warningTriangleExists":
+                return "Есть знак аварийной остановки?"
+            case "wheelsSize":
+                return "Укажите размер колес"
+            case "year":
+                return "Укажите год выпуска авто"
+            default:
+                return ""
+        }
     }
 }

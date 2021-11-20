@@ -33,15 +33,39 @@ class NewCarTestMainInfoCollectionViewCell: UICollectionViewCell, ReuseIdentifyi
         self.properties = properties
         
         titleLabel.text = "О новой машине"
-        markLabel.text = "Какая марка?"
+        
+        markLabel.text = Car.getHintForProperty(property: "mark")
         markTextField.placeholder = "Mercedes, Skoda и др."
-        modelLabel.text = "Какая модель?"
+        markTextField.addTarget(self, action: #selector(markHasBeenChanged), for: .editingChanged)
+        
+        modelLabel.text = Car.getHintForProperty(property: "model")
         modelTextField.placeholder = "Golf, Corolla и др."
-        yearLabel.text = "Какого года?"
+        modelTextField.addTarget(self, action: #selector(modelHasBeenChanged), for: .editingChanged)
+        
+        yearLabel.text = Car.getHintForProperty(property: "year")
         yearTextField.placeholder = "Одно число (например, 2020)"
-        mileageLabel.text = "Какой пробег?"
+        yearTextField.addTarget(self, action: #selector(yearHasBeenChanged), for: .editingChanged)
+        
+        mileageLabel.text = Car.getHintForProperty(property: "mileage")
         mileageTextField.placeholder = "Одно число (например, 10000)"
+        mileageTextField.addTarget(self, action: #selector(mileageHasBeenChanged), for: .editingChanged)
         
         nextButton.setTitle("Далее", for: .normal)
+    }
+    
+    @objc private func markHasBeenChanged() {
+        delegate?.updateInfo(key: "mark", value: markTextField.text ?? "")
+    }
+    
+    @objc private func modelHasBeenChanged() {
+        delegate?.updateInfo(key: "model", value: modelTextField.text ?? "")
+    }
+    
+    @objc private func yearHasBeenChanged() {
+        delegate?.updateInfo(key: "year", value: yearTextField.text ?? "")
+    }
+    
+    @objc private func mileageHasBeenChanged() {
+        delegate?.updateInfo(key: "mileage", value: mileageTextField.text ?? "")
     }
 }

@@ -139,62 +139,7 @@ class NewCarManualAddTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     
     private func getHintText(_ header: String) -> String {
-        switch header {
-            case "nickName":
-                return "Псевдоним"
-            case "mark":
-                return "Марка авто"
-            case "model":
-                return "Модель авто"
-            case "year":
-                return "Год выпуска"
-            case "photo":
-                return "Добавить фото"
-            case "mileage":
-                return "Текущий пробег"
-            case "engineType":
-                return "Тип двигателя"
-            case "transmissionType":
-                return "Тип трансмиссии"
-            case "wheelsSize":
-                return "Размер дисков"
-            case "tireType":
-                return "Тип резины"
-            case "antifreezeAge":
-                return "Последняя замена антифриза"
-            case "brakeFluidAge":
-                return "Последняя замена тормозной жидкости"
-            case "aidKitAge":
-                return "Возраст аптечки"
-            case "reflectiveVestExists":
-                return "Светоотражающий жилет"
-            case "warningTriangleExists":
-                return "Знак аварийной остановки"
-            case "scraperExists":
-                return "Скребок от льда"
-            case "brainageBasinExists":
-                return "Водосгон"
-            case "compressorExists":
-                return "Компрессор"
-            case "startingWiresExists":
-                return "Пусковые провода"
-            case "ragsExists":
-                return "Тряпочки для сушки"
-            case "videoRecorderExists":
-                return "Видеорегистратор"
-            case "fusesExists":
-                return "Запасные предохранители"
-            case "spareWheelExists":
-                return "Запасное колесо"
-            case "jackExists":
-                return "Домкрат"
-            case "spannersExists":
-                return "Инструменты"
-            case "extinguisherAge":
-                return "Возраст огнетушителя"
-            default:
-                return "UNKNOWN"
-        }
+        return Car.getHintForProperty(property: header)
     }
 }
 

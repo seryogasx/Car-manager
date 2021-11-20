@@ -104,6 +104,10 @@ extension NewCarTestViewController: UICollectionViewDelegateFlowLayout {
 extension NewCarTestViewController: NewCarAddDelegate {
     func updateInfo(key: String, value: String) {
         dataToAdd[key] = value
+        print(dataToAdd[key])
+        if dataToAdd[key] as? String == "" {
+            dataToAdd[key] = nil
+        }
     }
     
     func confirmChanges() {
@@ -127,13 +131,13 @@ extension NewCarTestViewController: NewCarAddDelegate {
     private func newCarPropertiesCheck() -> Bool {
         guard (dataToAdd["nickName"] != nil) || (dataToAdd["mark"] != nil) || (dataToAdd["model"] != nil) else { return false }
         if !checkImage() {
-            dataToAdd["photo"] = nil
+            dataToAdd["photoURL"] = nil
         }
         return true
     }
     
     private func checkImage() -> Bool {
-        if let url = URL(string: dataToAdd["photo"] as? String ?? ""),
+        if let url = URL(string: dataToAdd["photoURL"] as? String ?? ""),
            let jpegImage = carImage!.jpegData(compressionQuality: 0.8),
            (try? jpegImage.write(to: url)) != nil {
             return true
@@ -181,7 +185,7 @@ extension NewCarTestViewController: UIImagePickerControllerDelegate, UINavigatio
         let imageName = UUID().uuidString
         let imagePath = getDocumentsDirectory().appendingPathComponent(imageName).absoluteString
         self.carImage = image
-        dataToAdd["photo"] = imagePath
+        dataToAdd["photoURL"] = imagePath
         self.dismiss(animated: true, completion: nil)
         collectionView.reloadSections([0])
     }

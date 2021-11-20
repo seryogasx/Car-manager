@@ -13,7 +13,6 @@
         <attribute name="mark" optional="YES" attributeType="String"/>
         <attribute name="mileage" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="model" optional="YES" attributeType="String"/>
-        <attribute name="motorType" optional="YES" attributeType="String"/>
         <attribute name="nickName" optional="YES" attributeType="String"/>
         <attribute name="photoURL" optional="YES" attributeType="String"/>
         <attribute name="ragsExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -36,7 +35,7 @@
         <relationship name="car" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" inverseName="notes" inverseEntity="Car"/>
     </entity>
     <elements>
-        <element name="Car" positionX="-63" positionY="-18" width="128" height="449"/>
+        <element name="Car" positionX="-63" positionY="-18" width="128" height="434"/>
         <element name="Note" positionX="-63" positionY="144" width="128" height="74"/>
     </elements>
 </model>
