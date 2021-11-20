@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="NewCarTestMainInfoCollectionViewCell" customModule="CarManager" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="559" height="569"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="559" height="569"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXJ-WV-KSv">
+                        <rect key="frame" x="259" y="10" width="41.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="I43-0c-3ke">
+                        <rect key="frame" x="154.5" y="50.5" width="250" height="342"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RzC-rE-c1A">
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xhL-69-IY9">
+                                <rect key="frame" x="0.0" y="44" width="250" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iph-2j-ZHF">
+                                <rect key="frame" x="0.0" y="88" width="250" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BuF-Z7-kf0">
+                                <rect key="frame" x="0.0" y="132" width="250" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="piY-pC-6wo">
+                                <rect key="frame" x="0.0" y="176" width="250" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cHp-5p-uFM">
+                                <rect key="frame" x="0.0" y="220" width="250" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTI-0Q-cUW">
+                                <rect key="frame" x="0.0" y="264" width="250" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A5a-9R-tvi">
+                                <rect key="frame" x="0.0" y="308" width="250" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="250" id="yCO-4c-ca6"/>
+                        </constraints>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6F-3H-SqQ">
+                        <rect key="frame" x="246" y="528" width="67" height="31"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="f6F-3H-SqQ" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="0XT-0T-CTq"/>
+                <constraint firstAttribute="bottom" secondItem="f6F-3H-SqQ" secondAttribute="bottom" constant="10" id="GsN-7t-czD"/>
+                <constraint firstItem="fXJ-WV-KSv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="Wht-bx-EfM"/>
+                <constraint firstItem="I43-0c-3ke" firstAttribute="top" secondItem="fXJ-WV-KSv" secondAttribute="bottom" constant="20" id="dAo-qT-Ug1"/>
+                <constraint firstItem="I43-0c-3ke" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="mFN-Tc-C3M"/>
+                <constraint firstItem="f6F-3H-SqQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="I43-0c-3ke" secondAttribute="bottom" constant="20" id="nIi-oC-4ui"/>
+                <constraint firstItem="fXJ-WV-KSv" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="t8B-Jh-m8q"/>
+            </constraints>
+            <size key="customSize" width="559" height="569"/>
+            <connections>
+                <outlet property="markLabel" destination="RzC-rE-c1A" id="uAb-zP-2kh"/>
+                <outlet property="markTextField" destination="xhL-69-IY9" id="ugp-ab-79J"/>
+                <outlet property="mileageLabel" destination="rTI-0Q-cUW" id="oeY-8E-Hze"/>
+                <outlet property="mileageTextField" destination="A5a-9R-tvi" id="FNW-J6-dsE"/>
+                <outlet property="modelLabel" destination="iph-2j-ZHF" id="QBo-b9-giB"/>
+                <outlet property="modelTextField" destination="BuF-Z7-kf0" id="pqQ-w3-oYD"/>
+                <outlet property="nextButton" destination="f6F-3H-SqQ" id="nw7-HC-5W9"/>
+                <outlet property="titleLabel" destination="fXJ-WV-KSv" id="3JF-JI-lqf"/>
+                <outlet property="yearLabel" destination="piY-pC-6wo" id="XXT-Oj-MAV"/>
+                <outlet property="yearTextField" destination="cHp-5p-uFM" id="lwH-7E-Isx"/>
+            </connections>
+            <point key="canvasLocation" x="506.52173913043481" y="280.91517857142856"/>
+        </collectionViewCell>
+    </objects>
+</document>

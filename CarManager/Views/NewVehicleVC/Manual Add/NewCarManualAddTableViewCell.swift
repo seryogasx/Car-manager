@@ -7,10 +7,19 @@
 
 import UIKit
 
-protocol NewCarManualAddDelegate: AnyObject {
+protocol NewCarAddDelegate: AnyObject {
     func updateInfo(key: String, value: String)
     func confirmChanges()
     func photoHasBeenPressed()
+    func showOverlay(baseFrame: CGRect, propertyName: String)
+}
+
+extension NewCarAddDelegate {
+    func confirmChanges() { }
+    
+    func photoHasBeenPressed() { }
+    
+    func showOverlay(baseFrame: CGRect, propertyName: String) { }
 }
 
 class NewCarManualAddTableViewCell: UITableViewCell, ReuseIdentifying {
@@ -21,12 +30,15 @@ class NewCarManualAddTableViewCell: UITableViewCell, ReuseIdentifying {
     @IBOutlet weak var boolSwitch: UISwitch!
     @IBOutlet weak var carImageView: UIImageView!
     
-    weak var delegate: NewCarManualAddDelegate?
+    weak var delegate: NewCarAddDelegate?
     
     var propertyName = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        let textFieldMinWidth = UIScreen.main.bounds.width / 2
+        let newSize = textField.sizeThatFits(CGSize(width: textFieldMinWidth, height: textField.frame.height))
+        textField.frame.size = CGSize(width: max(newSize.width, textFieldMinWidth), height: newSize.height)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -41,73 +53,73 @@ class NewCarManualAddTableViewCell: UITableViewCell, ReuseIdentifying {
         submitButton.titleLabel?.textColor = .white
     }
     
-    func setup(type: NewCarContentType, header: String?, text: String?, delegate: NewCarManualAddDelegate, image: UIImage? = nil) {
+    func setup(type: NewCarContentType, header: String?, text: String?, delegate: NewCarAddDelegate, image: UIImage? = nil) {
         self.delegate = delegate
         self.propertyName = header ?? ""
-        switch type {
-            case .photo:
-                boolSwitch.isHidden = true
-                headerLabel.isHidden = true
-                textField.isHidden = true
-                textField.text = "Photo"
-                submitButton.isHidden = true
-                boolSwitch.isHidden = true
-                
-                carImageView.isHidden = false
-                carImageView.setCarImage(image: image)
-                carImageView.isUserInteractionEnabled = true
-                carImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(photoHasBeenPressed)))
-            case .input:
-                let labelHintText = getHintText(header!)
-                headerLabel.isHidden = false
-                textField.isHidden = false
-                submitButton.isHidden = true
-                boolSwitch.isHidden = true
-                carImageView.isHidden = true
-                
-                headerLabel.text = labelHintText
-                if let text = text {
-                    textField.text = text
-                }
-                
-                textField.addTarget(self, action: #selector(dataHasBeenChanged(sender:)), for: .editingChanged)
-            case .select:
-                let labelHintText = getHintText(header!)
-                headerLabel.isHidden = false
-                textField.isHidden = false
-                submitButton.isHidden = true
-                boolSwitch.isHidden = true
-                carImageView.isHidden = true
-                
-                headerLabel.text = labelHintText
-                if let text = text {
-                    textField.text = text
-                }
-                
-                textField.addTarget(self, action: #selector(dataHasBeenChanged(sender:)), for: .editingChanged)
-            case .bool:
-                let labelHintText = getHintText(header!)
-                headerLabel.isHidden = false
-                headerLabel.text = labelHintText
-                
-                textField.isHidden = true
-                submitButton.isHidden = true
-                boolSwitch.isHidden = false
-                carImageView.isHidden = true
-                
-                boolSwitch.addTarget(self, action: #selector(dataHasBeenChanged(sender:)), for: .valueChanged)
-                boolSwitch.setOn(false, animated: false)
-            case .confirm:
-                headerLabel.isHidden = true
-                textField.isHidden = true
-                submitButton.isHidden = false
-                boolSwitch.isHidden = true
-                carImageView.isHidden = true
-
-                submitButton.titleLabel?.textColor = .white
-                submitButton.layer.cornerRadius = 2
-                submitButton.addTarget(self, action: #selector(confirmButtonPressed), for: .touchUpInside)
-        }
+//        switch type {
+//            case .photo:
+//                boolSwitch.isHidden = true
+//                headerLabel.isHidden = true
+//                textField.isHidden = true
+//                textField.text = "Photo"
+//                submitButton.isHidden = true
+//                boolSwitch.isHidden = true
+//                
+//                carImageView.isHidden = false
+//                carImageView.setCarImage(image: image)
+//                carImageView.isUserInteractionEnabled = true
+//                carImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(photoHasBeenPressed)))
+//            case .input:
+//                let labelHintText = getHintText(header!)
+//                headerLabel.isHidden = false
+//                textField.isHidden = false
+//                submitButton.isHidden = true
+//                boolSwitch.isHidden = true
+//                carImageView.isHidden = true
+//                
+//                headerLabel.text = labelHintText
+//                if let text = text {
+//                    textField.text = text
+//                }
+//                
+//                textField.addTarget(self, action: #selector(dataHasBeenChanged(sender:)), for: .editingChanged)
+//            case .select:
+//                let labelHintText = getHintText(header!)
+//                headerLabel.isHidden = false
+//                textField.isHidden = false
+//                submitButton.isHidden = true
+//                boolSwitch.isHidden = true
+//                carImageView.isHidden = true
+//                
+//                headerLabel.text = labelHintText
+//                if let text = text {
+//                    textField.text = text
+//                }
+//                
+//                textField.addTarget(self, action: #selector(dataHasBeenChanged(sender:)), for: .editingChanged)
+//            case .bool:
+//                let labelHintText = getHintText(header!)
+//                headerLabel.isHidden = false
+//                headerLabel.text = labelHintText
+//                
+//                textField.isHidden = true
+//                submitButton.isHidden = true
+//                boolSwitch.isHidden = false
+//                carImageView.isHidden = true
+//                
+//                boolSwitch.addTarget(self, action: #selector(dataHasBeenChanged(sender:)), for: .valueChanged)
+//                boolSwitch.setOn(false, animated: false)
+//            case .confirm:
+//                headerLabel.isHidden = true
+//                textField.isHidden = true
+//                submitButton.isHidden = false
+//                boolSwitch.isHidden = true
+//                carImageView.isHidden = true
+//
+//                submitButton.titleLabel?.textColor = .white
+//                submitButton.layer.cornerRadius = 2
+//                submitButton.addTarget(self, action: #selector(confirmButtonPressed), for: .touchUpInside)
+//        }
     }
     
     @objc func dataHasBeenChanged(sender: Any) {

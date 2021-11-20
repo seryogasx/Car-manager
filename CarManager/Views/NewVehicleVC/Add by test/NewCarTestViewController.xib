@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewCarTestViewController" customModule="CarManager" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="xE4-hK-ebI" id="TYM-Mf-9gz"/>
+                <outlet property="collectionViewFlowLayout" destination="eKH-hZ-via" id="EFb-Xa-AxO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,24 +21,24 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="6un-Aj-4OC">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                </pageControl>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PS3-r8-8mP">
-                    <rect key="frame" x="186" y="438" width="33" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xE4-hK-ebI">
+                    <rect key="frame" x="5" y="49" width="404" height="808"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eKH-hZ-via">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="6un-Aj-4OC" secondAttribute="bottom" id="1JU-jE-mhN"/>
-                <constraint firstItem="6un-Aj-4OC" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="6fJ-Ku-JZB"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6un-Aj-4OC" secondAttribute="trailing" id="Rhp-p8-M8B"/>
-                <constraint firstItem="6un-Aj-4OC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="jHc-yv-bOH"/>
+                <constraint firstItem="xE4-hK-ebI" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="5" id="AoG-qO-5fs"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xE4-hK-ebI" secondAttribute="trailing" constant="5" id="HGu-dI-emk"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="xE4-hK-ebI" secondAttribute="bottom" constant="5" id="Rof-FS-DVm"/>
+                <constraint firstItem="xE4-hK-ebI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="5" id="arc-hc-90f"/>
             </constraints>
             <point key="canvasLocation" x="139" y="110"/>
         </view>

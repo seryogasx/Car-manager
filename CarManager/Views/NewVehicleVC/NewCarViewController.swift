@@ -32,8 +32,8 @@ class NewCarViewController: UIViewController {
     }
     
     @IBAction func ManualAddSelected(_ sender: Any) {
-        let vc = NewCarManualAddViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = NewCarManualAddViewController()
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

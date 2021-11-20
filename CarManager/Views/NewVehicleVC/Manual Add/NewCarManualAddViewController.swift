@@ -22,16 +22,9 @@ class NewCarManualAddViewController: UIViewController {
     
     var carImage: UIImage?
     var rowsCount: Int = 0
-    let sectionNumber = CarData.paramTypes.count + 1
-    let propertyNames: [String] = {
-        let someVehicle = CarData(photo: "Some url", nickName: "name", mark: "mark", model: "model", year: 1998, mileage: 100, engineType: .atmo, transmissionType: .amt, wheelsSize: 10, tireType: .allSeason, antifreezeAge: 10, brakeFluidAge: 10, extinguisherAge: 1, aidKitAge: 10, reflectiveVestExists: true, warningTriangleExists: true, scraperExists: true, brainageBasinExists: true, compressorExists: true, startingWiresExists: true, ragsExists: true, videoRecorderExists: true, fusesExists: true, spareWheelExists: true, jackExists: true, spannersExists: true)
-        let mirror = Mirror(reflecting: someVehicle)
-        var properties: [String] = []
-        for child in mirror.children {
-            properties.append(child.label!)
-        }
-        return properties
-    }()
+    let sectionNumber = Car.paramTypes.count + 1
+    let paramTypes = Car.paramTypes
+    let propertyNames: [String] = Car.paramNames
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +32,13 @@ class NewCarManualAddViewController: UIViewController {
         newCarManualAddTableView.dataSource = self
         newCarManualAddTableView.register(UINib(nibName: NewCarManualAddTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: NewCarManualAddTableViewCell.reuseIdentifier)
         newCarManualAddTableView.register(UINib(nibName: NewCarManualAddTableViewHeader.reuseIdentifier, bundle: nil), forHeaderFooterViewReuseIdentifier: NewCarManualAddTableViewHeader.reuseIdentifier)
-        rowsCount = CarData.paramsCount + 1
+        rowsCount = Car.propertiesCount + 1
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print(#function)
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        print(#function)
+//    }
 }
 
 extension NewCarManualAddViewController: UITableViewDataSource {
@@ -55,7 +48,7 @@ extension NewCarManualAddViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == CarData.paramTypes.count ? 1 : CarData.paramTypes[section].1
+        return section == sectionNumber ? 1 : Car.paramTypes[section].1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,16 +59,13 @@ extension NewCarManualAddViewController: UITableViewDataSource {
             case 0:
                 cell.setup(type: .photo, header: nil, text: nil, delegate: self, image: self.carImage)
             case 1:
-                let index = CarData.paramTypes[0].1 + indexPath.item
-                print(index, propertyNames[index])
+                let index = Car.paramTypes[0].1 + indexPath.item
                 cell.setup(type: .input, header: propertyNames[index], text: dataToAdd[propertyNames[index]] as? String, delegate: self)
             case 2:
-                let index = CarData.paramTypes[0].1 + CarData.paramTypes[1].1 + indexPath.item
-                print(index, propertyNames[index])
+                let index = Car.paramTypes[0].1 + Car.paramTypes[1].1 + indexPath.item
                 cell.setup(type: .select, header: propertyNames[index], text: dataToAdd[propertyNames[index]] as? String, delegate: self)
             case 3:
-                let index = CarData.paramTypes[0].1 + CarData.paramTypes[1].1 + CarData.paramTypes[2].1 + indexPath.item
-                print(index, propertyNames[index])
+                let index = Car.paramTypes[0].1 + Car.paramTypes[1].1 + Car.paramTypes[2].1 + indexPath.item
                 cell.setup(type: .bool, header: propertyNames[index], text: nil, delegate: self)
                 dataToAdd[propertyNames[index]] = false
             default:
@@ -110,7 +100,7 @@ extension NewCarManualAddViewController: UITableViewDataSource {
 extension NewCarManualAddViewController: UITableViewDelegate {
 }
 
-extension NewCarManualAddViewController: NewCarManualAddDelegate {
+extension NewCarManualAddViewController: NewCarAddDelegate {
     func updateInfo(key: String, value: String) {
         dataToAdd[key] = value != "" ? value : nil
     }
@@ -124,19 +114,18 @@ extension NewCarManualAddViewController: NewCarManualAddDelegate {
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-        print(dataToAdd)
     }
     
     private func newCarPropertiesCheck() -> Bool {
         guard (dataToAdd["nickName"] != nil) || (dataToAdd["mark"] != nil) || (dataToAdd["model"] != nil) else { return false }
         if !checkImage() {
-            dataToAdd["photo"] = nil
+            dataToAdd["photoURL"] = nil
         }
         return true
     }
     
     private func checkImage() -> Bool {
-        if let url = URL(string: dataToAdd["photo"] as? String ?? ""),
+        if let url = URL(string: dataToAdd["photoURL"] as? String ?? ""),
            let jpegImage = carImage!.jpegData(compressionQuality: 0.8),
            (try? jpegImage.write(to: url)) != nil {
             return true
@@ -159,7 +148,7 @@ extension NewCarManualAddViewController: UIImagePickerControllerDelegate, UINavi
         let imageName = UUID().uuidString
         let imagePath = getDocumentsDirectory().appendingPathComponent(imageName).absoluteString
         self.carImage = image
-        dataToAdd["photo"] = imagePath
+        dataToAdd["photoURL"] = imagePath
         self.dismiss(animated: true, completion: nil)
         newCarManualAddTableView.reloadSections([0], with: .automatic)
     }
@@ -170,7 +159,7 @@ extension NewCarManualAddViewController: UIImagePickerControllerDelegate, UINavi
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dataToAdd["photo"] = nil
+        dataToAdd["photoURL"] = nil
         self.dismiss(animated: true, completion: nil)
     }
 }
