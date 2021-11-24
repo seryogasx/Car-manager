@@ -20,9 +20,31 @@ class NewCarTestViewController: UIViewController {
     let additionalProperties = Car.getAdditionalProperties()
     let boolProperties = Car.getBoolProperties()
     
+    var selectedOptions: [String] = []
+    var currentPropertyNameSetting: String?
+    var currentPropertyTextFieldSetting: UITextField?
+    let overlayView = UIView()
+    let tableView = UITableView()
+    
+    let tableCellHeight: CGFloat = 50
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollection()
+        setupOverlayView()
+    }
+    
+    private func setupOverlayView() {
+        overlayView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        overlayView.backgroundColor = UIColor.black
+        overlayView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeTransparentView)))
+        overlayView.alpha = 0
+        self.view.addSubview(overlayView)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        self.view.addSubview(tableView)
     }
     
     func setupCollection() {
@@ -81,7 +103,9 @@ extension NewCarTestViewController: UICollectionViewDelegate, UICollectionViewDa
 //                    dataToAdd[propertyName] as! Bool
 //                }
 //                cell.setup(additionalProperties: additionalProperties, additionalPropertiesValues: additionalPropertiesValues), boolProperties: boolProperties, delegate: self)
-                cell.setup(additionalProperties: additionalProperties, boolProperties: boolProperties, delegate: self)
+                let additionalValues = additionalProperties.map { dataToAdd[$0] == nil ? nil : String(describing: dataToAdd[$0]!) }
+                let boolValues = boolProperties.map { dataToAdd[$0] == nil ? nil : String(describing: dataToAdd[$0]!) }
+                cell.setup(additionalProperties: additionalProperties, additionalPropertiesValues: additionalValues, boolProperties: boolProperties, boolPropertiesValues: boolValues, delegate: self)
                 return cell
         }
     }
@@ -110,23 +134,19 @@ extension NewCarTestViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension NewCarTestViewController: NewCarAddDelegate {
-    func updateInfo(key: String, value: String) {
+    func updateInfo(key: String, value: Any) {
         dataToAdd[key] = value
-        print(dataToAdd[key])
-        if dataToAdd[key] as? String == "" {
+        print(key, dataToAdd[key])
+//        if dataToAdd[key] as? String == "" {
+        if String(describing: dataToAdd[key]) == "" {
             dataToAdd[key] = nil
         }
     }
     
     func confirmChanges() {
         print(dataToAdd)
-        if newCarPropertiesCheck() {
-            StorageManager.shared.saveNewCar(properties: dataToAdd)
+        if newCarPropertiesCheck() && StorageManager.shared.saveNewCar(properties: dataToAdd) {
             self.navigationController?.popToRootViewController(animated: true)
-        } else {
-            let alert = UIAlertController(title: "Ошибка", message: "Не все данные введены", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -138,11 +158,29 @@ extension NewCarTestViewController: NewCarAddDelegate {
     }
     
     private func newCarPropertiesCheck() -> Bool {
-        guard (dataToAdd["nickName"] != nil) || (dataToAdd["mark"] != nil) || (dataToAdd["model"] != nil) else { return false }
+        guard (dataToAdd["nickName"] != nil) || (dataToAdd["mark"] != nil) || (dataToAdd["model"] != nil) else {
+            showAlert(message: "Похоже, что не все данные введены")
+            return false
+        }
+        if let mileageValue = dataToAdd["mileage"] as? String {
+            dataToAdd["mileage"] = Int32(mileageValue)
+        }
+        if let yearValue = dataToAdd["year"] as? String {
+            dataToAdd["year"] = Int16(yearValue)
+        }
         if !checkImage() {
+            if dataToAdd["photoURL"] != nil {
+                showAlert(message: "Произошла неизвестная ошибка с картинкой! Попробуйте выбрать её позже в меню авто!")
+            }
             dataToAdd["photoURL"] = nil
         }
         return true
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     private func checkImage() -> Bool {
@@ -152,6 +190,40 @@ extension NewCarTestViewController: NewCarAddDelegate {
             return true
         }
         return false
+    }
+    
+    func showOverlay(overlayView: UIView, propertyName: String) {
+        let baseFrame = overlayView.frame
+        selectedOptions = Car.getOptionsForProperty(propertyName: propertyName)
+        guard let overlayView = overlayView as? UITextField, selectedOptions.count > 0 else { return }
+        currentPropertyNameSetting = propertyName
+        currentPropertyTextFieldSetting = overlayView
+
+        currentPropertyTextFieldSetting?.layer.borderWidth = 1
+        tableView.frame = CGRect(x: baseFrame.origin.x, y: baseFrame.height, width: baseFrame.width, height: 0)
+        tableView.layer.borderWidth = 1
+        let maxTableViewHeight = min(CGFloat(selectedOptions.count) * self.tableCellHeight, UIScreen.main.bounds.height - (baseFrame.origin.y + baseFrame.height + 15))
+        tableView.reloadData()
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveLinear, animations: { [weak self] in
+            self?.tableView.frame = CGRect(x: baseFrame.origin.x, y: baseFrame.origin.y + baseFrame.height, width: baseFrame.width, height: maxTableViewHeight)
+            self?.tableView.layer.cornerRadius = 5
+            self?.overlayView.alpha = 0.3
+            self?.currentPropertyTextFieldSetting?.layer.borderWidth = 1
+            self?.currentPropertyTextFieldSetting?.layer.cornerRadius = 5
+        }, completion: nil)
+    }
+    
+    @objc private func removeTransparentView(baseFrame: CGRect) {
+        let tableFrame = tableView.frame
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveLinear
+                       , animations: { [weak self] in
+            self?.tableView.frame = CGRect(x: tableFrame.origin.x, y: tableFrame.origin.y, width: tableFrame.width, height: 0)
+            self?.currentPropertyTextFieldSetting?.layer.borderWidth = 0
+            self?.currentPropertyTextFieldSetting?.layer.cornerRadius = 0
+            self?.overlayView.alpha = 0
+        }, completion: nil)
+        currentPropertyNameSetting = nil
+        currentPropertyTextFieldSetting = nil
     }
 }
 
@@ -172,4 +244,37 @@ extension NewCarTestViewController: UIImagePickerControllerDelegate, UINavigatio
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
+}
+
+extension NewCarTestViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return selectedOptions.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
+        cell.textLabel?.text = selectedOptions[indexPath.item]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.tableCellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newOption = selectedOptions[indexPath.item]
+        updateInfo(key: currentPropertyNameSetting!, value: newOption)
+        currentPropertyTextFieldSetting?.placeholder = ""
+        currentPropertyTextFieldSetting?.text = newOption
+        removeTransparentView(baseFrame: currentPropertyTextFieldSetting!.frame)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension NewCarTestAdditionalInfoCollectionViewCell: UITableViewDelegate {
+    
 }

@@ -8,18 +8,16 @@
 import UIKit
 
 protocol NewCarAddDelegate: AnyObject {
-    func updateInfo(key: String, value: String)
+    func updateInfo(key: String, value: Any)
     func confirmChanges()
     func photoHasBeenPressed()
-    func showOverlay(overlayView: UIView)
+    func showOverlay(overlayView: UIView, propertyName: String)
 }
 
 extension NewCarAddDelegate {
     func confirmChanges() { }
-    
     func photoHasBeenPressed() { }
-    
-    func showOverlay(overlayView: UIView) { }
+    func showOverlay(overlayView: UIView, propertyName: String) { }
 }
 
 class NewCarManualAddTableViewCell: UITableViewCell, ReuseIdentifying {

@@ -2,7 +2,7 @@
 //  Note+CoreDataClass.swift
 //  CarManager
 //
-//  Created by Сергей Петров on 18.11.2021.
+//  Created by Сергей Петров on 22.11.2021.
 //
 //
 

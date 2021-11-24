@@ -2,7 +2,7 @@
 //  Note+CoreDataProperties.swift
 //  CarManager
 //
-//  Created by Сергей Петров on 18.11.2021.
+//  Created by Сергей Петров on 22.11.2021.
 //
 //
 
@@ -18,6 +18,7 @@ extension Note {
 
     @NSManaged public var isComplete: Bool
     @NSManaged public var text: String?
+    @NSManaged public var isAlert: Bool
     @NSManaged public var car: Car?
 
 }

@@ -30,12 +30,13 @@
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Note" inverseName="car" inverseEntity="Note"/>
     </entity>
     <entity name="Note" representedClassName="Note" syncable="YES">
+        <attribute name="isAlert" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isComplete" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <relationship name="car" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" inverseName="notes" inverseEntity="Car"/>
     </entity>
     <elements>
         <element name="Car" positionX="-63" positionY="-18" width="128" height="434"/>
-        <element name="Note" positionX="-63" positionY="144" width="128" height="74"/>
+        <element name="Note" positionX="-63" positionY="144" width="128" height="89"/>
     </elements>
 </model>

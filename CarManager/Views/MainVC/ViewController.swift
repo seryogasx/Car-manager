@@ -19,47 +19,75 @@ extension ReuseIdentifying {
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var CarListTableView: UITableView!
+    @IBOutlet weak var CarCollectionView: UICollectionView!
+    let collectionLayout = CarCollectionLayout()
+    @IBOutlet weak var gradientView: UIView!
     
     var cars = StorageManager.shared.getCars()
     
+    let cornerRadius: CGFloat = 20
+    
+    let gradientLayer = CAGradientLayer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "My Garage"
-        CarListTableView.delegate = self
-        CarListTableView.dataSource = self
-        CarListTableView.register(UINib(nibName: CarTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CarTableViewCell.reuseIdentifier)
-        CarListTableView.separatorStyle = .none
+        self.title = "Garage"
+        setLayer()
+        CarCollectionView.becomeFirstResponder()
+        CarCollectionView.collectionViewLayout = collectionLayout
+        CarCollectionView.isPagingEnabled = true
+        CarCollectionView.contentInsetAdjustmentBehavior = .always
+        CarCollectionView.delegate = self
+        CarCollectionView.dataSource = self
+        CarCollectionView.register(UINib(nibName: CarCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: CarCollectionViewCell.reuseIdentifier)
         
         NetworkManager.shared.checkWeather()
     }
     
+    private func setLayer() {
+//        gradientLayer.frame = self.view.frame
+//        gradientLayer.startPoint = CGPoint(x: 0, y: 1)
+//        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+//        gradientLayer.colors = [UIColor.red.cgColor, UIColor.blue.cgColor]
+        let color = UIColor(red: 242 / 255, green: 242 / 255, blue: 247 / 255, alpha: 1)
+        self.view.layer.backgroundColor = color.cgColor
+        self.CarCollectionView.backgroundColor = color
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
+        print(#function)
         super.viewWillAppear(animated)
         cars = StorageManager.shared.getCars()
-        CarListTableView.reloadData()
+        CarCollectionView.reloadData()
     }
 }
 
-extension ViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return cars.count + 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CarTableViewCell.reuseIdentifier, for: indexPath) as? CarTableViewCell else {
-            return UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarCollectionViewCell.reuseIdentifier, for: indexPath) as? CarCollectionViewCell else {
+            return UICollectionViewCell()
         }
-        if indexPath.item == cars.count {
-            cell.setup(carName: "Добавить новую машину")
+        var carImage = UIImage()
+        let index = indexPath.section
+        if index == collectionView.numberOfSections - 1 {
+            carImage = UIImage(named: "DefaultCarImage")!
+            cell.setup(image: carImage)
         } else {
-            let carName = cars[indexPath.item].nickName ?? cars[indexPath.item].mark ?? cars[indexPath.item].model ?? "UNKNOWN"
-            guard let photoURL = cars[indexPath.item].photoURL, let imageURL = URL(string: photoURL) else {
-                cell.setup(carName: carName)
+            guard let photoURL = cars[index].photoURL, let imageURL = URL(string: photoURL) else {
+                cell.setup(car: cars[index], image: carImage)
                 return cell
             }
-            let image = try? UIImage(data: Data(contentsOf: imageURL))
-            cell.setup(carName: carName, image: image)
+            carImage = (try? UIImage(data: Data(contentsOf: imageURL))) ?? UIImage(named: "DefaultCarImage")!
+            cell.setup(car: cars[index], image: carImage)
         }
         return cell
     }
@@ -74,8 +102,30 @@ extension ViewController: UITableViewDataSource {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == collectionView.numberOfSections - 1 {
+            self.navigationController?.pushViewController(NewCarViewController(), animated: true)
+        } else {
+            let detailsVC = CarDetailViewController()
+            detailsVC.car = cars[indexPath.section]
+            self.navigationController?.pushViewController(detailsVC, animated: true)
+        }
+    }
 }
 
-extension ViewController: UITableViewDelegate {
-    
+extension UIImage {
+    var averageColor: UIColor? {
+        guard let inputImage = CIImage(image: self) else { return nil }
+        let extentVector = CIVector(x: inputImage.extent.origin.x, y: inputImage.extent.origin.y,
+                                    z: inputImage.extent.size.width, w: inputImage.extent.size.height)
+        guard let filter = CIFilter(name: "CIAreaAverage",
+                                    parameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: extentVector])
+        else { return nil }
+        guard let outputImage = filter.outputImage else { return nil }
+        var bitmap = [UInt8](repeating: 0, count: 4)
+        let context = CIContext(options: [.workingColorSpace: kCFNull])
+        context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
+        return UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[2]) / 255)
+    }
 }

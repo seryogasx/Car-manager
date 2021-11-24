@@ -2,7 +2,7 @@
 //  Car+CoreDataProperties.swift
 //  CarManager
 //
-//  Created by Сергей Петров on 18.11.2021.
+//  Created by Сергей Петров on 22.11.2021.
 //
 //
 
@@ -79,106 +79,4 @@ extension Car {
     @objc(removeNotes:)
     @NSManaged public func removeFromNotes(_ values: NSOrderedSet)
 
-}
-
-extension Car: Identifiable {
-    static var paramTypes: [(String, Int)] {
-        return [("Photo", 1), ("Input", 5), ("Select", 8), ("Bool", 12)]
-    }
-    
-    static var propertyTypes: [(String, [String])] {
-        return [("Identity", getIdentityProperties()), ("Main", getMainProperties()), ("Additional", getAdditionalProperties())]
-    }
-    
-    static func getIdentityProperties() -> [String] {
-        return ["nickName", "photoURL"]
-    }
-    
-    static func getMainProperties() -> [String] {
-        return ["mark", "model", "year", "mileage"]
-    }
-    
-    static func getAdditionalProperties() -> [String] {
-        return ["engineType", "transmissionType", "wheelsSize", "tireType", "antifreezeAge", "brakeFluidAge",
-                "extinguisherAge", "aidKitAge"]
-    }
-    
-    static func getBoolProperties() -> [String] {
-        return ["reflectiveVestExists", "warningTriangleExists", "scraperExists", "brainageBasinExists", "compressorExists",
-                "startingWiresExists", "ragsExists", "videoRecorderExists", "fusesExists", "spareWheelExists",
-                "jackExists", "spannersExists"]
-    }
-    
-    static var propertiesCount: Int {
-        guard let entity = NSEntityDescription.entity(forEntityName: "Car", in: StorageManager.shared.mainContext) else { return 0 }
-        let someCar = Car(entity: entity, insertInto: StorageManager.shared.mainContext)
-        return someCar.entity.attributesByName.count
-    }
-    
-    static var paramNames: [String] {
-        guard let entity = NSEntityDescription.entity(forEntityName: "Car", in: StorageManager.shared.mainContext) else { return [] }
-        let someCar = Car(entity: entity, insertInto: StorageManager.shared.mainContext)
-        let arr = someCar.entity.attributesByName.enumerated().map { $0.element.key }
-        return arr
-    }
-    
-    static func getHintForProperty(property: String) -> String {
-        switch property {
-            case "aidKitAge":
-                return "Аптечка"
-            case "antifreezeAge":
-                return "Замена антифриза"
-            case "brainageBasinExists":
-                return "Водосгон"
-            case "brakeFluidAge":
-                return "Замена тормозной жидкости"
-            case "compressorExists":
-                return "Компрессор или насос"
-            case "engineType":
-                return "Укажите тип двигателя"
-            case "extinguisherAge":
-                return "Срок огнетушителя"
-            case "fusesExists":
-                return "Запасные предохранители"
-            case "jackExists":
-                return "Домкрат"
-            case "mark":
-                return "Укажите марку авто"
-            case "mileage":
-                return "Укажите пробег"
-            case "model":
-                return "Укажите модель авто"
-            case "nickName":
-                return "Укажите псевдоним авто"
-            case "photoURL":
-                return "Укажите иконку авто"
-            case "ragsExists":
-                return "Тряпки для сушки авто?"
-            case "reflectiveVestExists":
-                return "Светоотражающий жилет"
-            case "scraperExists":
-                return "Скребок"
-            case "spannersExists":
-                return "Гаечные ключи"
-            case "spareWheelExists":
-                return "Запасное колесо"
-            case "startingWiresExists":
-                return "Пусковые провода"
-            case "tireType":
-                return "Укажите тип резины"
-            case "transmissionType":
-                return "Укажите тип трансмиссии"
-            case "videoRecorderExists":
-                return "Видеорегистратор"
-            case "warningTriangleExists":
-                return "Знак аварийной остановки"
-            case "wheelsSize":
-                return "Укажите размер колес"
-            case "year":
-                return "Укажите год выпуска авто"
-            default:
-//                print(property)
-                return ""
-        }
-    }
 }

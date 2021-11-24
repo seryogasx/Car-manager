@@ -101,13 +101,16 @@ extension NewCarManualAddViewController: UITableViewDelegate {
 }
 
 extension NewCarManualAddViewController: NewCarAddDelegate {
-    func updateInfo(key: String, value: String) {
-        dataToAdd[key] = value != "" ? value : nil
+    func updateInfo(key: String, value: Any) {
+        dataToAdd[key] = value
+        
+        if String(describing: dataToAdd[key]) == "" {
+            dataToAdd[key] = nil
+        }
     }
     
     func confirmChanges() {
-        if newCarPropertiesCheck() {
-            StorageManager.shared.saveNewCar(properties: dataToAdd)
+        if newCarPropertiesCheck() && StorageManager.shared.saveNewCar(properties: dataToAdd) {
             self.navigationController?.popToRootViewController(animated: true)
         } else {
             let alert = UIAlertController(title: "Ошибка", message: "Не все данные введены", preferredStyle: .alert)

@@ -101,10 +101,10 @@ extension CarDetailViewController: CarNoteCellDelegate {
     }
     
     func deleteAction(note: Note) {
-        print(#function)
         let index = (car.notes?.index(of: note))!
-        StorageManager.shared.deleteNote(note: note)
-        CarDetailTableView.deleteRows(at: [IndexPath(row: index, section: sectionIndex["Note"]!)], with: .bottom)
+        if StorageManager.shared.deleteNote(note: note) {
+            CarDetailTableView.deleteRows(at: [IndexPath(row: index, section: sectionIndex["Note"]!)], with: .bottom)
+        }
     }
 }
 
