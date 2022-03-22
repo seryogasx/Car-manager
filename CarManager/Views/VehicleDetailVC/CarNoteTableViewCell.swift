@@ -71,7 +71,7 @@ extension CarNoteTableViewCell: UITextViewDelegate {
         }
         if textView.text != note.text {
             note.text = textView.text
-            StorageManager.shared.updateStorage()
+//            StorageManager.shared.updateStorage()
         }
     }
 }

@@ -143,11 +143,20 @@ extension NewCarTestViewController: NewCarAddDelegate {
         }
     }
     
+    
+    // FIXME: Add conform changes into addCar + change logic (fill properties with Car, not dataToAdd aka Dict)
     func confirmChanges() {
         print(dataToAdd)
-        if newCarPropertiesCheck() && StorageManager.shared.saveNewCar(properties: dataToAdd) {
-            self.navigationController?.popToRootViewController(animated: true)
-        }
+//        if newCarPropertiesCheck() {
+//            StorageManager.shared.saveNewCar(properties: dataToAdd)
+//            carGateway.addCar(car: <#T##Car#>, completion: <#T##(StorageError?) -> Void#>)
+//            self.navigationController?.popToRootViewController(animated: true)
+//        }
+//        carGateway.addCar(car: car) { error in
+//            if let error = error {
+//                print("fail to confirmChanges! \(error)")
+//            }
+//        }
     }
     
     func photoHasBeenPressed() {

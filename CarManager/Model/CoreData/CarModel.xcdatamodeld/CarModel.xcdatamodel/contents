@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Alert" representedClassName="Alert" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="car" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" inverseName="alerts" inverseEntity="Car"/>
+    </entity>
     <entity name="Car" representedClassName="Car" syncable="YES">
         <attribute name="aidKitAge" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="antifreezeAge" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -27,16 +32,18 @@
         <attribute name="warningTriangleExists" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="wheelsSize" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="alerts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Alert" inverseName="car" inverseEntity="Alert"/>
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Note" inverseName="car" inverseEntity="Note"/>
     </entity>
     <entity name="Note" representedClassName="Note" syncable="YES">
-        <attribute name="isAlert" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="completeDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isComplete" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <relationship name="car" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" inverseName="notes" inverseEntity="Car"/>
     </entity>
     <elements>
-        <element name="Car" positionX="-63" positionY="-18" width="128" height="434"/>
+        <element name="Car" positionX="-63" positionY="-18" width="128" height="449"/>
         <element name="Note" positionX="-63" positionY="144" width="128" height="89"/>
+        <element name="Alert" positionX="-54" positionY="144" width="128" height="74"/>
     </elements>
 </model>

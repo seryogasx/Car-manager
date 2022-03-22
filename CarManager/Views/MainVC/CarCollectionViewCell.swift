@@ -115,8 +115,8 @@ extension CarCollectionViewCell: CarNoteCellDelegate {
     
     func deleteAction(note: Note) {
         let index = car?.notes?.index(of: note)
-        if StorageManager.shared.deleteNote(note: note), let index = index {
-            CarTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .bottom)
-        }
+//        if StorageManager.shared.deleteNote(note: note), let index = index {
+//            CarTableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .bottom)
+//        }
     }
 }

@@ -51,7 +51,7 @@ class NotificationManager: NSObject {
         }
     }
     
-    public func changeTiresNotification(carNickNames: [String], to tiresType: CarInputData.TireTypes = .summer, delay: Double = 1) {
+    public func changeTiresNotification(carNickNames: [Car], to tiresType: CarInputData.TireTypes = .summer, delay: Double = 1) {
         let content = UNMutableNotificationContent()
         content.title = "Смените резину"
         content.body = "В ближайшее время на нескольких машинах необходимо сменить резину на \(tiresType == .summer ? "летнюю" : "зимнюю")!"

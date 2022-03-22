@@ -15,6 +15,14 @@ enum NewCarContentType {
     case confirm
 }
 
+protocol NewCarScreenAdapterProtocol {
+    
+}
+
+protocol NewCarScreenViewModelProtocol: AnyObject {
+    
+}
+
 class NewCarManualAddViewController: UIViewController {
     
     @IBOutlet weak var newCarManualAddTableView: UITableView!
@@ -110,7 +118,8 @@ extension NewCarManualAddViewController: NewCarAddDelegate {
     }
     
     func confirmChanges() {
-        if newCarPropertiesCheck() && StorageManager.shared.saveNewCar(properties: dataToAdd) {
+        if newCarPropertiesCheck() {
+//            && StorageManager.shared.saveNewCar(properties: dataToAdd)
             self.navigationController?.popToRootViewController(animated: true)
         } else {
             let alert = UIAlertController(title: "Ошибка", message: "Не все данные введены", preferredStyle: .alert)

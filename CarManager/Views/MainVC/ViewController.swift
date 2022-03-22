@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol ReuseIdentifying {
     static var reuseIdentifier: String { get }
@@ -23,7 +24,10 @@ class ViewController: UIViewController {
     let collectionLayout = CarCollectionLayout()
     @IBOutlet weak var gradientView: UIView!
     
-    var cars = StorageManager.shared.getCars()
+    var viewModel: MainScreenViewModelProtocol?
+    var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
+    
+    var cars: [Car] = []
     
     let cornerRadius: CGFloat = 20
     
@@ -31,6 +35,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel = mainScreenViewModel
+        setSubscribes()
         self.title = "Garage"
         setLayer()
         CarCollectionView.becomeFirstResponder()
@@ -44,11 +50,13 @@ class ViewController: UIViewController {
         NetworkManager.shared.checkWeather()
     }
     
+    private func setSubscribes() {
+        self.viewModel?.carsPublisher.sink { [weak self] cars in
+            self?.cars = cars
+        }.store(in: &cancellable)
+    }
+    
     private func setLayer() {
-//        gradientLayer.frame = self.view.frame
-//        gradientLayer.startPoint = CGPoint(x: 0, y: 1)
-//        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
-//        gradientLayer.colors = [UIColor.red.cgColor, UIColor.blue.cgColor]
         let color = UIColor(red: 242 / 255, green: 242 / 255, blue: 247 / 255, alpha: 1)
         self.view.layer.backgroundColor = color.cgColor
         self.CarCollectionView.backgroundColor = color
@@ -57,7 +65,6 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         print(#function)
         super.viewWillAppear(animated)
-        cars = StorageManager.shared.getCars()
         CarCollectionView.reloadData()
     }
 }

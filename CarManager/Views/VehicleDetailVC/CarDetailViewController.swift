@@ -30,7 +30,11 @@ class CarDetailViewController: UIViewController {
         super.viewDidDisappear(animated)
         if let notesToDelete = car.notes?.filter({ ($0 as! Note).text == "" }) {
             for note in notesToDelete {
-                StorageManager.shared.deleteNote(note: note as! Note)
+                noteGateway.deleteNote(note: note as! Note) { error in
+                    if let error = error {
+                        print("Fail to delete note! \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }
@@ -79,7 +83,11 @@ extension CarDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            StorageManager.shared.deleteNote(note: self.car.notes![indexPath.item] as! Note)
+            noteGateway.deleteNote(note: self.car.notes![indexPath.item] as! Note) { error in
+                if let error = error {
+                    print("Fail to delete note! \(error.localizedDescription)")
+                }
+            }
         }
     }
 }
@@ -102,15 +110,21 @@ extension CarDetailViewController: CarNoteCellDelegate {
     
     func deleteAction(note: Note) {
         let index = (car.notes?.index(of: note))!
-        if StorageManager.shared.deleteNote(note: note) {
-            CarDetailTableView.deleteRows(at: [IndexPath(row: index, section: sectionIndex["Note"]!)], with: .bottom)
+        noteGateway.deleteNote(note: note) { [weak self ] error in
+            if let error = error {
+                print("Fail to delete note! \(error.localizedDescription)")
+            } else {
+                if let sectionIndex = self?.sectionIndex["Note"] {
+                    self?.CarDetailTableView.deleteRows(at: [IndexPath(row: index, section: sectionIndex)], with: .bottom)
+                }
+            }
         }
     }
 }
 
 extension CarDetailViewController: AddNoteProtocol {
     func addAction() {
-        guard let newNote = StorageManager.shared.createNewNote() else { return }
+        let newNote = noteGateway.initNote(car: car)
         newNote.isComplete = false
         newNote.text = ""
         car.addToNotes(newNote)

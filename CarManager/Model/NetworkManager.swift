@@ -54,14 +54,42 @@ class NetworkManager {
     private func checkWeatherData(_ weatherData: WeatherData) {
         let weekMedianTemeperature = weatherData.daily.reduce(0.0) { $0 + $1.temp.day } / Double(weatherData.daily.count)
         if weekMedianTemeperature < 7.0 {
-            let cars = StorageManager.shared.carsWithTires(tiresType: .summer)
-            if cars.count > 0 {
-                NotificationManager.shared.changeTiresNotification(carNickNames: cars, to: .winter, delay: 2)
+            carGateway.fetchCars { result in
+                switch result {
+                    case .success(let controller):
+                        if let cars = controller.fetchedObjects {
+                            let carsWithSummerTyres = cars.filter { car in
+                                if let tyreType = car.tireType {
+                                    return tyreType == CarInputData.TireTypes.summer.rawValue
+                                }
+                                return false
+                            }
+                            if carsWithSummerTyres.count > 0 {
+                                NotificationManager.shared.changeTiresNotification(carNickNames: carsWithSummerTyres, to: .winter, delay: 2)
+                            }
+                        }
+                    case .failure(let error):
+                        print("Fail to fetchCars!: \(error.localizedDescription)")
+                }
             }
         } else if weekMedianTemeperature > 10.0 {
-            let cars = StorageManager.shared.carsWithTires(tiresType: .winter)
-            if cars.count > 0 {
-                NotificationManager.shared.changeTiresNotification(carNickNames: cars, to: .summer, delay: 2)
+            carGateway.fetchCars { result in
+                switch result {
+                    case .success(let controller):
+                        if let cars = controller.fetchedObjects {
+                            let carsWithWinterTyres = cars.filter { car in
+                                if let tyreType = car.tireType {
+                                    return tyreType == CarInputData.TireTypes.winter.rawValue
+                                }
+                                return false
+                            }
+                            if carsWithWinterTyres.count > 0 {
+                                NotificationManager.shared.changeTiresNotification(carNickNames: carsWithWinterTyres, to: .summer, delay: 2)
+                            }
+                        }
+                    case .failure(let error):
+                        print("Fail to fetchCars!: \(error.localizedDescription)")
+                }
             }
         }
     }
