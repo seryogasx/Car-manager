@@ -20,9 +20,8 @@ extension ReuseIdentifying {
 
 class GarageViewController: UIViewController {
 
-    @IBOutlet weak var CarCollectionView: UICollectionView!
+    var CarCollectionView: UICollectionView!
     let collectionLayout = CarCollectionLayout()
-    @IBOutlet weak var gradientView: UIView!
     
     var viewModel: GarageViewModelProtocol?
     var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
@@ -36,6 +35,12 @@ class GarageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewModel = mainScreenViewModel
+        CarCollectionView = UICollectionView(frame: CGRect(x: 0,
+                                                           y: 0,
+                                                           width: view.bounds.width,
+                                                           height: view.bounds.height),
+                                             collectionViewLayout: collectionLayout)
+        setConstraints()
         setSubscribes()
         self.title = "Garage"
         setLayer()
@@ -48,6 +53,16 @@ class GarageViewController: UIViewController {
         CarCollectionView.register(UINib(nibName: CarCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: CarCollectionViewCell.reuseIdentifier)
         
         NetworkManager.shared.checkWeather()
+    }
+    
+    private func setConstraints() {
+        view.addSubview(CarCollectionView)
+        NSLayoutConstraint.activate([
+            CarCollectionView.topAnchor.constraint(equalTo: CarCollectionView.topAnchor),
+            CarCollectionView.bottomAnchor.constraint(equalTo: CarCollectionView.bottomAnchor),
+            CarCollectionView.leadingAnchor.constraint(equalTo: CarCollectionView.leadingAnchor),
+            CarCollectionView.trailingAnchor.constraint(equalTo: CarCollectionView.trailingAnchor)
+        ])
     }
     
     private func setSubscribes() {
