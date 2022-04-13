@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,19 +19,19 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ySP-dV-E3P">
-                        <rect key="frame" x="5" y="5" width="531" height="398.5"/>
+                        <rect key="frame" x="10" y="10" width="521" height="293"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="ySP-dV-E3P" secondAttribute="height" multiplier="4/3" id="unG-K4-Kp8"/>
+                            <constraint firstAttribute="width" secondItem="ySP-dV-E3P" secondAttribute="height" multiplier="16/9" id="unG-K4-Kp8"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя авто" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACE-N3-aOX">
-                        <rect key="frame" x="234" y="413.5" width="73" height="20.5"/>
+                        <rect key="frame" x="234" y="313" width="73" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Rtg-3m-Zpf">
-                        <rect key="frame" x="10" y="454" width="521" height="449"/>
+                        <rect key="frame" x="10" y="343.5" width="521" height="559.5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </tableView>
                 </subviews>
@@ -39,20 +39,20 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="Rtg-3m-Zpf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="1TQ-b6-En3"/>
-                <constraint firstItem="Rtg-3m-Zpf" firstAttribute="top" secondItem="ACE-N3-aOX" secondAttribute="bottom" constant="20" id="A0p-lk-vlF"/>
+                <constraint firstItem="Rtg-3m-Zpf" firstAttribute="top" secondItem="ACE-N3-aOX" secondAttribute="bottom" constant="10" id="A0p-lk-vlF"/>
                 <constraint firstAttribute="trailing" secondItem="Rtg-3m-Zpf" secondAttribute="trailing" constant="10" id="JeQ-Vt-LbW"/>
                 <constraint firstItem="ACE-N3-aOX" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Jkh-1n-bjU"/>
-                <constraint firstItem="ySP-dV-E3P" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="L4J-g9-JCI"/>
-                <constraint firstAttribute="trailing" secondItem="ySP-dV-E3P" secondAttribute="trailing" constant="5" id="Pcj-Cg-EWt"/>
+                <constraint firstItem="ySP-dV-E3P" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="L4J-g9-JCI"/>
+                <constraint firstAttribute="trailing" secondItem="ySP-dV-E3P" secondAttribute="trailing" constant="10" id="Pcj-Cg-EWt"/>
                 <constraint firstItem="ACE-N3-aOX" firstAttribute="top" secondItem="ySP-dV-E3P" secondAttribute="bottom" constant="10" id="QbI-yY-6fx"/>
-                <constraint firstItem="ySP-dV-E3P" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="khc-fK-2sP"/>
+                <constraint firstItem="ySP-dV-E3P" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="khc-fK-2sP"/>
                 <constraint firstAttribute="bottom" secondItem="Rtg-3m-Zpf" secondAttribute="bottom" constant="5" id="rzu-DZ-tOo"/>
             </constraints>
             <size key="customSize" width="541" height="908"/>
             <connections>
-                <outlet property="CarImageView" destination="ySP-dV-E3P" id="JEr-rP-FTn"/>
                 <outlet property="CarNameLabel" destination="ACE-N3-aOX" id="7yA-bp-z0E"/>
-                <outlet property="CarTableView" destination="Rtg-3m-Zpf" id="NMY-P9-OU5"/>
+                <outlet property="carImageView" destination="ySP-dV-E3P" id="JEr-rP-FTn"/>
+                <outlet property="carTableView" destination="Rtg-3m-Zpf" id="NMY-P9-OU5"/>
             </connections>
             <point key="canvasLocation" x="548.55072463768124" y="390.40178571428572"/>
         </collectionViewCell>

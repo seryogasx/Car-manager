@@ -39,24 +39,46 @@ class CarNotesTableViewCell: UITableViewCell, ReuseIdentifying {
         finishButton.setTitle("◎", for: .normal)
         finishButton.setTitleColor(.blue, for: .normal)
         finishButton.addTarget(self, action: #selector(finishButtonPressed(sender:)), for: .touchUpInside)
-        finishButton.snp.makeConstraints { make in
-            make.height.equalTo(20)
-            make.width.equalTo(finishButton.snp.height)
-            make.top.equalToSuperview().offset(5)
-            make.leading.equalToSuperview().offset(5)
-            make.bottom.equalToSuperview().offset(-5)
-            make.centerY.equalToSuperview()
-        }
+        NSLayoutConstraint.activate([
+            finishButton.heightAnchor.constraint(equalToConstant: 20),
+            finishButton.widthAnchor.constraint(equalToConstant: finishButton.frame.height),
+            finishButton.topAnchor.constraint(equalTo: contentView.topAnchor,
+                                              constant: 5),
+            finishButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
+                                                  constant: 5),
+            finishButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
+                                                 constant: -5),
+            finishButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
+//        finishButton.snp.makeConstraints { make in
+//            make.height.equalTo(20)
+//            make.width.equalTo(finishButton.snp.height)
+//            make.top.equalToSuperview().offset(5)
+//            make.leading.equalToSuperview().offset(5)
+//            make.bottom.equalToSuperview().offset(-5)
+//            make.centerY.equalToSuperview()
+//        }
         
         self.contentView.addSubview(noteTextLabel)
         noteTextLabel.text = "\(note.isAlert ? "⚠️" : "")\(note.text ?? "")"
-        noteTextLabel.snp.makeConstraints { make in
-            make.leading.equalTo(finishButton.snp.trailing).offset(10)
-            make.top.equalToSuperview().offset(5)
-            make.bottom.equalToSuperview().offset(-5)
-            make.trailing.equalToSuperview().offset(-5)
-            make.centerY.equalToSuperview()
-        }
+        NSLayoutConstraint.activate([
+            noteTextLabel.leadingAnchor.constraint(equalTo: finishButton.trailingAnchor,
+                                                   constant: 10),
+            noteTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor,
+                                               constant: 5),
+            noteTextLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
+                                                  constant: -5),
+            noteTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
+                                                    constant: -5),
+            noteTextLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
+//        noteTextLabel.snp.makeConstraints { make in
+//            make.leading.equalTo(finishButton.snp.trailing).offset(10)
+//            make.top.equalToSuperview().offset(5)
+//            make.bottom.equalToSuperview().offset(-5)
+//            make.trailing.equalToSuperview().offset(-5)
+//            make.centerY.equalToSuperview()
+//        }
     }
     
     @objc private func finishButtonPressed(sender: UIButton) {

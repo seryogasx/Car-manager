@@ -147,6 +147,38 @@ extension NewCarTestViewController: NewCarAddDelegate {
     // FIXME: Add conform changes into addCar + change logic (fill properties with Car, not dataToAdd aka Dict)
     func confirmChanges() {
         print(dataToAdd)
+        let car = carGateway.initNewCar()
+        car.photoURL = dataToAdd["photoURL"] as? String
+        car.nickName = "octaha"
+        car.mark = "skoda"
+        car.model = "octavia"
+        car.year = 2018
+        car.mileage = 94000
+        car.engineType = "turbo"
+        car.transmissionType = "amt"
+        car.wheelsSize = 18
+        car.tireType = "summer"
+        car.antifreezeAge = 2
+        car.brakeFluidAge = 2
+        car.aidKitAge = 0
+        car.extinguisherAge = 0
+        car.reflectiveVestExists = true
+        car.warningTriangleExists = true
+        car.scraperExists = true
+        car.brainageBasinExists = true
+        car.compressorExists = true
+        car.startingWiresExists = true
+        car.ragsExists = true
+        car.videoRecorderExists = true
+        car.fusesExists = true
+        car.spannersExists = true
+        car.jackExists = true
+        car.spannersExists = true
+        carGateway.addCar(car: car) { error in
+            if let error = error {
+                print("fail to add car! \(error.localizedDescription)")
+            }
+        }
 //        if newCarPropertiesCheck() {
 //            StorageManager.shared.saveNewCar(properties: dataToAdd)
 //            carGateway.addCar(car: <#T##Car#>, completion: <#T##(StorageError?) -> Void#>)

@@ -42,8 +42,8 @@
         <relationship name="car" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" inverseName="notes" inverseEntity="Car"/>
     </entity>
     <elements>
+        <element name="Alert" positionX="-54" positionY="144" width="128" height="74"/>
         <element name="Car" positionX="-63" positionY="-18" width="128" height="449"/>
         <element name="Note" positionX="-63" positionY="144" width="128" height="89"/>
-        <element name="Alert" positionX="-54" positionY="144" width="128" height="74"/>
     </elements>
 </model>

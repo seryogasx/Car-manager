@@ -11,14 +11,14 @@ import Combine
 
 protocol MainScreenAdapterProtocol: AnyObject {
     var carGateway: CarStorageGatewayProtocol { get set }
-    var viewModel: MainScreenViewModelProtocol? { get set }
+    var viewModel: GarageViewModelProtocol? { get set }
     func fetchCars(completion: @escaping (Result<[Car], StorageError>) -> Void)
 }
 
 class MainScreenAdapter: NSObject, MainScreenAdapterProtocol {
     var carGateway: CarStorageGatewayProtocol
     
-    weak var viewModel: MainScreenViewModelProtocol?
+    weak var viewModel: GarageViewModelProtocol?
     
     func fetchCars(completion: @escaping (Result<[Car], StorageError>) -> Void) {
         carGateway.fetchCars { result in

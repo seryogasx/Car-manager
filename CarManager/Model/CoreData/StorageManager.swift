@@ -13,7 +13,7 @@ let carGateway = CarStorageCateway(storageManager: storageManager)
 let noteGateway = NoteGateway(storageManager: storageManager)
 let alertGateway = AlertGateway(storageManager: storageManager)
 let mainScreenAdapter = MainScreenAdapter(carGateway: carGateway)
-let mainScreenViewModel = MainScreenViewModel(adapter: mainScreenAdapter)
+let mainScreenViewModel = GarageViewModel(adapter: mainScreenAdapter)
 
 protocol StorageManagerProtocol {
     var persistentContainer: NSPersistentContainer { get }

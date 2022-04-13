@@ -8,13 +8,13 @@
 import Foundation
 import CoreData
 
-protocol MainScreenViewModelProtocol: AnyObject {
+protocol GarageViewModelProtocol: AnyObject {
     var carsPublisher: Published<[Car]>.Publisher { get }
     var adapter: MainScreenAdapterProtocol { get }
     func getCars()
 }
 
-class MainScreenViewModel: NSObject, MainScreenViewModelProtocol, NSFetchedResultsControllerDelegate {
+class GarageViewModel: NSObject, GarageViewModelProtocol, NSFetchedResultsControllerDelegate {
     
     @Published var cars: [Car] = []
     var carsPublisher: Published<[Car]>.Publisher { $cars }

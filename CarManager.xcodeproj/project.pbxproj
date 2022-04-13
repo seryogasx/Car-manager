@@ -7,10 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A60A657D2806CBE000C362C7 /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A65702805DE1600C362C7 /* RxCocoa.xcframework */; };
+		A60A657E2806CBE000C362C7 /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A60A65702805DE1600C362C7 /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A60A657F2806CBE000C362C7 /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A65712805DE1700C362C7 /* RxRelay.xcframework */; };
+		A60A65802806CBE000C362C7 /* RxRelay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A60A65712805DE1700C362C7 /* RxRelay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A60A65812806CBE000C362C7 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A65722805DE1700C362C7 /* RxSwift.xcframework */; };
+		A60A65822806CBE000C362C7 /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A60A65722805DE1700C362C7 /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A60A65852806F45300C362C7 /* SnapKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A65842806F45300C362C7 /* SnapKit.xcframework */; };
+		A60A65862806F45300C362C7 /* SnapKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A60A65842806F45300C362C7 /* SnapKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A60A658A280741E500C362C7 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A6589280741E500C362C7 /* MainVC.swift */; };
+		A60A658E2807443C00C362C7 /* StatisticsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A658D2807443C00C362C7 /* StatisticsVC.swift */; };
+		A60A65912807449A00C362C7 /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60A65902807449A00C362C7 /* NotificationsVC.swift */; };
 		A623E7AC274917C600DAA850 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A623E7AB274917C600DAA850 /* AppFonts.swift */; };
 		A636A035272452E100BAD6E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A034272452E100BAD6E8 /* AppDelegate.swift */; };
 		A636A037272452E100BAD6E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A036272452E100BAD6E8 /* SceneDelegate.swift */; };
-		A636A039272452E100BAD6E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A038272452E100BAD6E8 /* ViewController.swift */; };
+		A636A039272452E100BAD6E8 /* GarageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A038272452E100BAD6E8 /* GarageViewController.swift */; };
 		A636A03C272452E100BAD6E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A636A03A272452E100BAD6E8 /* Main.storyboard */; };
 		A636A03E272452E200BAD6E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A636A03D272452E200BAD6E8 /* Assets.xcassets */; };
 		A636A041272452E200BAD6E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A636A03F272452E200BAD6E8 /* LaunchScreen.storyboard */; };
@@ -25,7 +36,7 @@
 		A65CC3F927E7798300AC5FE4 /* MainScreenAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3F827E7798300AC5FE4 /* MainScreenAdapter.swift */; };
 		A65CC3FB27E78D1800AC5FE4 /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3FA27E78D1800AC5FE4 /* StorageError.swift */; };
 		A65CC3FD27E7963C00AC5FE4 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3FC27E7963C00AC5FE4 /* Gateway.swift */; };
-		A65CC3FF27E87FB700AC5FE4 /* MainVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3FE27E87FB700AC5FE4 /* MainVCViewModel.swift */; };
+		A65CC3FF27E87FB700AC5FE4 /* GarageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3FE27E87FB700AC5FE4 /* GarageViewModel.swift */; };
 		A65CC40127E8808B00AC5FE4 /* AddCarScreenAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC40027E8808B00AC5FE4 /* AddCarScreenAdapter.swift */; };
 		A65CC40327E8C99B00AC5FE4 /* DetailVCAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC40227E8C99B00AC5FE4 /* DetailVCAdapter.swift */; };
 		A687A50F27271DFC00C18EB7 /* CarInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A687A50D27271DFC00C18EB7 /* CarInfoTableViewCell.swift */; };
@@ -33,8 +44,6 @@
 		A687A513272720AC00C18EB7 /* CarTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A687A511272720AC00C18EB7 /* CarTitleTableViewCell.swift */; };
 		A687A514272720AC00C18EB7 /* CarTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A687A512272720AC00C18EB7 /* CarTitleTableViewCell.xib */; };
 		A68949B1274E6B7900AA732E /* CarNotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68949B0274E6B7900AA732E /* CarNotesTableViewCell.swift */; };
-		A692A0612747CE13005962C2 /* SnapKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A692A0602747CE13005962C2 /* SnapKit.xcframework */; };
-		A692A0622747CE13005962C2 /* SnapKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A692A0602747CE13005962C2 /* SnapKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A6A2D1A72734304C008D08AB /* AddNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2D1A52734304C008D08AB /* AddNoteTableViewCell.swift */; };
 		A6A2D1A82734304C008D08AB /* AddNoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A2D1A62734304C008D08AB /* AddNoteTableViewCell.xib */; };
 		A6A549DC2729A0F000534A8F /* NewCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549DA2729A0F000534A8F /* NewCarViewController.swift */; };
@@ -68,13 +77,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A692A0632747CE13005962C2 /* Embed Frameworks */ = {
+		A60A65832806CBE000C362C7 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A692A0622747CE13005962C2 /* SnapKit.xcframework in Embed Frameworks */,
+				A60A65862806F45300C362C7 /* SnapKit.xcframework in Embed Frameworks */,
+				A60A65822806CBE000C362C7 /* RxSwift.xcframework in Embed Frameworks */,
+				A60A657E2806CBE000C362C7 /* RxCocoa.xcframework in Embed Frameworks */,
+				A60A65802806CBE000C362C7 /* RxRelay.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,11 +94,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A60A65702805DE1600C362C7 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
+		A60A65712805DE1700C362C7 /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
+		A60A65722805DE1700C362C7 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
+		A60A65842806F45300C362C7 /* SnapKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SnapKit.xcframework; path = Carthage/Build/SnapKit.xcframework; sourceTree = "<group>"; };
+		A60A6589280741E500C362C7 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		A60A658D2807443C00C362C7 /* StatisticsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsVC.swift; sourceTree = "<group>"; };
+		A60A65902807449A00C362C7 /* NotificationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsVC.swift; sourceTree = "<group>"; };
 		A623E7AB274917C600DAA850 /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		A636A031272452E100BAD6E8 /* CarManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A636A034272452E100BAD6E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A636A036272452E100BAD6E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A636A038272452E100BAD6E8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A636A038272452E100BAD6E8 /* GarageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageViewController.swift; sourceTree = "<group>"; };
 		A636A03B272452E100BAD6E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A636A03D272452E200BAD6E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A636A040272452E200BAD6E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -102,7 +121,7 @@
 		A65CC3F827E7798300AC5FE4 /* MainScreenAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenAdapter.swift; sourceTree = "<group>"; };
 		A65CC3FA27E78D1800AC5FE4 /* StorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageError.swift; sourceTree = "<group>"; };
 		A65CC3FC27E7963C00AC5FE4 /* Gateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
-		A65CC3FE27E87FB700AC5FE4 /* MainVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCViewModel.swift; sourceTree = "<group>"; };
+		A65CC3FE27E87FB700AC5FE4 /* GarageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageViewModel.swift; sourceTree = "<group>"; };
 		A65CC40027E8808B00AC5FE4 /* AddCarScreenAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarScreenAdapter.swift; sourceTree = "<group>"; };
 		A65CC40227E8C99B00AC5FE4 /* DetailVCAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVCAdapter.swift; sourceTree = "<group>"; };
 		A687A50D27271DFC00C18EB7 /* CarInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -110,7 +129,6 @@
 		A687A511272720AC00C18EB7 /* CarTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTitleTableViewCell.swift; sourceTree = "<group>"; };
 		A687A512272720AC00C18EB7 /* CarTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarTitleTableViewCell.xib; sourceTree = "<group>"; };
 		A68949B0274E6B7900AA732E /* CarNotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarNotesTableViewCell.swift; sourceTree = "<group>"; };
-		A692A0602747CE13005962C2 /* SnapKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SnapKit.xcframework; path = Carthage/Build/SnapKit.xcframework; sourceTree = "<group>"; };
 		A6A2D1A52734304C008D08AB /* AddNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteTableViewCell.swift; sourceTree = "<group>"; };
 		A6A2D1A62734304C008D08AB /* AddNoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNoteTableViewCell.xib; sourceTree = "<group>"; };
 		A6A549DA2729A0F000534A8F /* NewCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarViewController.swift; sourceTree = "<group>"; };
@@ -148,13 +166,75 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A692A0612747CE13005962C2 /* SnapKit.xcframework in Frameworks */,
+				A60A65852806F45300C362C7 /* SnapKit.xcframework in Frameworks */,
+				A60A65812806CBE000C362C7 /* RxSwift.xcframework in Frameworks */,
+				A60A657D2806CBE000C362C7 /* RxCocoa.xcframework in Frameworks */,
+				A60A657F2806CBE000C362C7 /* RxRelay.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A60A658728073B3300C362C7 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				A60A6589280741E500C362C7 /* MainVC.swift */,
+				A60A658F2807448000C362C7 /* NotificationsVC */,
+				A60A658C280743F600C362C7 /* StatisticsVC */,
+				A60A658B280743DD00C362C7 /* CarDetailVC */,
+				A60A658828073B6D00C362C7 /* GarageVC */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		A60A658828073B6D00C362C7 /* GarageVC */ = {
+			isa = PBXGroup;
+			children = (
+				A636A03A272452E100BAD6E8 /* Main.storyboard */,
+				A636A038272452E100BAD6E8 /* GarageViewController.swift */,
+				A6D79AFB274B71CF00EAC5EB /* CarCollectionViewCell.swift */,
+				A6D79AFC274B71CF00EAC5EB /* CarCollectionViewCell.xib */,
+				A6D79B13274CF27300EAC5EB /* CarCollectionLayout.swift */,
+				A68949B0274E6B7900AA732E /* CarNotesTableViewCell.swift */,
+				A65CC3FE27E87FB700AC5FE4 /* GarageViewModel.swift */,
+			);
+			path = GarageVC;
+			sourceTree = "<group>";
+		};
+		A60A658B280743DD00C362C7 /* CarDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				A6EEB04A2726FFB200715F3A /* CarDetailViewController.swift */,
+				A6EEB04B2726FFB200715F3A /* CarDetailViewController.xib */,
+				A6EEB051272702A900715F3A /* CarNoteTableViewCell.swift */,
+				A6EEB052272702A900715F3A /* CarNoteTableViewCell.xib */,
+				A687A50D27271DFC00C18EB7 /* CarInfoTableViewCell.swift */,
+				A687A50E27271DFC00C18EB7 /* CarInfoTableViewCell.xib */,
+				A687A511272720AC00C18EB7 /* CarTitleTableViewCell.swift */,
+				A687A512272720AC00C18EB7 /* CarTitleTableViewCell.xib */,
+				A6A2D1A52734304C008D08AB /* AddNoteTableViewCell.swift */,
+				A6A2D1A62734304C008D08AB /* AddNoteTableViewCell.xib */,
+			);
+			path = CarDetailVC;
+			sourceTree = "<group>";
+		};
+		A60A658C280743F600C362C7 /* StatisticsVC */ = {
+			isa = PBXGroup;
+			children = (
+				A60A658D2807443C00C362C7 /* StatisticsVC.swift */,
+			);
+			path = StatisticsVC;
+			sourceTree = "<group>";
+		};
+		A60A658F2807448000C362C7 /* NotificationsVC */ = {
+			isa = PBXGroup;
+			children = (
+				A60A65902807449A00C362C7 /* NotificationsVC.swift */,
+			);
+			path = NotificationsVC;
+			sourceTree = "<group>";
+		};
 		A636A028272452E100BAD6E8 = {
 			isa = PBXGroup;
 			children = (
@@ -223,7 +303,10 @@
 		A692A05F2747CE13005962C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A692A0602747CE13005962C2 /* SnapKit.xcframework */,
+				A60A65842806F45300C362C7 /* SnapKit.xcframework */,
+				A60A65702805DE1600C362C7 /* RxCocoa.xcframework */,
+				A60A65712805DE1700C362C7 /* RxRelay.xcframework */,
+				A60A65722805DE1700C362C7 /* RxSwift.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -286,42 +369,10 @@
 		A6EEB04E2727021500715F3A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A60A658728073B3300C362C7 /* TabBar */,
 				A6A549D92729943900534A8F /* NewVehicleVC */,
-				A6EEB0502727026100715F3A /* VehicleDetailVC */,
-				A6EEB04F2727024900715F3A /* MainVC */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		A6EEB04F2727024900715F3A /* MainVC */ = {
-			isa = PBXGroup;
-			children = (
-				A636A03A272452E100BAD6E8 /* Main.storyboard */,
-				A636A038272452E100BAD6E8 /* ViewController.swift */,
-				A6D79AFB274B71CF00EAC5EB /* CarCollectionViewCell.swift */,
-				A6D79AFC274B71CF00EAC5EB /* CarCollectionViewCell.xib */,
-				A6D79B13274CF27300EAC5EB /* CarCollectionLayout.swift */,
-				A68949B0274E6B7900AA732E /* CarNotesTableViewCell.swift */,
-				A65CC3FE27E87FB700AC5FE4 /* MainVCViewModel.swift */,
-			);
-			path = MainVC;
-			sourceTree = "<group>";
-		};
-		A6EEB0502727026100715F3A /* VehicleDetailVC */ = {
-			isa = PBXGroup;
-			children = (
-				A6EEB04A2726FFB200715F3A /* CarDetailViewController.swift */,
-				A6EEB04B2726FFB200715F3A /* CarDetailViewController.xib */,
-				A6EEB051272702A900715F3A /* CarNoteTableViewCell.swift */,
-				A6EEB052272702A900715F3A /* CarNoteTableViewCell.xib */,
-				A687A50D27271DFC00C18EB7 /* CarInfoTableViewCell.swift */,
-				A687A50E27271DFC00C18EB7 /* CarInfoTableViewCell.xib */,
-				A687A511272720AC00C18EB7 /* CarTitleTableViewCell.swift */,
-				A687A512272720AC00C18EB7 /* CarTitleTableViewCell.xib */,
-				A6A2D1A52734304C008D08AB /* AddNoteTableViewCell.swift */,
-				A6A2D1A62734304C008D08AB /* AddNoteTableViewCell.xib */,
-			);
-			path = VehicleDetailVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,7 +385,7 @@
 				A636A02D272452E100BAD6E8 /* Sources */,
 				A636A02E272452E100BAD6E8 /* Frameworks */,
 				A636A02F272452E100BAD6E8 /* Resources */,
-				A692A0632747CE13005962C2 /* Embed Frameworks */,
+				A60A65832806CBE000C362C7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -417,8 +468,10 @@
 				A6A549EB272A823100534A8F /* NewCarManualAddTableViewCell.swift in Sources */,
 				A687A513272720AC00C18EB7 /* CarTitleTableViewCell.swift in Sources */,
 				A6A549E32729CC7800534A8F /* NewCarTestViewController.swift in Sources */,
-				A65CC3FF27E87FB700AC5FE4 /* MainVCViewModel.swift in Sources */,
+				A60A658A280741E500C362C7 /* MainVC.swift in Sources */,
+				A65CC3FF27E87FB700AC5FE4 /* GarageViewModel.swift in Sources */,
 				A623E7AC274917C600DAA850 /* AppFonts.swift in Sources */,
+				A60A658E2807443C00C362C7 /* StatisticsVC.swift in Sources */,
 				A6548A8F272C3F64008FBF2C /* CarModel.xcdatamodeld in Sources */,
 				A6A2D1A72734304C008D08AB /* AddNoteTableViewCell.swift in Sources */,
 				A64DF51C272D2575008182B6 /* NewCarManualAddTableViewHeader.swift in Sources */,
@@ -426,7 +479,8 @@
 				A65CC3FD27E7963C00AC5FE4 /* Gateway.swift in Sources */,
 				A6EEB04C2726FFB200715F3A /* CarDetailViewController.swift in Sources */,
 				A65CC3F127E6606D00AC5FE4 /* NoteGateway.swift in Sources */,
-				A636A039272452E100BAD6E8 /* ViewController.swift in Sources */,
+				A636A039272452E100BAD6E8 /* GarageViewController.swift in Sources */,
+				A60A65912807449A00C362C7 /* NotificationsVC.swift in Sources */,
 				A65CC40127E8808B00AC5FE4 /* AddCarScreenAdapter.swift in Sources */,
 				A6D79B12274BE17A00EAC5EB /* Car+CoreDataProperties.swift in Sources */,
 				A6EEB053272702A900715F3A /* CarNoteTableViewCell.swift in Sources */,
@@ -598,11 +652,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4LT66343UC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CarManager/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -627,11 +684,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4LT66343UC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CarManager/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

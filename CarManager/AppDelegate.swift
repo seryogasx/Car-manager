@@ -9,6 +9,8 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -25,6 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NetworkManager.shared.checkWeather()
         }
         UserDefaults.standard.set(currentDate, forKey: "lastWeatherUpdate")
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        UITabBar.appearance().tintColor = .systemBlue
+//        window?.overrideUserInterfaceStyle = .dark
+        window?.rootViewController = MainViewController()
+        window?.makeKeyAndVisible()
         
         return true
     }

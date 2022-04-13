@@ -18,13 +18,13 @@ extension ReuseIdentifying {
     }
 }
 
-class ViewController: UIViewController {
+class GarageViewController: UIViewController {
 
     @IBOutlet weak var CarCollectionView: UICollectionView!
     let collectionLayout = CarCollectionLayout()
     @IBOutlet weak var gradientView: UIView!
     
-    var viewModel: MainScreenViewModelProtocol?
+    var viewModel: GarageViewModelProtocol?
     var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
     
     var cars: [Car] = []
@@ -69,7 +69,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension GarageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
