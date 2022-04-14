@@ -31,7 +31,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Rtg-3m-Zpf">
-                        <rect key="frame" x="10" y="343.5" width="521" height="559.5"/>
+                        <rect key="frame" x="10" y="343.5" width="521" height="554.5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </tableView>
                 </subviews>
@@ -46,7 +46,7 @@
                 <constraint firstAttribute="trailing" secondItem="ySP-dV-E3P" secondAttribute="trailing" constant="10" id="Pcj-Cg-EWt"/>
                 <constraint firstItem="ACE-N3-aOX" firstAttribute="top" secondItem="ySP-dV-E3P" secondAttribute="bottom" constant="10" id="QbI-yY-6fx"/>
                 <constraint firstItem="ySP-dV-E3P" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="khc-fK-2sP"/>
-                <constraint firstAttribute="bottom" secondItem="Rtg-3m-Zpf" secondAttribute="bottom" constant="5" id="rzu-DZ-tOo"/>
+                <constraint firstAttribute="bottom" secondItem="Rtg-3m-Zpf" secondAttribute="bottom" constant="10" id="rzu-DZ-tOo"/>
             </constraints>
             <size key="customSize" width="541" height="908"/>
             <connections>

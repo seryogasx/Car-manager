@@ -19,9 +19,9 @@ extension ReuseIdentifying {
 }
 
 class GarageViewController: UIViewController {
-
-    var CarCollectionView: UICollectionView!
+    
     let collectionLayout = CarCollectionLayout()
+    var carCollectionView: UICollectionView!
     
     var viewModel: GarageViewModelProtocol?
     var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
@@ -34,35 +34,39 @@ class GarageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus.circle"),
+                                                                 style: .plain,
+                                                                 target: self,
+                                                                 action: #selector(addCarButtonHandler))
         self.viewModel = mainScreenViewModel
-        CarCollectionView = UICollectionView(frame: CGRect(x: 0,
+        carCollectionView = UICollectionView(frame: CGRect(x: 0,
                                                            y: 0,
                                                            width: view.bounds.width,
                                                            height: view.bounds.height),
                                              collectionViewLayout: collectionLayout)
         setConstraints()
         setSubscribes()
-        self.title = "Garage"
         setLayer()
-        CarCollectionView.becomeFirstResponder()
-        CarCollectionView.collectionViewLayout = collectionLayout
-        CarCollectionView.isPagingEnabled = true
-        CarCollectionView.contentInsetAdjustmentBehavior = .always
-        CarCollectionView.delegate = self
-        CarCollectionView.dataSource = self
-        CarCollectionView.register(UINib(nibName: CarCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: CarCollectionViewCell.reuseIdentifier)
+        carCollectionView.becomeFirstResponder()
+        carCollectionView.collectionViewLayout = collectionLayout
+        carCollectionView.isPagingEnabled = true
+        carCollectionView.contentInsetAdjustmentBehavior = .always
+        carCollectionView.delegate = self
+        carCollectionView.dataSource = self
+        carCollectionView.register(UINib(nibName: CarCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: CarCollectionViewCell.reuseIdentifier)
         
         NetworkManager.shared.checkWeather()
     }
     
     private func setConstraints() {
-        view.addSubview(CarCollectionView)
+        view.addSubview(carCollectionView)
         NSLayoutConstraint.activate([
-            CarCollectionView.topAnchor.constraint(equalTo: CarCollectionView.topAnchor),
-            CarCollectionView.bottomAnchor.constraint(equalTo: CarCollectionView.bottomAnchor),
-            CarCollectionView.leadingAnchor.constraint(equalTo: CarCollectionView.leadingAnchor),
-            CarCollectionView.trailingAnchor.constraint(equalTo: CarCollectionView.trailingAnchor)
+            carCollectionView.topAnchor.constraint(equalTo: carCollectionView.topAnchor),
+            carCollectionView.bottomAnchor.constraint(equalTo: carCollectionView.bottomAnchor),
+            carCollectionView.leadingAnchor.constraint(equalTo: carCollectionView.leadingAnchor),
+            carCollectionView.trailingAnchor.constraint(equalTo: carCollectionView.trailingAnchor)
         ])
+//        self.navigationItem.rightBarButtonItem = addCarButton
     }
     
     private func setSubscribes() {
@@ -74,13 +78,18 @@ class GarageViewController: UIViewController {
     private func setLayer() {
         let color = UIColor(red: 242 / 255, green: 242 / 255, blue: 247 / 255, alpha: 1)
         self.view.layer.backgroundColor = color.cgColor
-        self.CarCollectionView.backgroundColor = color
+        self.carCollectionView.backgroundColor = color
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(#function)
         super.viewWillAppear(animated)
-        CarCollectionView.reloadData()
+        carCollectionView.reloadData()
+    }
+    
+    @objc
+    func addCarButtonHandler() {
+        let vc = NewCarViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -91,17 +100,16 @@ extension GarageViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return cars.count + 1
+        return cars.isEmpty ? 1 : cars.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarCollectionViewCell.reuseIdentifier, for: indexPath) as? CarCollectionViewCell else {
             return UICollectionViewCell()
         }
-        var carImage = UIImage()
+        var carImage = UIImage(named: "DefaultCarImage")!
         let index = indexPath.section
         if index == collectionView.numberOfSections - 1 {
-            carImage = UIImage(named: "DefaultCarImage")!
             cell.setup(image: carImage)
         } else {
             guard let photoURL = cars[index].photoURL, let imageURL = URL(string: photoURL) else {
@@ -115,6 +123,7 @@ extension GarageViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if let
         if indexPath.item == cars.count {
             let vc = NewCarViewController()
             self.navigationController?.pushViewController(vc, animated: true)
