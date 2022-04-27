@@ -1,2 +1,4 @@
 github "ReactiveX/RxSwift" "6.5.0"
 github "SnapKit/SnapKit" "5.6.0"
+github "Swinject/Swinject" "2.8.1"
+github "realm/realm-swift" "v10.25.1"

@@ -11,27 +11,31 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    let appDIContainer: AppDIContainerProtocol = AppDIContainer()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        NotificationManager.shared.requestAuth()
+//        NotificationManager.shared.requestAuth()
 //        LocationManager.shared.requestAccess()
         
-        let currentDate = Date()
-        let calendar = Calendar.current
-        if let lastWeatherUpdateDate = UserDefaults.standard.value(forKey: "lastWeatherUpdate") as? Date {
-            if calendar.dateComponents([.day], from: calendar.startOfDay(for: lastWeatherUpdateDate), to: calendar.startOfDay(for: currentDate)).day ?? 0 > 3 {
-                NetworkManager.shared.checkWeather()
-            }
-        } else {
-            NetworkManager.shared.checkWeather()
-        }
-        UserDefaults.standard.set(currentDate, forKey: "lastWeatherUpdate")
+        
+//        let currentDate = Date()
+//        let calendar = Calendar.current
+//        if let lastWeatherUpdateDate = UserDefaults.standard.value(forKey: "lastWeatherUpdate") as? Date {
+//            if calendar.dateComponents([.day], from: calendar.startOfDay(for: lastWeatherUpdateDate), to: calendar.startOfDay(for: currentDate)).day ?? 0 > 3 {
+//                NetworkManager.shared.checkWeather()
+//            }
+//        } else {
+//            NetworkManager.shared.checkWeather()
+//        }
+//        UserDefaults.standard.set(currentDate, forKey: "lastWeatherUpdate")
+        
+        
         
         window = UIWindow(frame: UIScreen.main.bounds)
         UITabBar.appearance().tintColor = .systemBlue
 //        window?.overrideUserInterfaceStyle = .dark
-        window?.rootViewController = MainViewController()
+        window?.rootViewController = appDIContainer.rootViewController
         window?.makeKeyAndVisible()
         
         return true

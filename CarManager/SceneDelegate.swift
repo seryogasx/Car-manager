@@ -11,6 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    let appDIContainer: AppDIContainerProtocol = AppDIContainer()
 
     @available(iOS 13.0, *)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -21,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         UITabBar.appearance().tintColor = .systemBlue
 //        window?.overrideUserInterfaceStyle = .dark
-        window?.rootViewController = MainViewController()
+        window?.rootViewController = appDIContainer.rootViewController
         window?.makeKeyAndVisible()
     }
 

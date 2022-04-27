@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A601D31F2811919600078D0B /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A601D31D2811919600078D0B /* Realm.xcframework */; };
+		A601D3202811919600078D0B /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A601D31D2811919600078D0B /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A601D3212811919600078D0B /* RealmSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A601D31E2811919600078D0B /* RealmSwift.xcframework */; };
+		A601D3222811919600078D0B /* RealmSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A601D31E2811919600078D0B /* RealmSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A601D325281191F800078D0B /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = A601D324281191F800078D0B /* Car.swift */; };
+		A601D327281191FD00078D0B /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = A601D326281191FD00078D0B /* Note.swift */; };
+		A601D3292811920300078D0B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A601D3282811920300078D0B /* Alert.swift */; };
+		A601D32B281195AB00078D0B /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A601D32A281195AB00078D0B /* StorageManager.swift */; };
 		A60A657D2806CBE000C362C7 /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A65702805DE1600C362C7 /* RxCocoa.xcframework */; };
 		A60A657E2806CBE000C362C7 /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A60A65702805DE1600C362C7 /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A60A657F2806CBE000C362C7 /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A65712805DE1700C362C7 /* RxRelay.xcframework */; };
@@ -21,58 +29,32 @@
 		A623E7AC274917C600DAA850 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A623E7AB274917C600DAA850 /* AppFonts.swift */; };
 		A636A035272452E100BAD6E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A034272452E100BAD6E8 /* AppDelegate.swift */; };
 		A636A037272452E100BAD6E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A036272452E100BAD6E8 /* SceneDelegate.swift */; };
-		A636A039272452E100BAD6E8 /* GarageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A038272452E100BAD6E8 /* GarageViewController.swift */; };
+		A636A039272452E100BAD6E8 /* GarageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A038272452E100BAD6E8 /* GarageVC.swift */; };
 		A636A03E272452E200BAD6E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A636A03D272452E200BAD6E8 /* Assets.xcassets */; };
 		A636A041272452E200BAD6E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A636A03F272452E200BAD6E8 /* LaunchScreen.storyboard */; };
 		A636A04927248F9D00BAD6E8 /* config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A636A04827248F9D00BAD6E8 /* config.swift */; };
 		A63B477B2735778200B33295 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63B477A2735778200B33295 /* NotificationManager.swift */; };
-		A64DF51C272D2575008182B6 /* NewCarManualAddTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64DF51B272D2575008182B6 /* NewCarManualAddTableViewHeader.swift */; };
-		A6548A8C272C3BB7008FBF2C /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6548A8B272C3BB7008FBF2C /* StorageManager.swift */; };
-		A6548A8F272C3F64008FBF2C /* CarModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A6548A8D272C3F64008FBF2C /* CarModel.xcdatamodeld */; };
-		A65CC3EF27E6605B00AC5FE4 /* CarGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3EE27E6605B00AC5FE4 /* CarGateway.swift */; };
-		A65CC3F127E6606D00AC5FE4 /* NoteGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3F027E6606D00AC5FE4 /* NoteGateway.swift */; };
-		A65CC3F327E6608400AC5FE4 /* AlertGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3F227E6608400AC5FE4 /* AlertGateway.swift */; };
-		A65CC3F927E7798300AC5FE4 /* MainScreenAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3F827E7798300AC5FE4 /* MainScreenAdapter.swift */; };
-		A65CC3FB27E78D1800AC5FE4 /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3FA27E78D1800AC5FE4 /* StorageError.swift */; };
-		A65CC3FD27E7963C00AC5FE4 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3FC27E7963C00AC5FE4 /* Gateway.swift */; };
-		A65CC3FF27E87FB700AC5FE4 /* GarageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3FE27E87FB700AC5FE4 /* GarageViewModel.swift */; };
-		A65CC40127E8808B00AC5FE4 /* AddCarScreenAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC40027E8808B00AC5FE4 /* AddCarScreenAdapter.swift */; };
-		A65CC40327E8C99B00AC5FE4 /* DetailVCAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC40227E8C99B00AC5FE4 /* DetailVCAdapter.swift */; };
-		A687A50F27271DFC00C18EB7 /* CarInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A687A50D27271DFC00C18EB7 /* CarInfoTableViewCell.swift */; };
-		A687A51027271DFC00C18EB7 /* CarInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A687A50E27271DFC00C18EB7 /* CarInfoTableViewCell.xib */; };
-		A687A513272720AC00C18EB7 /* CarTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A687A511272720AC00C18EB7 /* CarTitleTableViewCell.swift */; };
-		A687A514272720AC00C18EB7 /* CarTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A687A512272720AC00C18EB7 /* CarTitleTableViewCell.xib */; };
+		A65CC3FF27E87FB700AC5FE4 /* GarageScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3FE27E87FB700AC5FE4 /* GarageScreenViewModel.swift */; };
 		A68949B1274E6B7900AA732E /* CarNotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68949B0274E6B7900AA732E /* CarNotesTableViewCell.swift */; };
-		A6A2D1A72734304C008D08AB /* AddNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2D1A52734304C008D08AB /* AddNoteTableViewCell.swift */; };
-		A6A2D1A82734304C008D08AB /* AddNoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A2D1A62734304C008D08AB /* AddNoteTableViewCell.xib */; };
-		A6A549DC2729A0F000534A8F /* NewCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549DA2729A0F000534A8F /* NewCarViewController.swift */; };
-		A6A549DD2729A0F000534A8F /* NewCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A549DB2729A0F000534A8F /* NewCarViewController.xib */; };
+		A69D84FC281316CE0008843C /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D84FB281316CE0008843C /* StorageError.swift */; };
 		A6A549E02729C33D00534A8F /* CarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549DF2729C33D00534A8F /* CarInfo.swift */; };
-		A6A549E32729CC7800534A8F /* NewCarTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549E12729CC7800534A8F /* NewCarTestViewController.swift */; };
-		A6A549E42729CC7800534A8F /* NewCarTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A549E22729CC7800534A8F /* NewCarTestViewController.xib */; };
-		A6A549E72729CCD600534A8F /* NewCarManualAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549E52729CCD600534A8F /* NewCarManualAddViewController.swift */; };
-		A6A549E82729CCD600534A8F /* NewCarManualAddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A549E62729CCD600534A8F /* NewCarManualAddViewController.xib */; };
-		A6A549EB272A823100534A8F /* NewCarManualAddTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549E9272A823100534A8F /* NewCarManualAddTableViewCell.swift */; };
-		A6A549EC272A823100534A8F /* NewCarManualAddTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A549EA272A823100534A8F /* NewCarManualAddTableViewCell.xib */; };
+		A6A549E32729CC7800534A8F /* NewCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549E12729CC7800534A8F /* NewCarViewController.swift */; };
 		A6BE0D7527399EDF005B1DEC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BE0D7427399EDF005B1DEC /* NetworkManager.swift */; };
 		A6BE0D78273A77B2005B1DEC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6BE0D77273A77B2005B1DEC /* LocationManager.swift */; };
-		A6C6A2BA2746258100841F2A /* NewCarTestIdentityInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C6A2B82746258100841F2A /* NewCarTestIdentityInfoCollectionViewCell.swift */; };
-		A6C6A2BB2746258100841F2A /* NewCarTestIdentityInfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C6A2B92746258100841F2A /* NewCarTestIdentityInfoCollectionViewCell.xib */; };
-		A6C6A2C62746612800841F2A /* NewCarTestMainInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C6A2C42746612800841F2A /* NewCarTestMainInfoCollectionViewCell.swift */; };
-		A6C6A2C72746612800841F2A /* NewCarTestMainInfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C6A2C52746612800841F2A /* NewCarTestMainInfoCollectionViewCell.xib */; };
-		A6C6A2CA274674E900841F2A /* NewCarTestAdditionalInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C6A2C8274674E900841F2A /* NewCarTestAdditionalInfoCollectionViewCell.swift */; };
-		A6C6A2CB274674E900841F2A /* NewCarTestAdditionalInfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C6A2C9274674E900841F2A /* NewCarTestAdditionalInfoCollectionViewCell.xib */; };
+		A6D478A828181817001547B3 /* GarageScreenDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D478A728181817001547B3 /* GarageScreenDIContainer.swift */; };
+		A6D478AA28181840001547B3 /* NewCarScreenDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D478A928181840001547B3 /* NewCarScreenDIContainer.swift */; };
+		A6D478AC28181850001547B3 /* CarDetailsScreenDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D478AB28181850001547B3 /* CarDetailsScreenDIContainer.swift */; };
+		A6D478AE2818186B001547B3 /* StatisticsScreenDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D478AD2818186B001547B3 /* StatisticsScreenDIContainer.swift */; };
+		A6D478B3281818C2001547B3 /* NotificationsScreenDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D478B2281818C2001547B3 /* NotificationsScreenDIContainer.swift */; };
+		A6D478B528187CB3001547B3 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D478B428187CB3001547B3 /* NotificationsViewModel.swift */; };
+		A6D478B728187CBF001547B3 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D478B628187CBF001547B3 /* StatisticsViewModel.swift */; };
+		A6D478B928187CCF001547B3 /* CarDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D478B828187CCF001547B3 /* CarDetailsViewModel.swift */; };
+		A6D478BB281883F5001547B3 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D478BA281883F5001547B3 /* AppDIContainer.swift */; };
+		A6D478BD28188400001547B3 /* MainScreenDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D478BC28188400001547B3 /* MainScreenDIContainer.swift */; };
+		A6D478BF28188650001547B3 /* NewCarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D478BE28188650001547B3 /* NewCarViewModel.swift */; };
 		A6D79AFD274B71CF00EAC5EB /* CarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D79AFB274B71CF00EAC5EB /* CarCollectionViewCell.swift */; };
-		A6D79AFE274B71CF00EAC5EB /* CarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6D79AFC274B71CF00EAC5EB /* CarCollectionViewCell.xib */; };
-		A6D79B0F274BE17A00EAC5EB /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D79B0B274BE17A00EAC5EB /* Note+CoreDataClass.swift */; };
-		A6D79B10274BE17A00EAC5EB /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D79B0C274BE17A00EAC5EB /* Note+CoreDataProperties.swift */; };
-		A6D79B11274BE17A00EAC5EB /* Car+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D79B0D274BE17A00EAC5EB /* Car+CoreDataClass.swift */; };
-		A6D79B12274BE17A00EAC5EB /* Car+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D79B0E274BE17A00EAC5EB /* Car+CoreDataProperties.swift */; };
 		A6D79B14274CF27300EAC5EB /* CarCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D79B13274CF27300EAC5EB /* CarCollectionLayout.swift */; };
-		A6EEB04C2726FFB200715F3A /* CarDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EEB04A2726FFB200715F3A /* CarDetailViewController.swift */; };
-		A6EEB04D2726FFB200715F3A /* CarDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6EEB04B2726FFB200715F3A /* CarDetailViewController.xib */; };
-		A6EEB053272702A900715F3A /* CarNoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EEB051272702A900715F3A /* CarNoteTableViewCell.swift */; };
-		A6EEB054272702A900715F3A /* CarNoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6EEB052272702A900715F3A /* CarNoteTableViewCell.xib */; };
+		A6EEB04C2726FFB200715F3A /* CarDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EEB04A2726FFB200715F3A /* CarDetailsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -83,9 +65,11 @@
 			dstSubfolderSpec = 10;
 			files = (
 				A60A65862806F45300C362C7 /* SnapKit.xcframework in Embed Frameworks */,
+				A601D3222811919600078D0B /* RealmSwift.xcframework in Embed Frameworks */,
 				A60A65822806CBE000C362C7 /* RxSwift.xcframework in Embed Frameworks */,
 				A60A657E2806CBE000C362C7 /* RxCocoa.xcframework in Embed Frameworks */,
 				A60A65802806CBE000C362C7 /* RxRelay.xcframework in Embed Frameworks */,
+				A601D3202811919600078D0B /* Realm.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +77,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A601D31D2811919600078D0B /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
+		A601D31E2811919600078D0B /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
+		A601D324281191F800078D0B /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		A601D326281191FD00078D0B /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		A601D3282811920300078D0B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		A601D32A281195AB00078D0B /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		A60A65702805DE1600C362C7 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
 		A60A65712805DE1700C362C7 /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
 		A60A65722805DE1700C362C7 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
@@ -104,59 +94,33 @@
 		A636A031272452E100BAD6E8 /* CarManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A636A034272452E100BAD6E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A636A036272452E100BAD6E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A636A038272452E100BAD6E8 /* GarageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageViewController.swift; sourceTree = "<group>"; };
+		A636A038272452E100BAD6E8 /* GarageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageVC.swift; sourceTree = "<group>"; };
 		A636A03D272452E200BAD6E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A636A040272452E200BAD6E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A636A042272452E200BAD6E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A636A04827248F9D00BAD6E8 /* config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = config.swift; sourceTree = "<group>"; };
 		A63B477A2735778200B33295 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		A64DF51B272D2575008182B6 /* NewCarManualAddTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarManualAddTableViewHeader.swift; sourceTree = "<group>"; };
-		A6548A8B272C3BB7008FBF2C /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		A6548A8E272C3F64008FBF2C /* CarModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CarModel.xcdatamodel; sourceTree = "<group>"; };
-		A65CC3EE27E6605B00AC5FE4 /* CarGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarGateway.swift; sourceTree = "<group>"; };
-		A65CC3F027E6606D00AC5FE4 /* NoteGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteGateway.swift; sourceTree = "<group>"; };
-		A65CC3F227E6608400AC5FE4 /* AlertGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertGateway.swift; sourceTree = "<group>"; };
-		A65CC3F827E7798300AC5FE4 /* MainScreenAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenAdapter.swift; sourceTree = "<group>"; };
-		A65CC3FA27E78D1800AC5FE4 /* StorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageError.swift; sourceTree = "<group>"; };
-		A65CC3FC27E7963C00AC5FE4 /* Gateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
-		A65CC3FE27E87FB700AC5FE4 /* GarageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageViewModel.swift; sourceTree = "<group>"; };
-		A65CC40027E8808B00AC5FE4 /* AddCarScreenAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarScreenAdapter.swift; sourceTree = "<group>"; };
-		A65CC40227E8C99B00AC5FE4 /* DetailVCAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVCAdapter.swift; sourceTree = "<group>"; };
-		A687A50D27271DFC00C18EB7 /* CarInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfoTableViewCell.swift; sourceTree = "<group>"; };
-		A687A50E27271DFC00C18EB7 /* CarInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarInfoTableViewCell.xib; sourceTree = "<group>"; };
-		A687A511272720AC00C18EB7 /* CarTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTitleTableViewCell.swift; sourceTree = "<group>"; };
-		A687A512272720AC00C18EB7 /* CarTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarTitleTableViewCell.xib; sourceTree = "<group>"; };
+		A65CC3FE27E87FB700AC5FE4 /* GarageScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageScreenViewModel.swift; sourceTree = "<group>"; };
 		A68949B0274E6B7900AA732E /* CarNotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarNotesTableViewCell.swift; sourceTree = "<group>"; };
-		A6A2D1A52734304C008D08AB /* AddNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteTableViewCell.swift; sourceTree = "<group>"; };
-		A6A2D1A62734304C008D08AB /* AddNoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNoteTableViewCell.xib; sourceTree = "<group>"; };
-		A6A549DA2729A0F000534A8F /* NewCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarViewController.swift; sourceTree = "<group>"; };
-		A6A549DB2729A0F000534A8F /* NewCarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewCarViewController.xib; sourceTree = "<group>"; };
+		A69D84FB281316CE0008843C /* StorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageError.swift; sourceTree = "<group>"; };
 		A6A549DF2729C33D00534A8F /* CarInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfo.swift; sourceTree = "<group>"; };
-		A6A549E12729CC7800534A8F /* NewCarTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarTestViewController.swift; sourceTree = "<group>"; };
-		A6A549E22729CC7800534A8F /* NewCarTestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewCarTestViewController.xib; sourceTree = "<group>"; };
-		A6A549E52729CCD600534A8F /* NewCarManualAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarManualAddViewController.swift; sourceTree = "<group>"; };
-		A6A549E62729CCD600534A8F /* NewCarManualAddViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewCarManualAddViewController.xib; sourceTree = "<group>"; };
-		A6A549E9272A823100534A8F /* NewCarManualAddTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarManualAddTableViewCell.swift; sourceTree = "<group>"; };
-		A6A549EA272A823100534A8F /* NewCarManualAddTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewCarManualAddTableViewCell.xib; sourceTree = "<group>"; };
+		A6A549E12729CC7800534A8F /* NewCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarViewController.swift; sourceTree = "<group>"; };
 		A6BE0D7427399EDF005B1DEC /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A6BE0D77273A77B2005B1DEC /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		A6C6A2B82746258100841F2A /* NewCarTestIdentityInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarTestIdentityInfoCollectionViewCell.swift; sourceTree = "<group>"; };
-		A6C6A2B92746258100841F2A /* NewCarTestIdentityInfoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewCarTestIdentityInfoCollectionViewCell.xib; sourceTree = "<group>"; };
-		A6C6A2C42746612800841F2A /* NewCarTestMainInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarTestMainInfoCollectionViewCell.swift; sourceTree = "<group>"; };
-		A6C6A2C52746612800841F2A /* NewCarTestMainInfoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewCarTestMainInfoCollectionViewCell.xib; sourceTree = "<group>"; };
-		A6C6A2C8274674E900841F2A /* NewCarTestAdditionalInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarTestAdditionalInfoCollectionViewCell.swift; sourceTree = "<group>"; };
-		A6C6A2C9274674E900841F2A /* NewCarTestAdditionalInfoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewCarTestAdditionalInfoCollectionViewCell.xib; sourceTree = "<group>"; };
+		A6D478A728181817001547B3 /* GarageScreenDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageScreenDIContainer.swift; sourceTree = "<group>"; };
+		A6D478A928181840001547B3 /* NewCarScreenDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarScreenDIContainer.swift; sourceTree = "<group>"; };
+		A6D478AB28181850001547B3 /* CarDetailsScreenDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsScreenDIContainer.swift; sourceTree = "<group>"; };
+		A6D478AD2818186B001547B3 /* StatisticsScreenDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsScreenDIContainer.swift; sourceTree = "<group>"; };
+		A6D478B2281818C2001547B3 /* NotificationsScreenDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsScreenDIContainer.swift; sourceTree = "<group>"; };
+		A6D478B428187CB3001547B3 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
+		A6D478B628187CBF001547B3 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
+		A6D478B828187CCF001547B3 /* CarDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsViewModel.swift; sourceTree = "<group>"; };
+		A6D478BA281883F5001547B3 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
+		A6D478BC28188400001547B3 /* MainScreenDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenDIContainer.swift; sourceTree = "<group>"; };
+		A6D478BE28188650001547B3 /* NewCarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarViewModel.swift; sourceTree = "<group>"; };
 		A6D79AFB274B71CF00EAC5EB /* CarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCollectionViewCell.swift; sourceTree = "<group>"; };
-		A6D79AFC274B71CF00EAC5EB /* CarCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarCollectionViewCell.xib; sourceTree = "<group>"; };
-		A6D79B0B274BE17A00EAC5EB /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A6D79B0C274BE17A00EAC5EB /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A6D79B0D274BE17A00EAC5EB /* Car+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A6D79B0E274BE17A00EAC5EB /* Car+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A6D79B13274CF27300EAC5EB /* CarCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCollectionLayout.swift; sourceTree = "<group>"; };
-		A6EEB04A2726FFB200715F3A /* CarDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailViewController.swift; sourceTree = "<group>"; };
-		A6EEB04B2726FFB200715F3A /* CarDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarDetailViewController.xib; sourceTree = "<group>"; };
-		A6EEB051272702A900715F3A /* CarNoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarNoteTableViewCell.swift; sourceTree = "<group>"; };
-		A6EEB052272702A900715F3A /* CarNoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarNoteTableViewCell.xib; sourceTree = "<group>"; };
+		A6EEB04A2726FFB200715F3A /* CarDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,71 +129,77 @@
 			buildActionMask = 2147483647;
 			files = (
 				A60A65852806F45300C362C7 /* SnapKit.xcframework in Frameworks */,
+				A601D3212811919600078D0B /* RealmSwift.xcframework in Frameworks */,
 				A60A65812806CBE000C362C7 /* RxSwift.xcframework in Frameworks */,
 				A60A657D2806CBE000C362C7 /* RxCocoa.xcframework in Frameworks */,
 				A60A657F2806CBE000C362C7 /* RxRelay.xcframework in Frameworks */,
+				A601D31F2811919600078D0B /* Realm.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A601D323281191DD00078D0B /* StorageObjects */ = {
+			isa = PBXGroup;
+			children = (
+				A6A549DF2729C33D00534A8F /* CarInfo.swift */,
+				A601D324281191F800078D0B /* Car.swift */,
+				A601D326281191FD00078D0B /* Note.swift */,
+				A601D3282811920300078D0B /* Alert.swift */,
+			);
+			path = StorageObjects;
+			sourceTree = "<group>";
+		};
 		A60A658728073B3300C362C7 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
 				A60A6589280741E500C362C7 /* MainVC.swift */,
-				A60A658F2807448000C362C7 /* NotificationsVC */,
-				A60A658C280743F600C362C7 /* StatisticsVC */,
-				A60A658B280743DD00C362C7 /* CarDetailVC */,
-				A60A658828073B6D00C362C7 /* GarageVC */,
+				A60A658F2807448000C362C7 /* NotificationsScreen */,
+				A60A658C280743F600C362C7 /* StatisticsScreen */,
+				A60A658B280743DD00C362C7 /* CarDetailScreen */,
+				A60A658828073B6D00C362C7 /* GarageScreen */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		A60A658828073B6D00C362C7 /* GarageVC */ = {
+		A60A658828073B6D00C362C7 /* GarageScreen */ = {
 			isa = PBXGroup;
 			children = (
-				A636A038272452E100BAD6E8 /* GarageViewController.swift */,
+				A636A038272452E100BAD6E8 /* GarageVC.swift */,
+				A65CC3FE27E87FB700AC5FE4 /* GarageScreenViewModel.swift */,
 				A6D79AFB274B71CF00EAC5EB /* CarCollectionViewCell.swift */,
-				A6D79AFC274B71CF00EAC5EB /* CarCollectionViewCell.xib */,
 				A6D79B13274CF27300EAC5EB /* CarCollectionLayout.swift */,
 				A68949B0274E6B7900AA732E /* CarNotesTableViewCell.swift */,
-				A65CC3FE27E87FB700AC5FE4 /* GarageViewModel.swift */,
 			);
-			path = GarageVC;
+			path = GarageScreen;
 			sourceTree = "<group>";
 		};
-		A60A658B280743DD00C362C7 /* CarDetailVC */ = {
+		A60A658B280743DD00C362C7 /* CarDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
-				A6EEB04A2726FFB200715F3A /* CarDetailViewController.swift */,
-				A6EEB04B2726FFB200715F3A /* CarDetailViewController.xib */,
-				A6EEB051272702A900715F3A /* CarNoteTableViewCell.swift */,
-				A6EEB052272702A900715F3A /* CarNoteTableViewCell.xib */,
-				A687A50D27271DFC00C18EB7 /* CarInfoTableViewCell.swift */,
-				A687A50E27271DFC00C18EB7 /* CarInfoTableViewCell.xib */,
-				A687A511272720AC00C18EB7 /* CarTitleTableViewCell.swift */,
-				A687A512272720AC00C18EB7 /* CarTitleTableViewCell.xib */,
-				A6A2D1A52734304C008D08AB /* AddNoteTableViewCell.swift */,
-				A6A2D1A62734304C008D08AB /* AddNoteTableViewCell.xib */,
+				A6EEB04A2726FFB200715F3A /* CarDetailsVC.swift */,
+				A6D478B828187CCF001547B3 /* CarDetailsViewModel.swift */,
 			);
-			path = CarDetailVC;
+			path = CarDetailScreen;
 			sourceTree = "<group>";
 		};
-		A60A658C280743F600C362C7 /* StatisticsVC */ = {
+		A60A658C280743F600C362C7 /* StatisticsScreen */ = {
 			isa = PBXGroup;
 			children = (
 				A60A658D2807443C00C362C7 /* StatisticsVC.swift */,
+				A6D478B628187CBF001547B3 /* StatisticsViewModel.swift */,
 			);
-			path = StatisticsVC;
+			path = StatisticsScreen;
 			sourceTree = "<group>";
 		};
-		A60A658F2807448000C362C7 /* NotificationsVC */ = {
+		A60A658F2807448000C362C7 /* NotificationsScreen */ = {
 			isa = PBXGroup;
 			children = (
 				A60A65902807449A00C362C7 /* NotificationsVC.swift */,
+				A6D478B428187CB3001547B3 /* NotificationsViewModel.swift */,
 			);
-			path = NotificationsVC;
+			path = NotificationsScreen;
 			sourceTree = "<group>";
 		};
 		A636A028272452E100BAD6E8 = {
@@ -253,8 +223,9 @@
 		A636A033272452E100BAD6E8 /* CarManager */ = {
 			isa = PBXGroup;
 			children = (
-				A6A549DE2729C33300534A8F /* Model */,
-				A6EEB04E2727021500715F3A /* Views */,
+				A67C84CC2815AC8C00864F65 /* DependencyContainers */,
+				A6A549DE2729C33300534A8F /* Resources */,
+				A6EEB04E2727021500715F3A /* Screens */,
 				A636A034272452E100BAD6E8 /* AppDelegate.swift */,
 				A636A036272452E100BAD6E8 /* SceneDelegate.swift */,
 				A636A03D272452E200BAD6E8 /* Assets.xcassets */,
@@ -264,42 +235,25 @@
 			path = CarManager;
 			sourceTree = "<group>";
 		};
-		A65CC3EC27E63B3C00AC5FE4 /* CoreData */ = {
+		A67C84CC2815AC8C00864F65 /* DependencyContainers */ = {
 			isa = PBXGroup;
 			children = (
-				A65CC3F527E7794300AC5FE4 /* Adapters */,
-				A65CC3ED27E6604E00AC5FE4 /* Gateways */,
-				A6548A8D272C3F64008FBF2C /* CarModel.xcdatamodeld */,
-				A6548A8B272C3BB7008FBF2C /* StorageManager.swift */,
-				A65CC3FA27E78D1800AC5FE4 /* StorageError.swift */,
+				A6D478BA281883F5001547B3 /* AppDIContainer.swift */,
+				A6D478BC28188400001547B3 /* MainScreenDIContainer.swift */,
+				A6D478A728181817001547B3 /* GarageScreenDIContainer.swift */,
+				A6D478B2281818C2001547B3 /* NotificationsScreenDIContainer.swift */,
+				A6D478AD2818186B001547B3 /* StatisticsScreenDIContainer.swift */,
+				A6D478A928181840001547B3 /* NewCarScreenDIContainer.swift */,
+				A6D478AB28181850001547B3 /* CarDetailsScreenDIContainer.swift */,
 			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
-		A65CC3ED27E6604E00AC5FE4 /* Gateways */ = {
-			isa = PBXGroup;
-			children = (
-				A65CC3EE27E6605B00AC5FE4 /* CarGateway.swift */,
-				A65CC3F027E6606D00AC5FE4 /* NoteGateway.swift */,
-				A65CC3F227E6608400AC5FE4 /* AlertGateway.swift */,
-				A65CC3FC27E7963C00AC5FE4 /* Gateway.swift */,
-			);
-			path = Gateways;
-			sourceTree = "<group>";
-		};
-		A65CC3F527E7794300AC5FE4 /* Adapters */ = {
-			isa = PBXGroup;
-			children = (
-				A65CC3F827E7798300AC5FE4 /* MainScreenAdapter.swift */,
-				A65CC40027E8808B00AC5FE4 /* AddCarScreenAdapter.swift */,
-				A65CC40227E8C99B00AC5FE4 /* DetailVCAdapter.swift */,
-			);
-			path = Adapters;
+			path = DependencyContainers;
 			sourceTree = "<group>";
 		};
 		A692A05F2747CE13005962C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A601D31D2811919600078D0B /* Realm.xcframework */,
+				A601D31E2811919600078D0B /* RealmSwift.xcframework */,
 				A60A65842806F45300C362C7 /* SnapKit.xcframework */,
 				A60A65702805DE1600C362C7 /* RxCocoa.xcframework */,
 				A60A65712805DE1700C362C7 /* RxRelay.xcframework */,
@@ -308,68 +262,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A6A549D92729943900534A8F /* NewVehicleVC */ = {
+		A69D84FA281316AA0008843C /* InternalStorage */ = {
 			isa = PBXGroup;
 			children = (
-				A6A549EE272A824900534A8F /* Add by test */,
-				A6A549ED272A823900534A8F /* Manual Add */,
-				A6A549DA2729A0F000534A8F /* NewCarViewController.swift */,
-				A6A549DB2729A0F000534A8F /* NewCarViewController.xib */,
+				A601D32A281195AB00078D0B /* StorageManager.swift */,
+				A69D84FB281316CE0008843C /* StorageError.swift */,
+				A601D323281191DD00078D0B /* StorageObjects */,
 			);
-			path = NewVehicleVC;
+			path = InternalStorage;
 			sourceTree = "<group>";
 		};
-		A6A549DE2729C33300534A8F /* Model */ = {
+		A6A549D92729943900534A8F /* NewCarScreen */ = {
 			isa = PBXGroup;
 			children = (
-				A65CC3EC27E63B3C00AC5FE4 /* CoreData */,
-				A6D79B0B274BE17A00EAC5EB /* Note+CoreDataClass.swift */,
-				A6D79B0C274BE17A00EAC5EB /* Note+CoreDataProperties.swift */,
-				A6D79B0D274BE17A00EAC5EB /* Car+CoreDataClass.swift */,
-				A6D79B0E274BE17A00EAC5EB /* Car+CoreDataProperties.swift */,
-				A6A549DF2729C33D00534A8F /* CarInfo.swift */,
+				A6A549E12729CC7800534A8F /* NewCarViewController.swift */,
+				A6D478BE28188650001547B3 /* NewCarViewModel.swift */,
+			);
+			path = NewCarScreen;
+			sourceTree = "<group>";
+		};
+		A6A549DE2729C33300534A8F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A69D84FA281316AA0008843C /* InternalStorage */,
 				A63B477A2735778200B33295 /* NotificationManager.swift */,
 				A6BE0D7427399EDF005B1DEC /* NetworkManager.swift */,
 				A6BE0D77273A77B2005B1DEC /* LocationManager.swift */,
 				A623E7AB274917C600DAA850 /* AppFonts.swift */,
 			);
-			path = Model;
+			path = Resources;
 			sourceTree = "<group>";
 		};
-		A6A549ED272A823900534A8F /* Manual Add */ = {
-			isa = PBXGroup;
-			children = (
-				A6A549E52729CCD600534A8F /* NewCarManualAddViewController.swift */,
-				A6A549E62729CCD600534A8F /* NewCarManualAddViewController.xib */,
-				A6A549E9272A823100534A8F /* NewCarManualAddTableViewCell.swift */,
-				A6A549EA272A823100534A8F /* NewCarManualAddTableViewCell.xib */,
-				A64DF51B272D2575008182B6 /* NewCarManualAddTableViewHeader.swift */,
-			);
-			path = "Manual Add";
-			sourceTree = "<group>";
-		};
-		A6A549EE272A824900534A8F /* Add by test */ = {
-			isa = PBXGroup;
-			children = (
-				A6A549E12729CC7800534A8F /* NewCarTestViewController.swift */,
-				A6A549E22729CC7800534A8F /* NewCarTestViewController.xib */,
-				A6C6A2B82746258100841F2A /* NewCarTestIdentityInfoCollectionViewCell.swift */,
-				A6C6A2B92746258100841F2A /* NewCarTestIdentityInfoCollectionViewCell.xib */,
-				A6C6A2C42746612800841F2A /* NewCarTestMainInfoCollectionViewCell.swift */,
-				A6C6A2C52746612800841F2A /* NewCarTestMainInfoCollectionViewCell.xib */,
-				A6C6A2C8274674E900841F2A /* NewCarTestAdditionalInfoCollectionViewCell.swift */,
-				A6C6A2C9274674E900841F2A /* NewCarTestAdditionalInfoCollectionViewCell.xib */,
-			);
-			path = "Add by test";
-			sourceTree = "<group>";
-		};
-		A6EEB04E2727021500715F3A /* Views */ = {
+		A6EEB04E2727021500715F3A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				A60A658728073B3300C362C7 /* TabBar */,
-				A6A549D92729943900534A8F /* NewVehicleVC */,
+				A6A549D92729943900534A8F /* NewCarScreen */,
 			);
-			path = Views;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,20 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A636A041272452E200BAD6E8 /* LaunchScreen.storyboard in Resources */,
-				A6A2D1A82734304C008D08AB /* AddNoteTableViewCell.xib in Resources */,
-				A6A549E42729CC7800534A8F /* NewCarTestViewController.xib in Resources */,
-				A6A549E82729CCD600534A8F /* NewCarManualAddViewController.xib in Resources */,
 				A636A03E272452E200BAD6E8 /* Assets.xcassets in Resources */,
-				A6A549EC272A823100534A8F /* NewCarManualAddTableViewCell.xib in Resources */,
-				A687A514272720AC00C18EB7 /* CarTitleTableViewCell.xib in Resources */,
-				A6D79AFE274B71CF00EAC5EB /* CarCollectionViewCell.xib in Resources */,
-				A6A549DD2729A0F000534A8F /* NewCarViewController.xib in Resources */,
-				A6C6A2BB2746258100841F2A /* NewCarTestIdentityInfoCollectionViewCell.xib in Resources */,
-				A6C6A2CB274674E900841F2A /* NewCarTestAdditionalInfoCollectionViewCell.xib in Resources */,
-				A6C6A2C72746612800841F2A /* NewCarTestMainInfoCollectionViewCell.xib in Resources */,
-				A6EEB054272702A900715F3A /* CarNoteTableViewCell.xib in Resources */,
-				A687A51027271DFC00C18EB7 /* CarInfoTableViewCell.xib in Resources */,
-				A6EEB04D2726FFB200715F3A /* CarDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,48 +373,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6D79B11274BE17A00EAC5EB /* Car+CoreDataClass.swift in Sources */,
-				A6C6A2C62746612800841F2A /* NewCarTestMainInfoCollectionViewCell.swift in Sources */,
-				A6D79B10274BE17A00EAC5EB /* Note+CoreDataProperties.swift in Sources */,
+				A6D478BB281883F5001547B3 /* AppDIContainer.swift in Sources */,
 				A6D79AFD274B71CF00EAC5EB /* CarCollectionViewCell.swift in Sources */,
-				A687A50F27271DFC00C18EB7 /* CarInfoTableViewCell.swift in Sources */,
-				A6A549EB272A823100534A8F /* NewCarManualAddTableViewCell.swift in Sources */,
-				A687A513272720AC00C18EB7 /* CarTitleTableViewCell.swift in Sources */,
-				A6A549E32729CC7800534A8F /* NewCarTestViewController.swift in Sources */,
+				A601D325281191F800078D0B /* Car.swift in Sources */,
+				A6D478B928187CCF001547B3 /* CarDetailsViewModel.swift in Sources */,
+				A6A549E32729CC7800534A8F /* NewCarViewController.swift in Sources */,
+				A69D84FC281316CE0008843C /* StorageError.swift in Sources */,
 				A60A658A280741E500C362C7 /* MainVC.swift in Sources */,
-				A65CC3FF27E87FB700AC5FE4 /* GarageViewModel.swift in Sources */,
+				A6D478B3281818C2001547B3 /* NotificationsScreenDIContainer.swift in Sources */,
+				A65CC3FF27E87FB700AC5FE4 /* GarageScreenViewModel.swift in Sources */,
 				A623E7AC274917C600DAA850 /* AppFonts.swift in Sources */,
+				A6D478B528187CB3001547B3 /* NotificationsViewModel.swift in Sources */,
 				A60A658E2807443C00C362C7 /* StatisticsVC.swift in Sources */,
-				A6548A8F272C3F64008FBF2C /* CarModel.xcdatamodeld in Sources */,
-				A6A2D1A72734304C008D08AB /* AddNoteTableViewCell.swift in Sources */,
-				A64DF51C272D2575008182B6 /* NewCarManualAddTableViewHeader.swift in Sources */,
-				A6A549DC2729A0F000534A8F /* NewCarViewController.swift in Sources */,
-				A65CC3FD27E7963C00AC5FE4 /* Gateway.swift in Sources */,
-				A6EEB04C2726FFB200715F3A /* CarDetailViewController.swift in Sources */,
-				A65CC3F127E6606D00AC5FE4 /* NoteGateway.swift in Sources */,
-				A636A039272452E100BAD6E8 /* GarageViewController.swift in Sources */,
+				A6EEB04C2726FFB200715F3A /* CarDetailsVC.swift in Sources */,
+				A636A039272452E100BAD6E8 /* GarageVC.swift in Sources */,
+				A601D327281191FD00078D0B /* Note.swift in Sources */,
 				A60A65912807449A00C362C7 /* NotificationsVC.swift in Sources */,
-				A65CC40127E8808B00AC5FE4 /* AddCarScreenAdapter.swift in Sources */,
-				A6D79B12274BE17A00EAC5EB /* Car+CoreDataProperties.swift in Sources */,
-				A6EEB053272702A900715F3A /* CarNoteTableViewCell.swift in Sources */,
-				A65CC40327E8C99B00AC5FE4 /* DetailVCAdapter.swift in Sources */,
+				A6D478AE2818186B001547B3 /* StatisticsScreenDIContainer.swift in Sources */,
 				A6BE0D7527399EDF005B1DEC /* NetworkManager.swift in Sources */,
 				A636A04927248F9D00BAD6E8 /* config.swift in Sources */,
-				A65CC3EF27E6605B00AC5FE4 /* CarGateway.swift in Sources */,
-				A6C6A2BA2746258100841F2A /* NewCarTestIdentityInfoCollectionViewCell.swift in Sources */,
 				A636A035272452E100BAD6E8 /* AppDelegate.swift in Sources */,
-				A6C6A2CA274674E900841F2A /* NewCarTestAdditionalInfoCollectionViewCell.swift in Sources */,
+				A601D32B281195AB00078D0B /* StorageManager.swift in Sources */,
 				A6A549E02729C33D00534A8F /* CarInfo.swift in Sources */,
+				A6D478BF28188650001547B3 /* NewCarViewModel.swift in Sources */,
 				A63B477B2735778200B33295 /* NotificationManager.swift in Sources */,
+				A6D478AA28181840001547B3 /* NewCarScreenDIContainer.swift in Sources */,
 				A6BE0D78273A77B2005B1DEC /* LocationManager.swift in Sources */,
-				A6548A8C272C3BB7008FBF2C /* StorageManager.swift in Sources */,
-				A6D79B0F274BE17A00EAC5EB /* Note+CoreDataClass.swift in Sources */,
-				A65CC3F327E6608400AC5FE4 /* AlertGateway.swift in Sources */,
+				A6D478B728187CBF001547B3 /* StatisticsViewModel.swift in Sources */,
+				A6D478A828181817001547B3 /* GarageScreenDIContainer.swift in Sources */,
+				A6D478AC28181850001547B3 /* CarDetailsScreenDIContainer.swift in Sources */,
 				A6D79B14274CF27300EAC5EB /* CarCollectionLayout.swift in Sources */,
+				A6D478BD28188400001547B3 /* MainScreenDIContainer.swift in Sources */,
 				A68949B1274E6B7900AA732E /* CarNotesTableViewCell.swift in Sources */,
-				A65CC3FB27E78D1800AC5FE4 /* StorageError.swift in Sources */,
-				A65CC3F927E7798300AC5FE4 /* MainScreenAdapter.swift in Sources */,
-				A6A549E72729CCD600534A8F /* NewCarManualAddViewController.swift in Sources */,
+				A601D3292811920300078D0B /* Alert.swift in Sources */,
 				A636A037272452E100BAD6E8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -718,19 +626,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A6548A8D272C3F64008FBF2C /* CarModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				A6548A8E272C3F64008FBF2C /* CarModel.xcdatamodel */,
-			);
-			currentVersion = A6548A8E272C3F64008FBF2C /* CarModel.xcdatamodel */;
-			path = CarModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = A636A029272452E100BAD6E8 /* Project object */;
 }
