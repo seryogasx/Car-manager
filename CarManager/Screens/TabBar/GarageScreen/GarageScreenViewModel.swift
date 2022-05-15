@@ -7,9 +7,11 @@
 
 import Foundation
 import CoreData
+import RxSwift
 
 protocol GarageScreenViewModelProtocol: AnyObject {
-    var carsPublisher: Published<[Car]>.Publisher { get }
+//    var carsPublisher: PublishSubject<[Car]> { get set }
+    var cars: PublishSubject<[Car]> { get set }
     var storage: StorageManagerProtocol { get }
     func getCars()
     init(storage: StorageManagerProtocol)
@@ -17,8 +19,8 @@ protocol GarageScreenViewModelProtocol: AnyObject {
 
 class GarageScreenViewModel: NSObject, GarageScreenViewModelProtocol, NSFetchedResultsControllerDelegate {
     
-    @Published var cars: [Car] = []
-    var carsPublisher: Published<[Car]>.Publisher { $cars }
+//    var carsPublisher: PublishSubject<[Car]> = PublishSubject<[Car]>()
+    var cars: PublishSubject<[Car]> = PublishSubject<[Car]>()
     var storage: StorageManagerProtocol {
         didSet {
             getCars()
@@ -26,11 +28,9 @@ class GarageScreenViewModel: NSObject, GarageScreenViewModelProtocol, NSFetchedR
     }
     
     func getCars() {
-        cars = storage.fetchObjects(objectType: Car.self)?.reduce(into: []) { partialResult, item in
-            if let car = item as? Car {
-                partialResult?.append(car)
-            }
-        } ?? []
+        if let fetchedCars = storage.fetchObjects(objectType: Car.self) as? [Car] {
+            cars.onNext(fetchedCars)
+        }
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

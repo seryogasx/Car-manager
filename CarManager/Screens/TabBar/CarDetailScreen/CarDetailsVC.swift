@@ -22,17 +22,12 @@ class CarDetailsViewController: UIViewController, CarDetailViewControllerProtoco
 
     var car: Car?
     
-    let sectionIndex: [String: Int] = ["Photo": 0, "Info": 1, "Note": 2, "Delete": 3]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        title = car.nickName// ?? car.model ?? car.mark
-//        CarDetailTableView.register(UINib(nibName: CarNoteTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CarNoteTableViewCell.reuseIdentifier)
-//        CarDetailTableView.register(UINib(nibName: CarTitleTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CarTitleTableViewCell.reuseIdentifier)
-//        CarDetailTableView.register(UINib(nibName: CarInfoTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: CarInfoTableViewCell.reuseIdentifier)
-//        CarDetailTableView.register(UINib(nibName: AddNoteTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: AddNoteTableViewCell.reuseIdentifier)
-//        CarDetailTableView.delegate = self
-//        CarDetailTableView.dataSource = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     required init(viewModel: CarDetailsViewModelProtocol) {

@@ -8,32 +8,47 @@
 import UIKit
 import CoreImage
 
+class CircularImageView: UIImageView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.cornerRadius = self.frame.size.width / 2
+        self.layer.borderColor = UIColor.gray.cgColor
+        self.layer.borderWidth = 1
+        self.clipsToBounds = true
+    }
+}
 class CarCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
 
-    var carImageView: UIImageView = {
-        return UIImageView()
+    var carImageView: CircularImageView = {
+        let imageView = CircularImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
+    
     var carNameLabel: UILabel = {
-        return UILabel()
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
+    
     var carTableView: UITableView = {
-        return UITableView()
+        let tableView = UITableView()
+        tableView.register(CarNotesTableViewCell.self, forCellReuseIdentifier: CarNotesTableViewCell.reuseIdentifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.layer.cornerRadius = 20
+        return tableView
     }()
     
     var car: Car?
     let gradientLayer = CAGradientLayer()
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        carTableView.register(CarNotesTableViewCell.self, forCellReuseIdentifier: CarNotesTableViewCell.reuseIdentifier)
-//    }
-
     func setup(car: Car? = nil, image: UIImage) {
         self.car = car
-        carImageView.contentMode = .scaleAspectFill
-        carImageView.isUserInteractionEnabled = true
         if let car = car {
-            carNameLabel.attributedText = AppFonts.mainTitle(string: car.nickName ?? car.model ?? car.mark ?? "")
+            carNameLabel.attributedText = AppFonts.mainTitle(string: car.nickName)
             carNameLabel.textColor = UIColor(red: 34 / 255, green: 34 / 255, blue: 34 / 255, alpha: 1)
             carTableView.delegate = self
             carTableView.dataSource = self
@@ -47,8 +62,7 @@ class CarCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     }
     
     override func layoutSubviews() {
-        self.carImageView.layer.cornerRadius = 20
-        self.carTableView.layer.cornerRadius = 20
+        super.layoutSubviews()
         self.gradientLayer.frame = self.bounds
         self.gradientLayer.cornerRadius = 20
         self.gradientLayer.startPoint = CGPoint(x: 1, y: 0)
@@ -72,21 +86,24 @@ class CarCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         self.addSubview(carNameLabel)
         self.addSubview(carTableView)
         NSLayoutConstraint.activate([
-            carImageView.topAnchor.constraint(equalTo: self.topAnchor),
-            carImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            carImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            carImageView.heightAnchor.constraint(equalToConstant: 200)
+//            carImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: -100),
+            carImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            carImageView.centerYAnchor.constraint(equalTo: self.topAnchor),
+            carImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                                   constant: -self.bounds.width / 5),
+            carImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                                  constant: self.bounds.width / 5),
+            carImageView.heightAnchor.constraint(equalTo: carImageView.widthAnchor)
         ])
         NSLayoutConstraint.activate([
             carNameLabel.topAnchor.constraint(equalTo: self.carImageView.bottomAnchor, constant: 10),
             carNameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            carNameLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
         NSLayoutConstraint.activate([
             carTableView.topAnchor.constraint(equalTo: self.carNameLabel.bottomAnchor, constant: 10),
-            carTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            carTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            carTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            carTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            carTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            carTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
         ])
     }
     

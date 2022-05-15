@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Combine
+import RxSwift
 
 protocol ReuseIdentifying {
     static var reuseIdentifier: String { get }
@@ -36,12 +36,15 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
     var carDetailsDIContainer: CarDetailsScreenDIContainerProtocol
     
     var viewModel: GarageScreenViewModelProtocol
-    var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
+    var disposeBag: DisposeBag = DisposeBag()
     
-    var cars: [Car] = []
+    var cars: [Car] = [] {
+        didSet {
+            carCollectionView.reloadData()
+        }
+    }
     
     let cornerRadius: CGFloat = 20
-    
     let gradientLayer = CAGradientLayer()
     
     override func viewDidLoad() {
@@ -54,7 +57,7 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
                                                            y: 0,
                                                            width: view.bounds.width,
                                                            height: view.bounds.height),
-                                             collectionViewLayout: collectionLayout)
+                                             collectionViewLayout: CarCollectionLayout())
         setConstraints()
         setSubscribes()
         setLayer()
@@ -77,13 +80,12 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
             carCollectionView.leadingAnchor.constraint(equalTo: carCollectionView.leadingAnchor),
             carCollectionView.trailingAnchor.constraint(equalTo: carCollectionView.trailingAnchor)
         ])
-//        self.navigationItem.rightBarButtonItem = addCarButton
     }
     
     private func setSubscribes() {
-        self.viewModel.carsPublisher.sink { [weak self] cars in
-            self?.cars = cars
-        }.store(in: &cancellable)
+        self.viewModel.cars.asObservable().subscribe(onNext: { newCars in
+            self.cars = newCars
+        }).disposed(by: disposeBag)
     }
     
     private func setLayer() {
@@ -94,7 +96,7 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        carCollectionView.reloadData()
+        self.viewModel.getCars()
     }
     
     @objc
@@ -131,31 +133,31 @@ extension GarageViewController: UICollectionViewDataSource, UICollectionViewDele
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarCollectionViewCell.reuseIdentifier, for: indexPath) as? CarCollectionViewCell else {
             return UICollectionViewCell()
         }
-        var carImage = UIImage(named: "DefaultCarImage")!
         let index = indexPath.section
+        let defaultImage = UIImage(named: "DefaultCarImage")!
         if cars.isEmpty {
-            cell.setup(image: carImage)
+            cell.setup(image: defaultImage)
         } else {
-//            guard let photoURL = cars[index].photoURL, let imageURL = URL(string: photoURL) else {
-//                cell.setup(car: cars[index], image: carImage)
-//                return cell
-//            }
-//            carImage = (try? UIImage(data: Data(contentsOf: imageURL))) ?? UIImage(named: "DefaultCarImage")!
+            guard let imageURL = URL(string: cars[index].photoURLString) else {
+                cell.setup(car: cars[index], image: defaultImage)
+                return cell
+            }
+            let carImage = (try? UIImage(data: Data(contentsOf: imageURL))) ?? defaultImage
             cell.setup(car: cars[index], image: carImage)
         }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.item == cars.count {
-            let vc = newCarDIContainer.view
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else {
-            let vc = carDetailsDIContainer.view
-            vc.car = cars[indexPath.item]
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if indexPath.item == cars.count {
+//            let vc = newCarDIContainer.view
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        } else {
+//            let vc = carDetailsDIContainer.view
+//            vc.car = cars[indexPath.item]
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
+//    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == collectionView.numberOfSections - 1 {

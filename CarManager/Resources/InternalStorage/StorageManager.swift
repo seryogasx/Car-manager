@@ -13,7 +13,7 @@ protocol StorageManagerProtocol {
     func addObject(object: Object, completion: (StorageError?) -> Void)
     func deleteObject(object: Object, completion: (StorageError?) -> Void)
     func updateObjects(_ block: () -> Void)
-    func fetchObjects(objectType: Object.Type) -> Results<Object>?
+    func fetchObjects(objectType: Object.Type) -> [Object]?
 }
 
 final class StorageManager: StorageManagerProtocol {
@@ -66,7 +66,10 @@ final class StorageManager: StorageManagerProtocol {
         }
     }
     
-    func fetchObjects(objectType: Object.Type) -> Results<Object>? {
-        storage?.objects(objectType)
+    func fetchObjects(objectType: Object.Type) -> [Object]? {
+        if let objects = storage?.objects(objectType) {
+            return Array(objects)
+        }
+        return nil
     }
 }

@@ -6,13 +6,24 @@
 //
 
 import Foundation
+import UIKit
 
 protocol NewCarViewModelProtocol {
+    var storageManager: StorageManagerProtocol { get set }
+    var networkManager: NetworkManagerProtocol { get set }
+    var car: Car { get set }
     init(storageManager: StorageManagerProtocol, networkManager: NetworkManagerProtocol)
 }
 
 final class NewCarViewModel: NewCarViewModelProtocol {
+    
+    var storageManager: StorageManagerProtocol
+    var networkManager: NetworkManagerProtocol
+    
+    var car: Car = Car()
+    
     required init(storageManager: StorageManagerProtocol, networkManager: NetworkManagerProtocol) {
-        
+        self.storageManager = storageManager
+        self.networkManager = networkManager
     }
 }
