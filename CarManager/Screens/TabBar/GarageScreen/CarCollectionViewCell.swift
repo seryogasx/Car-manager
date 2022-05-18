@@ -8,15 +8,6 @@
 import UIKit
 import CoreImage
 
-class CircularImageView: UIImageView {
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.layer.cornerRadius = self.frame.size.width / 2
-        self.layer.borderColor = UIColor.gray.cgColor
-        self.layer.borderWidth = 1
-        self.clipsToBounds = true
-    }
-}
 class CarCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
 
     var carImageView: CircularImageView = {
