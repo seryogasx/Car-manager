@@ -18,7 +18,11 @@ class CarDetailsViewController: UIViewController, CarDetailViewControllerProtoco
     
     lazy var carDetailTableView: UITableView = {
         let carDetailTableView = UITableView()
-        carDetailTableView.register(CarDetailTableViewCell.self, forCellReuseIdentifier: CarDetailTableViewCell.reuseIdentifier)
+        carDetailTableView.estimatedRowHeight = 54.0
+        carDetailTableView.rowHeight = UITableView.automaticDimension
+        carDetailTableView.register(CarDetailTableViewAlertCell.self, forCellReuseIdentifier: CarDetailTableViewAlertCell.reuseIdentifier)
+        carDetailTableView.register(CarDetailTableViewNoteCell.self, forCellReuseIdentifier: CarDetailTableViewNoteCell.reuseIdentifier)
+        carDetailTableView.register(AddNoteTableViewCell.self, forCellReuseIdentifier: AddNoteTableViewCell.reuseIdentifier)
         return carDetailTableView
     }()
     
@@ -77,22 +81,41 @@ extension CarDetailsViewController: UITableViewDataSource {
         if section == 0 {
             return self.car.alerts.isEmpty ? 1 : self.car.alerts.count
         } else {
-            return self.car.notes.isEmpty ? 1 : self.car.notes.count
+            return self.car.notes.isEmpty ? 1 : self.car.notes.count + 1
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewCell.reuseIdentifier) as? CarDetailTableViewCell else {
-//            let cell = UITableViewCell(style: .default, reuseIdentifier: tableViewReuseIdentifier)
-//            cell.largeContentTitle = "Wow"
-//            return cell
-            return UITableViewCell()
-        }
         if indexPath.section == 0 {
-            cell.update(text: self.car.alerts.isEmpty ? "Пока нет предупреждений" : self.car.alerts[indexPath.row].text)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewAlertCell.reuseIdentifier) as? CarDetailTableViewAlertCell else {
+                return UITableViewCell()
+            }
+            cell.update(alert: self.car.alerts.isEmpty ? nil : self.car.alerts[indexPath.row])
+            return cell
         } else {
-            cell.update(text: self.car.notes.isEmpty ? "Пока нет заметок" : self.car.notes[indexPath.row].text)
+            if indexPath.row >= self.car.notes.count {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: AddNoteTableViewCell.reuseIdentifier) as? AddNoteTableViewCell else {
+                    return UITableViewCell()
+                }
+                return cell
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewNoteCell.reuseIdentifier) as? CarDetailTableViewNoteCell else {
+                    return UITableViewCell()
+                }
+                cell.update(note: self.car.notes[indexPath.row], placeholder: "Текст заметки")
+                return cell
+            }
         }
-        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? "Предупреждения" : "Заметки"
     }
 }
+
+
+//extension CarDetailsViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+//}
