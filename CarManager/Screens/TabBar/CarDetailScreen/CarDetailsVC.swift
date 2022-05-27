@@ -73,15 +73,16 @@ class CarDetailsViewController: UIViewController, CarDetailViewControllerProtoco
 extension CarDetailsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return section == 0 ? self.car.alerts.count : self.car.notes.count
         if section == 0 {
             return self.car.alerts.isEmpty ? 1 : self.car.alerts.count
+        } else if section == 1 {
+            return self.car.notes.count
         } else {
-            return self.car.notes.isEmpty ? 1 : self.car.notes.count + 1
+            return 1
         }
     }
     
@@ -92,30 +93,29 @@ extension CarDetailsViewController: UITableViewDataSource {
             }
             cell.update(alert: self.car.alerts.isEmpty ? nil : self.car.alerts[indexPath.row])
             return cell
-        } else {
-            if indexPath.row >= self.car.notes.count {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: AddNoteTableViewCell.reuseIdentifier) as? AddNoteTableViewCell else {
-                    return UITableViewCell()
-                }
-                return cell
-            } else {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewNoteCell.reuseIdentifier) as? CarDetailTableViewNoteCell else {
-                    return UITableViewCell()
-                }
-                cell.update(note: self.car.notes[indexPath.row], placeholder: "Текст заметки")
-                return cell
+        } else if indexPath.section == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewNoteCell.reuseIdentifier) as? CarDetailTableViewNoteCell else {
+                return UITableViewCell()
             }
+            cell.update(note: self.car.notes[indexPath.row], placeholder: "Текст заметки")
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddNoteTableViewCell.reuseIdentifier) as? AddNoteTableViewCell else {
+                return UITableViewCell()
+            }
+            cell.addButton.addTarget(self, action: #selector(addNoteAction), for: .touchUpInside)
+            return cell
         }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 2 {
+            return ""
+        }
         return section == 0 ? "Предупреждения" : "Заметки"
     }
+    
+    @objc func addNoteAction(_ sender: UIButton) {
+        viewModel.addNewEmptyNote()
+    }
 }
-
-
-//extension CarDetailsViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-//}

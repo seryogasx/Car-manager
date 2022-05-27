@@ -40,6 +40,7 @@
 		A65CC3FF27E87FB700AC5FE4 /* GarageScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3FE27E87FB700AC5FE4 /* GarageScreenViewModel.swift */; };
 		A66040E7282C06F700133E1A /* NewCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66040E5282C06F700133E1A /* NewCarViewController.swift */; };
 		A68949B1274E6B7900AA732E /* CarNotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68949B0274E6B7900AA732E /* CarNotesTableViewCell.swift */; };
+		A68BF7CC28415A2500227123 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68BF7CB28415A2500227123 /* ImagePickerController.swift */; };
 		A690E49128342F83005EDC0E /* CarDetailTableViewNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A690E49028342F83005EDC0E /* CarDetailTableViewNoteCell.swift */; };
 		A69D84FC281316CE0008843C /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69D84FB281316CE0008843C /* StorageError.swift */; };
 		A6A549E02729C33D00534A8F /* CarInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A549DF2729C33D00534A8F /* CarInfo.swift */; };
@@ -113,6 +114,7 @@
 		A65CC3FE27E87FB700AC5FE4 /* GarageScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageScreenViewModel.swift; sourceTree = "<group>"; };
 		A66040E5282C06F700133E1A /* NewCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarViewController.swift; sourceTree = "<group>"; };
 		A68949B0274E6B7900AA732E /* CarNotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarNotesTableViewCell.swift; sourceTree = "<group>"; };
+		A68BF7CB28415A2500227123 /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
 		A690E49028342F83005EDC0E /* CarDetailTableViewNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailTableViewNoteCell.swift; sourceTree = "<group>"; };
 		A69D84FB281316CE0008843C /* StorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageError.swift; sourceTree = "<group>"; };
 		A6A549DF2729C33D00534A8F /* CarInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfo.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 			children = (
 				A6FC2AAB28313C0100D40FB6 /* CircularImageView.swift */,
 				A611FE602836DB7F0068A3DC /* CircularButton.swift */,
+				A68BF7CB28415A2500227123 /* ImagePickerController.swift */,
 			);
 			path = "Additional Views";
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				A601D327281191FD00078D0B /* Note.swift in Sources */,
 				A60A65912807449A00C362C7 /* NotificationsVC.swift in Sources */,
 				A6D478AE2818186B001547B3 /* StatisticsScreenDIContainer.swift in Sources */,
+				A68BF7CC28415A2500227123 /* ImagePickerController.swift in Sources */,
 				A6BE0D7527399EDF005B1DEC /* NetworkManager.swift in Sources */,
 				A636A04927248F9D00BAD6E8 /* config.swift in Sources */,
 				A636A035272452E100BAD6E8 /* AppDelegate.swift in Sources */,

@@ -40,7 +40,7 @@ final class StorageManager: StorageManagerProtocol {
             }
         } catch {
             print("fail to addObject: \(object)")
-            completion(.internalError)
+            completion(.internalError(message: "Ошибка добавления!"))
         }
     }
     
@@ -52,7 +52,7 @@ final class StorageManager: StorageManagerProtocol {
             }
         } catch {
             print("fail to deleteObject: \(object)")
-            completion(.internalError)
+            completion(.internalError(message: "Ошибка удаления!"))
         }
     }
     

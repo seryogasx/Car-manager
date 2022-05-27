@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 protocol NewCarViewControllerProtocol: UIViewController {
     var viewModel: NewCarViewModelProtocol { get }
@@ -36,8 +38,11 @@ class NewCarViewController: UIViewController, NewCarViewControllerProtocol {
     
     let sectionTitle = ["Фото автомобиля", "Основная информация", "Дополнительная информация"]
     
+    var disposeBag = DisposeBag()
+    
     var newCarTableView: UITableView = {
         let newCarTableView = UITableView()
+        newCarTableView.delaysContentTouches = true
         newCarTableView.register(NewCarTableViewCell.self, forCellReuseIdentifier: NewCarTableViewCell.reuseIdentifier)
         newCarTableView.separatorStyle = .none
         return newCarTableView
@@ -49,25 +54,32 @@ class NewCarViewController: UIViewController, NewCarViewControllerProtocol {
         newCarTableView.delegate = self
         newCarTableView.rowHeight = UITableView.automaticDimension
         newCarTableView.estimatedRowHeight = 150
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHasBeenShown), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHasBeenDismissed), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardHasBeenShown(notification: Notification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        self.view.frame.origin.y = 0 - keyboardSize.height
+    }
+    
+    @objc private func keyboardHasBeenDismissed(notification: Notification) {
+        self.view.frame.origin.y = 0
+        self.view.setNeedsDisplay()
     }
     
     func addTestCar() {
-        let newCar = Car()
-        newCar.nickName = "octaha"
-        newCar.mark = "skoda"
-        newCar.model = "octavia"
-        newCar.year = 2018
-        newCar.engine = "1.4"
-        newCar.transmissionType = .amt
-        newCar.mileage = 100000
-        newCar.tyreSeasonType = .summer
-        viewModel.storageManager.addObject(object: newCar) { error in
-            if let error = error {
-                print("fail to add car! \(error)")
-            } else {
-                print("success to add car")
-            }
-        }
+//        let newCar = Car()
+//        newCar.nickName = "octaha"
+//        newCar.mark = "skoda"
+//        newCar.model = "octavia"
+//        newCar.year = 2018
+//        newCar.engine = "1.4"
+//        newCar.transmissionType = .amt
+//        newCar.mileage = 100000
+//        newCar.tyreSeasonType = .summer
     }
     
     override func viewDidLayoutSubviews() {
@@ -104,6 +116,35 @@ extension NewCarViewController: UITableViewDataSource {
         }
         cell.update(cellType: carDataCells[indexPath.section][indexPath.row].cellType,
                     image: nil, text: nil)
+        switch carDataCells[indexPath.section][indexPath.row].cellType {
+            case .carAdd:
+                cell.addButton.removeTarget(nil, action: nil, for: .allEvents)
+                cell.addButton.addTarget(self, action: #selector(addCarAction), for: .touchUpInside)
+            case .carInfo:
+                if viewModel.car.value(forKey: self.carDataCells[indexPath.section][indexPath.row].label) is Int {
+                    cell.textField.keyboardType = .numberPad
+                    cell.textField.placeholder = "Например: 11"
+                } else {
+                    cell.textField.keyboardType = .default
+                    cell.textField.returnKeyType = .continue
+                    cell.textField.placeholder = "Например: aaa"
+                }
+                cell.textField.rx
+                    .controlEvent(.editingDidEnd)
+                    .withLatestFrom(cell.textField.rx.text.orEmpty)
+                    .filter { !$0.isEmpty }
+                    .subscribe { [weak self] text in
+                        if let self = self {
+                            self.viewModel.car
+                                .setValue(text.element, forKey: self.carDataCells[indexPath.section][indexPath.row].label)
+                        }
+                    }.disposed(by: disposeBag)
+            case .carLogo:
+                cell.viewController = self
+                cell.carLogoImage?.subscribe{ [weak self] event in
+                    self?.viewModel.carLogoImage = event.element
+                }.disposed(by: disposeBag)
+        }
         return cell
     }
     
@@ -116,6 +157,23 @@ extension NewCarViewController: UITableViewDataSource {
             return ""
         }
         return sectionTitle[section]
+    }
+    
+    @objc private func addCarAction() {
+        viewModel.addCar() { result in
+            switch result {
+                case .success(let message):
+                    let alert = UIAlertController(title: "Авто добавлено в гараж",
+                                                  message: message,
+                                                  preferredStyle: .actionSheet)
+                    self.present(alert, animated: true)
+                case .failure(let error):
+                    let alert = UIAlertController(title: "Ошибка",
+                                                  message: error.localizedDescription,
+                                                  preferredStyle: .actionSheet)
+                    self.present(alert, animated: true)
+            }
+        }
     }
 }
 

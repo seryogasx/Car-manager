@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum StorageError: String, Error {
-    case noData
-    case internalError
+enum StorageError: Error {
+    case noData(message: String)
+    case internalError(message: String)
 }

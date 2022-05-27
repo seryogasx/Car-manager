@@ -11,16 +11,16 @@ import RealmSwift
 class Car: Object {
     @Persisted var photoURLString: String = ""
     // identifying properties
-    @Persisted var nickName: String = ""
+    @Persisted var nickName: String?
     // main info properties
-    @Persisted var mark: String = ""
-    @Persisted var model: String = ""
-    @Persisted var year: Int = 0
+    @Persisted var mark: String?
+    @Persisted var model: String?
+    @Persisted var year: Int?
     // details properties
-    @Persisted var engine: String = ""
-    @Persisted var transmissionType: TransmissionType = .none
-    @Persisted var mileage: Int = 0
-    @Persisted var tyreSeasonType: TyreSeasonType = .allSeason
+    @Persisted var engine: String?
+    @Persisted var transmissionType: TransmissionType?
+    @Persisted var mileage: Int?
+    @Persisted var tyreSeasonType: TyreSeasonType?
 
     @Persisted var alerts: List<Alert> = .init()
     @Persisted var notes: List<Note> = .init()

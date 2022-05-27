@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 enum VisibleCellType {
     case carLogo
@@ -16,9 +17,23 @@ enum VisibleCellType {
 class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
     
     var cellType: VisibleCellType = .carLogo
+    var carLogoImage: PublishSubject<UIImage>?
+    weak var viewController: NewCarViewControllerProtocol? {
+        didSet {
+            self.imagePicker = ImagePicker(presentationController: viewController!, delegate: self)
+        }
+    }
+    var imagePicker: ImagePicker?
     
     var carImageView: CircularImageView = {
         let carImageView = CircularImageView()
+//        carImageView.image = UIImage(named: "DefaultCarImage")
+        carImageView.contentMode = .scaleAspectFill
+        carImageView.isUserInteractionEnabled = true
+        carImageView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                 action: #selector(presentImagePicker(sender:))))
+        carImageView.backgroundColor = .blue
+        carImageView.becomeFirstResponder()
         return carImageView
     }()
     
@@ -40,6 +55,11 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         button.sizeToFit()
         return button
     }()
+    
+    @objc private func presentImagePicker(sender: UITapGestureRecognizer) {
+//        self.imagePicker?.present(from: self)
+        print("kek")
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,7 +68,7 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        print("selected")
         // Configure the view for the selected state
     }
     
@@ -95,4 +115,19 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         self.addButton.removeFromSuperview()
     }
 
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension NewCarTableViewCell: ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        if let _ = self.carLogoImage, let image = image {
+            self.carLogoImage!.onNext(image)
+        }
+    }
 }

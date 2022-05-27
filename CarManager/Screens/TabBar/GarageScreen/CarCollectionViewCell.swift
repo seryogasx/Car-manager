@@ -39,7 +39,7 @@ class CarCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     func setup(car: Car? = nil, image: UIImage) {
         self.car = car
         if let car = car {
-            carNameLabel.attributedText = AppFonts.mainTitle(string: car.nickName)
+            carNameLabel.attributedText = AppFonts.mainTitle(string: car.nickName ?? "")
             carNameLabel.textColor = UIColor(red: 34 / 255, green: 34 / 255, blue: 34 / 255, alpha: 1)
             carTableView.delegate = self
             carTableView.dataSource = self
