@@ -27,13 +27,11 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
     
     var carImageView: CircularImageView = {
         let carImageView = CircularImageView()
-//        carImageView.image = UIImage(named: "DefaultCarImage")
+        carImageView.image = UIImage(named: "DefaultCarImage")
         carImageView.contentMode = .scaleAspectFill
         carImageView.isUserInteractionEnabled = true
         carImageView.addGestureRecognizer(UITapGestureRecognizer(target: self,
                                                                  action: #selector(presentImagePicker(sender:))))
-        carImageView.backgroundColor = .blue
-        carImageView.becomeFirstResponder()
         return carImageView
     }()
     
