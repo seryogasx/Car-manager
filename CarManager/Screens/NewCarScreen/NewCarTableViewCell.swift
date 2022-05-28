@@ -25,17 +25,15 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     var imagePicker: ImagePicker?
     
-    var carImageView: CircularImageView = {
+    lazy var carImageView: CircularImageView = {
         let carImageView = CircularImageView()
         carImageView.image = UIImage(named: "DefaultCarImage")
         carImageView.contentMode = .scaleAspectFill
         carImageView.isUserInteractionEnabled = true
-        carImageView.addGestureRecognizer(UITapGestureRecognizer(target: self,
-                                                                 action: #selector(presentImagePicker(sender:))))
         return carImageView
     }()
     
-    var textField: UITextField = {
+    lazy var textField: UITextField = {
         let textField = UITextField()
         textField.layer.cornerRadius = 10
         textField.layer.borderColor = UIColor.gray.cgColor
@@ -43,7 +41,7 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         return textField
     }()
     
-    var addButton: UIButton = {
+    lazy var addButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.systemBlue.cgColor
@@ -54,9 +52,16 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         return button
     }()
     
+    lazy var attributeLabel: UILabel = {
+        let attributeLabel = UILabel()
+        return attributeLabel
+    }()
+    
+    var disposeBag: DisposeBag = DisposeBag()
+    
     @objc private func presentImagePicker(sender: UITapGestureRecognizer) {
-//        self.imagePicker?.present(from: self)
-        print("kek")
+        self.imagePicker?.present(from: self)
+//        print("kek")
     }
 
     override func awakeFromNib() {
@@ -70,8 +75,22 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         // Configure the view for the selected state
     }
     
-    func update(cellType: VisibleCellType, image: UIImage?, text: String?) {
+    func update(attributeText: String?, cellType: VisibleCellType, image: UIImage?, text: String?, placeholder: String?) {
         self.cellType = cellType
+        if let attributeText = attributeText {
+            self.attributeLabel.text = attributeText
+            self.attributeLabel.sizeToFit()
+        }
+        if let image = image {
+            self.carImageView.image = image
+            self.carLogoImage?.onNext(image)
+        }
+        if let text = text, !text.isEmpty {
+            self.textField.text = text
+        }
+        if let placeholder = placeholder {
+            self.textField.placeholder = placeholder
+        }
         layoutIfNeeded()
     }
     
@@ -87,9 +106,15 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
                     make.width.equalTo(carImageView.snp.height)
                 }
             case .carInfo:
+                self.addSubview(attributeLabel)
+                attributeLabel.snp.makeConstraints { make in
+                    make.top.equalToSuperview().offset(10)
+                    make.leading.equalToSuperview().offset(10)
+                    make.height.equalTo(20)
+                }
                 self.addSubview(textField)
                 textField.snp.makeConstraints { make in
-                    make.top.equalToSuperview().offset(10)
+                    make.top.equalTo(attributeLabel.snp.bottom).offset(5)
                     make.bottom.equalToSuperview().offset(-10)
                     make.leading.equalToSuperview().offset(10)
                     make.width.equalTo(200)
@@ -111,10 +136,13 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         self.carImageView.removeFromSuperview()
         self.textField.removeFromSuperview()
         self.addButton.removeFromSuperview()
+        self.attributeLabel.removeFromSuperview()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        carImageView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                 action: #selector(presentImagePicker(sender:))))
     }
     
     required init?(coder: NSCoder) {
@@ -124,8 +152,9 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
 
 extension NewCarTableViewCell: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
-        if let _ = self.carLogoImage, let image = image {
-            self.carLogoImage!.onNext(image)
+        if let image = image {
+            self.carImageView.image = image
+            self.carLogoImage?.onNext(image)
         }
     }
 }

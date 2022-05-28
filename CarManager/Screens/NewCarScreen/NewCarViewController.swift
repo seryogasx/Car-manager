@@ -23,17 +23,20 @@ struct PropertyCellInfo {
 class NewCarViewController: UIViewController, NewCarViewControllerProtocol {
     var viewModel: NewCarViewModelProtocol
     
-    let carDataCells: [[(label: String, cellType: VisibleCellType)]] = [
-        [(label: "photoURLString", cellType: .carLogo)],
-        [(label: "nickName", cellType: .carInfo),
-         (label: "mark", cellType: .carInfo),
-         (label: "model", cellType: .carInfo),
-         (label: "year", cellType: .carInfo)],
-        [(label: "engine", cellType: .carInfo),
-         (label: "transmissionType", cellType: .carInfo),
-         (label: "mileage", cellType: .carInfo),
-         (label: "tyreSeasonType", cellType: .carInfo)],
-        [(label: "button", cellType: .carAdd)],
+    let carDataCells: [[(label: String,
+                         attributeText: String,
+                         cellType: VisibleCellType,
+                         keyboardType: UIKeyboardType?)]] = [
+        [(label: "photoURLString", attributeText: "Фото авто", cellType: .carLogo, keyboardType: nil)],
+        [(label: "nickName", attributeText: "Псевдоним авто", cellType: .carInfo, keyboardType: .default),
+         (label: "mark", attributeText: "Марка авто", cellType: .carInfo, keyboardType: .default),
+         (label: "model", attributeText: "Модель авто", cellType: .carInfo, keyboardType: .default),
+         (label: "year", attributeText: "Год выпуска", cellType: .carInfo, keyboardType: .numberPad)],
+        [(label: "engine", attributeText: "Тип двигателя", cellType: .carInfo, keyboardType: .default),
+         (label: "transmissionType", attributeText: "Тип трансмиссии", cellType: .carInfo, keyboardType: .default),
+         (label: "mileage", attributeText: "Текущий пробег (км)", cellType: .carInfo, keyboardType: .numberPad),
+         (label: "tyreSeasonType", attributeText: "Тип установленной резины", cellType: .carInfo, keyboardType: .default)],
+        [(label: "button", attributeText: "Добавить авто", cellType: .carAdd, keyboardType: nil)],
     ]
     
     let sectionTitle = ["Фото автомобиля", "Основная информация", "Дополнительная информация"]
@@ -114,32 +117,52 @@ extension NewCarViewController: UITableViewDataSource {
             print("nothing to reuse")
             return UITableViewCell()
         }
-        cell.update(cellType: carDataCells[indexPath.section][indexPath.row].cellType,
-                    image: nil, text: nil)
+        let cellType = carDataCells[indexPath.section][indexPath.row].cellType
+        let carAttribute = carDataCells[indexPath.section][indexPath.row].label
+        let carAttributeText = carDataCells[indexPath.section][indexPath.row].attributeText
         switch carDataCells[indexPath.section][indexPath.row].cellType {
             case .carAdd:
                 cell.addButton.removeTarget(nil, action: nil, for: .allEvents)
                 cell.addButton.addTarget(self, action: #selector(addCarAction), for: .touchUpInside)
+                cell.update(attributeText: nil,
+                            cellType: cellType,
+                            image: nil,
+                            text: nil,
+                            placeholder: nil)
             case .carInfo:
-                if viewModel.car.value(forKey: self.carDataCells[indexPath.section][indexPath.row].label) is Int {
-                    cell.textField.keyboardType = .numberPad
-                    cell.textField.placeholder = "Например: 11"
-                } else {
-                    cell.textField.keyboardType = .default
-                    cell.textField.returnKeyType = .continue
-                    cell.textField.placeholder = "Например: aaa"
+                let text = String(describing: viewModel.car.value(forKey: carAttribute) as? String ?? "")
+                if let keyboardType = carDataCells[indexPath.section][indexPath.row].keyboardType {
+                    cell.textField.keyboardType = keyboardType
+                    if keyboardType == .numberPad {
+                        cell.update(attributeText: carAttributeText,
+                                    cellType: cellType,
+                                    image: nil,
+                                    text: text,
+                                    placeholder: "Например: 11")
+                    } else {
+                        cell.update(attributeText: carAttributeText,
+                                    cellType: cellType,
+                                    image: nil,
+                                    text: text,
+                                    placeholder: "Например: aaa")
+                    }
+                    cell.textField.rx
+                        .controlEvent(.editingDidEnd)
+                        .withLatestFrom(cell.textField.rx.text.orEmpty)
+                        .filter { !$0.isEmpty }
+                        .subscribe { [weak self] text in
+                            if let self = self {
+                                self.viewModel.car
+                                    .setValue(text.element, forKey: self.carDataCells[indexPath.section][indexPath.row].label)
+                            }
+                        }.disposed(by: disposeBag)
                 }
-                cell.textField.rx
-                    .controlEvent(.editingDidEnd)
-                    .withLatestFrom(cell.textField.rx.text.orEmpty)
-                    .filter { !$0.isEmpty }
-                    .subscribe { [weak self] text in
-                        if let self = self {
-                            self.viewModel.car
-                                .setValue(text.element, forKey: self.carDataCells[indexPath.section][indexPath.row].label)
-                        }
-                    }.disposed(by: disposeBag)
             case .carLogo:
+                cell.update(attributeText: nil,
+                            cellType: cellType,
+                            image: viewModel.carLogoImage,
+                            text: nil,
+                            placeholder: nil)
                 cell.viewController = self
                 cell.carLogoImage?.subscribe{ [weak self] event in
                     self?.viewModel.carLogoImage = event.element
