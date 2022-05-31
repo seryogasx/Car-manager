@@ -69,7 +69,7 @@ class CarDetailTableViewAlertCell: UITableViewCell, ReuseIdentifying {
         alertLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(5)
             make.bottom.equalToSuperview().offset(-5)
-            make.leading.equalTo(completeButton.snp.trailing).offset(10)
+            make.leading.equalTo(completeButton.snp.trailing).offset(20)
             make.trailing.equalToSuperview().offset(-5)
         }
     }

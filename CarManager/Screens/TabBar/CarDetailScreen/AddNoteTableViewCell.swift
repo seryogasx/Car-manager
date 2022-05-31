@@ -20,9 +20,13 @@ extension UIImage {
 
 class AddNoteTableViewCell: UITableViewCell, ReuseIdentifying {
     
+    weak var viewController: CarDetailsViewController?
+    
     lazy var addIcon: UIImageView = {
         let addIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
         addIcon.image = UIImage(named: "AddNoteIcon")?.resizeImage(to: addIcon.frame.size)
+        addIcon.isUserInteractionEnabled = true
+        addIcon.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addNote)))
         return addIcon
     }()
     
@@ -31,8 +35,13 @@ class AddNoteTableViewCell: UITableViewCell, ReuseIdentifying {
         addButton.setTitle("Добавить новую заметку", for: .normal)
         addButton.setTitleColor(UIColor.systemBlue, for: .normal)
         addButton.sizeToFit()
+        addButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addNote)))
         return addButton
     }()
+    
+    @objc func addNote() {
+        self.viewController?.addNewNote()
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,7 +66,7 @@ class AddNoteTableViewCell: UITableViewCell, ReuseIdentifying {
         self.contentView.addSubview(addIcon)
         addIcon.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(5)
+            make.leading.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(5)
             make.bottom.equalToSuperview().offset(-5)
         }
@@ -67,5 +76,9 @@ class AddNoteTableViewCell: UITableViewCell, ReuseIdentifying {
             make.top.equalToSuperview().offset(5)
             make.bottom.equalToSuperview().offset(-5)
         }
+    }
+    
+    func update(viewController: CarDetailsViewController) {
+        self.viewController = viewController
     }
 }

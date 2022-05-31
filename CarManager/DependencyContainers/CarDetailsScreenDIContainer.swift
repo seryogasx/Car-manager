@@ -9,17 +9,20 @@ import Foundation
 import UIKit
 
 protocol CarDetailsScreenDIContainerProtocol {
-    var view: CarDetailViewControllerProtocol { get }
+    func getView(car: Car) -> CarDetailViewControllerProtocol
     var viewModel: CarDetailsViewModelProtocol { get }
     init(storageManager: StorageManagerProtocol)
 }
 
 class CarDetailsScreenDIContainer: CarDetailsScreenDIContainerProtocol {
-    var view: CarDetailViewControllerProtocol
+    
     var viewModel: CarDetailsViewModelProtocol
     
+    func getView(car: Car) -> CarDetailViewControllerProtocol {
+        return CarDetailsViewController(viewModel: viewModel, car: car)
+    }
+    
     required init(storageManager: StorageManagerProtocol) {
-        viewModel = CarDetailsViewModel()
-        view = CarDetailsViewController(viewModel: viewModel)
+        viewModel = CarDetailsViewModel(storageManager: storageManager)
     }
 }

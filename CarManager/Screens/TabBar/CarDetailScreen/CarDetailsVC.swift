@@ -6,15 +6,18 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol CarDetailViewControllerProtocol: UIViewController {
     var viewModel: CarDetailsViewModelProtocol { get }
-    var car: Car! { get set }
-    init(viewModel: CarDetailsViewModelProtocol)
+    init(viewModel: CarDetailsViewModelProtocol, car: Car)
+    func addNewNote()
 }
 
 class CarDetailsViewController: UIViewController, CarDetailViewControllerProtocol {
+    
     var viewModel: CarDetailsViewModelProtocol
+    var car: Car!
     
     lazy var carDetailTableView: UITableView = {
         let carDetailTableView = UITableView()
@@ -27,17 +30,17 @@ class CarDetailsViewController: UIViewController, CarDetailViewControllerProtoco
     }()
     
     lazy var tableHeader: CarDetailTableHeader = {
-        let tableHeader = CarDetailTableHeader(car: car)
+        let tableHeader = CarDetailTableHeader(car: viewModel.car ?? Car())
         return tableHeader
     }()
+    
+    var disposeBag: DisposeBag = DisposeBag()
 
-    var car: Car!
+//    var car: Car!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         carDetailTableView.dataSource = self
-//        setConstraints()
-        self.title = car.nickName
     }
     
     private func setConstraints() {
@@ -55,14 +58,24 @@ class CarDetailsViewController: UIViewController, CarDetailViewControllerProtoco
                                    height: carDetailTableView.frame.size.width / 2)
     }
     
+    required init(viewModel: CarDetailsViewModelProtocol, car: Car) {
+        self.car = car
+        self.viewModel = viewModel
+        self.viewModel.car = car
+        super.init(nibName: nil, bundle: nil)
+        setSubscribes()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setConstraints()
     }
     
-    required init(viewModel: CarDetailsViewModelProtocol) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+    func setSubscribes() {
+        self.viewModel.carSubject.subscribe { [weak self] event in
+//            self?.title = event.element?.nickName
+            self?.car = event.element
+        }.disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {
@@ -103,7 +116,7 @@ extension CarDetailsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddNoteTableViewCell.reuseIdentifier) as? AddNoteTableViewCell else {
                 return UITableViewCell()
             }
-            cell.addButton.addTarget(self, action: #selector(addNoteAction), for: .touchUpInside)
+            cell.update(viewController: self)
             return cell
         }
     }
@@ -115,7 +128,7 @@ extension CarDetailsViewController: UITableViewDataSource {
         return section == 0 ? "Предупреждения" : "Заметки"
     }
     
-    @objc func addNoteAction(_ sender: UIButton) {
-        viewModel.addNewEmptyNote()
+    func addNewNote() {
+        self.viewModel.addNewEmptyNote()
     }
 }

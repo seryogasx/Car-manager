@@ -101,7 +101,7 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
     
     @objc
     func addCarButtonHandler() {
-        let vc = newCarDIContainer.view
+        let vc = newCarDIContainer.getView()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -146,26 +146,14 @@ extension GarageViewController: UICollectionViewDataSource, UICollectionViewDele
             cell.setup(car: cars[index], image: carImage)
         }
         return cell
-    }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.item == cars.count {
-//            let vc = newCarDIContainer.view
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        } else {
-//            let vc = carDetailsDIContainer.view
-//            vc.car = cars[indexPath.item]
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
-//    }
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == collectionView.numberOfSections - 1 {
             if cars.isEmpty {
-                self.navigationController?.pushViewController(newCarDIContainer.view, animated: true)
+                self.navigationController?.pushViewController(newCarDIContainer.getView(), animated: true)
             } else {
-                let detailsVC = carDetailsDIContainer.view
-                detailsVC.car = cars[indexPath.section]
+                let detailsVC = carDetailsDIContainer.getView(car: cars[indexPath.section])
                 self.navigationController?.pushViewController(detailsVC, animated: true)
             }
         }

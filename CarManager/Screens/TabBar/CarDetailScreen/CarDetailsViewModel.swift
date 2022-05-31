@@ -9,23 +9,35 @@ import Foundation
 import RxSwift
 
 protocol CarDetailsViewModelProtocol {
-//    var car: PublishSubject<Car> { get set }
-//    var storageManager: StorageManagerProtocol { get set }
+    var carSubject: PublishSubject<Car> { get set }
+    var car: Car? { get set }
+    var storage: StorageManagerProtocol { get set }
     func addNewEmptyNote()
-//    init(storageManager: StorageManagerProtocol, car: Car)
+    init(storageManager: StorageManagerProtocol)
 }
 
 class CarDetailsViewModel: CarDetailsViewModelProtocol {
-//    var car: PublishSubject<Car> = PublishSubject<Car>()
-//
-//    var storageManager: StorageManagerProtocol
-//
-    func addNewEmptyNote() {
-        let newNote = Note()
+    
+    var carSubject: PublishSubject<Car> = PublishSubject<Car>()
+    var car: Car? {
+        didSet {
+            if let car = car {
+                carSubject.onNext(car)
+            }
+        }
     }
-//
-//    required init(storageManager: StorageManagerProtocol, car: Car) {
-//        self.storageManager = storageManager
-//        self.car.onNext(car)
-//    }
+
+    var storage: StorageManagerProtocol
+
+    func addNewEmptyNote() {
+        print(#function)
+        let newNote = Note()
+        storage.updateObjects {
+            car?.notes.append(newNote)
+        }
+    }
+
+    required init(storageManager: StorageManagerProtocol) {
+        self.storage = storageManager
+    }
 }

@@ -60,7 +60,7 @@ class CarDetailTableHeader: UITableViewHeaderFooterView, ReuseIdentifying {
         configureMainInfoStackView()
         self.addSubview(carLogoImageView)
         carLogoImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(10)
             make.width.equalToSuperview().dividedBy(2)
             make.height.equalTo(carLogoImageView.snp.width)

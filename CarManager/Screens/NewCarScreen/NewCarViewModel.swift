@@ -29,6 +29,9 @@ final class NewCarViewModel: NewCarViewModelProtocol {
     func addCar(completion: (Result<String, StorageError>) -> Void) {
         print("Add car! \(car)")
         if checkCarData() {
+            if let photo = carLogoImage {
+                car.photoURLString = storageManager.saveImage(image: photo)?.absoluteString ?? ""
+            }
             storageManager.addObject(object: car) { error in
                 if let error = error {
                     completion(.failure(StorageError.noData(message: "Ошибка добавления авто! \(error.localizedDescription)")))

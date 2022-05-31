@@ -73,7 +73,7 @@ class NewCarViewController: UIViewController, NewCarViewControllerProtocol {
         self.view.setNeedsDisplay()
     }
     
-    func addTestCar() {
+//    func addTestCar() {
 //        let newCar = Car()
 //        newCar.nickName = "octaha"
 //        newCar.mark = "skoda"
@@ -83,7 +83,7 @@ class NewCarViewController: UIViewController, NewCarViewControllerProtocol {
 //        newCar.transmissionType = .amt
 //        newCar.mileage = 100000
 //        newCar.tyreSeasonType = .summer
-    }
+//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -189,11 +189,13 @@ extension NewCarViewController: UITableViewDataSource {
                     let alert = UIAlertController(title: "Авто добавлено в гараж",
                                                   message: message,
                                                   preferredStyle: .actionSheet)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
                     self.present(alert, animated: true)
                 case .failure(let error):
                     let alert = UIAlertController(title: "Ошибка",
                                                   message: error.localizedDescription,
                                                   preferredStyle: .actionSheet)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
                     self.present(alert, animated: true)
             }
         }
