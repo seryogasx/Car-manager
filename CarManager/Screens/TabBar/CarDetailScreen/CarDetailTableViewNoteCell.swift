@@ -72,12 +72,14 @@ class CarDetailTableViewNoteCell: UITableViewCell, ReuseIdentifying {
         self.contentView.addSubview(completeButton)
         completeButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(5)
+            make.leading.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(5)
+            make.bottom.equalToSuperview().offset(-5)
         }
         self.contentView.addSubview(textView)
         textView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(5)
-            make.leading.equalTo(completeButton.snp.trailing).offset(20)
+            make.leading.equalTo(completeButton.snp.trailing).offset(10)
             make.trailing.equalToSuperview().offset(-5)
             make.bottom.equalToSuperview().offset(-5)
         }

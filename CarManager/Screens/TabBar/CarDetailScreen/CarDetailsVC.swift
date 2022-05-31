@@ -19,12 +19,9 @@ class CarDetailsViewController: UIViewController, CarDetailViewControllerProtoco
     var viewModel: CarDetailsViewModelProtocol
     var car: Car!
     
-    lazy var carDetailTableView: UITableView = {
-        let carDetailTableView = UITableView()
-        carDetailTableView.estimatedRowHeight = 54.0
-        carDetailTableView.rowHeight = UITableView.automaticDimension
-        carDetailTableView.register(CarDetailTableViewAlertCell.self, forCellReuseIdentifier: CarDetailTableViewAlertCell.reuseIdentifier)
-        carDetailTableView.register(CarDetailTableViewNoteCell.self, forCellReuseIdentifier: CarDetailTableViewNoteCell.reuseIdentifier)
+    lazy var carDetailTableView: NoteTableView = {
+        let carDetailTableView = NoteTableView()
+        carDetailTableView.setup(estimatedRowHeight: 54.0, rowHeight: UITableView.automaticDimension)
         carDetailTableView.register(AddNoteTableViewCell.self, forCellReuseIdentifier: AddNoteTableViewCell.reuseIdentifier)
         return carDetailTableView
     }()
@@ -35,8 +32,6 @@ class CarDetailsViewController: UIViewController, CarDetailViewControllerProtoco
     }()
     
     var disposeBag: DisposeBag = DisposeBag()
-
-//    var car: Car!
     
     override func viewDidLoad() {
         super.viewDidLoad()

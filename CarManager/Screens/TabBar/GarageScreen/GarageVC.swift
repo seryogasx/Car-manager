@@ -68,7 +68,6 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
         carCollectionView.delegate = self
         carCollectionView.dataSource = self
         carCollectionView.register(CarCollectionViewCell.self, forCellWithReuseIdentifier: CarCollectionViewCell.reuseIdentifier)
-        
         NetworkManager.shared.checkWeather()
     }
     

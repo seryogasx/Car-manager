@@ -39,7 +39,6 @@
 		A63B477B2735778200B33295 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63B477A2735778200B33295 /* NotificationManager.swift */; };
 		A65CC3FF27E87FB700AC5FE4 /* GarageScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A65CC3FE27E87FB700AC5FE4 /* GarageScreenViewModel.swift */; };
 		A66040E7282C06F700133E1A /* NewCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66040E5282C06F700133E1A /* NewCarViewController.swift */; };
-		A68949B1274E6B7900AA732E /* CarNotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68949B0274E6B7900AA732E /* CarNotesTableViewCell.swift */; };
 		A68BF7CC28415A2500227123 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68BF7CB28415A2500227123 /* ImagePickerController.swift */; };
 		A690E49128342F83005EDC0E /* CarDetailTableViewNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A690E49028342F83005EDC0E /* CarDetailTableViewNoteCell.swift */; };
 		A69A0BFC2846A64100C80E0C /* NoteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69A0BFB2846A64100C80E0C /* NoteTableView.swift */; };
@@ -115,7 +114,6 @@
 		A63B477A2735778200B33295 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A65CC3FE27E87FB700AC5FE4 /* GarageScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageScreenViewModel.swift; sourceTree = "<group>"; };
 		A66040E5282C06F700133E1A /* NewCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCarViewController.swift; sourceTree = "<group>"; };
-		A68949B0274E6B7900AA732E /* CarNotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarNotesTableViewCell.swift; sourceTree = "<group>"; };
 		A68BF7CB28415A2500227123 /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
 		A690E49028342F83005EDC0E /* CarDetailTableViewNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailTableViewNoteCell.swift; sourceTree = "<group>"; };
 		A69A0BFB2846A64100C80E0C /* NoteTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableView.swift; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 				A65CC3FE27E87FB700AC5FE4 /* GarageScreenViewModel.swift */,
 				A6D79AFB274B71CF00EAC5EB /* CarCollectionViewCell.swift */,
 				A6D79B13274CF27300EAC5EB /* CarCollectionLayout.swift */,
-				A68949B0274E6B7900AA732E /* CarNotesTableViewCell.swift */,
 			);
 			path = GarageScreen;
 			sourceTree = "<group>";
@@ -447,7 +444,6 @@
 				A6D478AC28181850001547B3 /* CarDetailsScreenDIContainer.swift in Sources */,
 				A6D79B14274CF27300EAC5EB /* CarCollectionLayout.swift in Sources */,
 				A6D478BD28188400001547B3 /* MainScreenDIContainer.swift in Sources */,
-				A68949B1274E6B7900AA732E /* CarNotesTableViewCell.swift in Sources */,
 				A6FC2AAE28313FE700D40FB6 /* CarDetailTableHeader.swift in Sources */,
 				A611FE5D28366D1E0068A3DC /* CarDetailTableViewAlertCell.swift in Sources */,
 				A66040E7282C06F700133E1A /* NewCarViewController.swift in Sources */,

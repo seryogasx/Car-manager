@@ -25,9 +25,10 @@ class CarCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         return label
     }()
     
-    var carTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(CarNotesTableViewCell.self, forCellReuseIdentifier: CarNotesTableViewCell.reuseIdentifier)
+    var carTableView: NoteTableView = {
+        let tableView = NoteTableView()
+        tableView.setup(estimatedRowHeight: 40.0, rowHeight: UITableView.automaticDimension)
+//        tableView.register(CarNotesTableViewCell.self, forCellReuseIdentifier: CarNotesTableViewCell.reuseIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.layer.cornerRadius = 20
         return tableView
@@ -109,19 +110,50 @@ class CarCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
 
 extension CarCollectionViewCell: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return carTableView.sectionsCount
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return car?.notes.count ?? 0
+        if let car = car {
+            if section == 0 {
+                return car.alerts.isEmpty ? 1 : car.alerts.count
+            } else if section == 1 {
+                return car.notes.isEmpty ? 1 : car.notes.count
+            } else {
+                return 1
+            }
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CarNotesTableViewCell.reuseIdentifier, for: indexPath) as! CarNotesTableViewCell
-        if let note = car?.notes[indexPath.item] {
-//            cell.setup(note: note, delegate: self)
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewAlertCell.reuseIdentifier) as? CarDetailTableViewAlertCell,
+                  let car = car else {
+                return UITableViewCell()
+            }
+            cell.alertLabel.font = UIFont(name: "verdana", size: 12.0)
+            cell.update(alert: car.alerts.isEmpty ? nil : car.alerts[indexPath.row])
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewNoteCell.reuseIdentifier) as? CarDetailTableViewNoteCell,
+                  let car = car else {
+                return UITableViewCell()
+            }
+            cell.textView.font = UIFont(name: "verdana", size: 12.0)
+            cell.update(note: car.notes.isEmpty ? nil : car.notes[indexPath.row], placeholder: "Пока нет заметок")
+            cell.textView.text = "Пока нет заметок"
+            cell.textView.isUserInteractionEnabled = false
+            print(cell.frame)
+            return cell
         }
-        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 2 {
+            return ""
+        }
+        return section == 0 ? "Предупреждения" : "Заметки"
     }
 }
 
