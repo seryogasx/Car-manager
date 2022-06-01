@@ -62,6 +62,8 @@
 		A6D79AFD274B71CF00EAC5EB /* CarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D79AFB274B71CF00EAC5EB /* CarCollectionViewCell.swift */; };
 		A6D79B14274CF27300EAC5EB /* CarCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D79B13274CF27300EAC5EB /* CarCollectionLayout.swift */; };
 		A6EEB04C2726FFB200715F3A /* CarDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EEB04A2726FFB200715F3A /* CarDetailsVC.swift */; };
+		A6F2C5832847698A0025A75B /* StatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F2C5822847698A0025A75B /* StatisticsTableViewCell.swift */; };
+		A6F2C58528476D790025A75B /* PieChartHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F2C58428476D790025A75B /* PieChartHeaderView.swift */; };
 		A6FC2AAC28313C0100D40FB6 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FC2AAB28313C0100D40FB6 /* CircularImageView.swift */; };
 		A6FC2AAE28313FE700D40FB6 /* CarDetailTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6FC2AAD28313FE700D40FB6 /* CarDetailTableHeader.swift */; };
 /* End PBXBuildFile section */
@@ -137,6 +139,8 @@
 		A6D79AFB274B71CF00EAC5EB /* CarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCollectionViewCell.swift; sourceTree = "<group>"; };
 		A6D79B13274CF27300EAC5EB /* CarCollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCollectionLayout.swift; sourceTree = "<group>"; };
 		A6EEB04A2726FFB200715F3A /* CarDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailsVC.swift; sourceTree = "<group>"; };
+		A6F2C5822847698A0025A75B /* StatisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewCell.swift; sourceTree = "<group>"; };
+		A6F2C58428476D790025A75B /* PieChartHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartHeaderView.swift; sourceTree = "<group>"; };
 		A6FC2AAB28313C0100D40FB6 /* CircularImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
 		A6FC2AAD28313FE700D40FB6 /* CarDetailTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailTableHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -210,6 +214,8 @@
 			children = (
 				A60A658D2807443C00C362C7 /* StatisticsVC.swift */,
 				A6D478B628187CBF001547B3 /* StatisticsViewModel.swift */,
+				A6F2C5822847698A0025A75B /* StatisticsTableViewCell.swift */,
+				A6F2C58428476D790025A75B /* PieChartHeaderView.swift */,
 			);
 			path = StatisticsScreen;
 			sourceTree = "<group>";
@@ -438,12 +444,14 @@
 				A6D478BF28188650001547B3 /* NewCarViewModel.swift in Sources */,
 				A63B477B2735778200B33295 /* NotificationManager.swift in Sources */,
 				A6D478AA28181840001547B3 /* NewCarScreenDIContainer.swift in Sources */,
+				A6F2C5832847698A0025A75B /* StatisticsTableViewCell.swift in Sources */,
 				A6BE0D78273A77B2005B1DEC /* LocationManager.swift in Sources */,
 				A6D478B728187CBF001547B3 /* StatisticsViewModel.swift in Sources */,
 				A6D478A828181817001547B3 /* GarageScreenDIContainer.swift in Sources */,
 				A6D478AC28181850001547B3 /* CarDetailsScreenDIContainer.swift in Sources */,
 				A6D79B14274CF27300EAC5EB /* CarCollectionLayout.swift in Sources */,
 				A6D478BD28188400001547B3 /* MainScreenDIContainer.swift in Sources */,
+				A6F2C58528476D790025A75B /* PieChartHeaderView.swift in Sources */,
 				A6FC2AAE28313FE700D40FB6 /* CarDetailTableHeader.swift in Sources */,
 				A611FE5D28366D1E0068A3DC /* CarDetailTableViewAlertCell.swift in Sources */,
 				A66040E7282C06F700133E1A /* NewCarViewController.swift in Sources */,
