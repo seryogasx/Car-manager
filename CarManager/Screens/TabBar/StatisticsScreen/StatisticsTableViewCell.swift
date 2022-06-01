@@ -67,7 +67,7 @@ class StatisticsTableViewCell: UITableViewCell, ReuseIdentifying {
     ])
   }
   
-  public func configure(with data: [(String, Double)], colors: [UIColor], for indexPath: IndexPath) {
+  public func configure(with data: [(String, Int)], colors: [UIColor], for indexPath: IndexPath) {
     let companyName = data[indexPath.row].0
     let companyValue = data[indexPath.row].1
     let maxCompanyValue = data[0].1
@@ -84,7 +84,7 @@ class StatisticsTableViewCell: UITableViewCell, ReuseIdentifying {
     }
     let color = colors[colorIndexPath]
     let sum = data.reduce(into: 0) { $0 += $1.1 }
-    let percent = companyValue / sum
+    let percent = NSDecimalNumber(decimal: Decimal(companyValue / sum)).doubleValue
     let progressBarPercent = Float(companyValue / maxCompanyValue)
     percentage.text = getNicePercent(percent: percent)
     progressBar.setProgress(progressBarPercent, animated: false)

@@ -9,17 +9,19 @@ import Foundation
 import UIKit
 
 protocol StatisticsScreenDIContainerProtocol {
-    var view: StatisticsViewControllerProtocol { get }
     var viewModel: StatisticsViewModelProtocol { get }
+    func getView() -> StatisticsViewControllerProtocol
     init(storageManager: StorageManagerProtocol)
 }
 
 class StatisticsScreenDIContainer: StatisticsScreenDIContainerProtocol {
-    var view: StatisticsViewControllerProtocol
     var viewModel: StatisticsViewModelProtocol
     
+    func getView() -> StatisticsViewControllerProtocol {
+        return StatisticsViewController(viewModel: viewModel)
+    }
+    
     required init(storageManager: StorageManagerProtocol) {
-        viewModel = StatisticsViewModel()
-        view = StatisticsViewController(viewModel: viewModel)
+        viewModel = StatisticsViewModel(storageManager: storageManager)
     }
 }

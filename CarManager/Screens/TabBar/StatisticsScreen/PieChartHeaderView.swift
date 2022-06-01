@@ -43,7 +43,7 @@ class PieChartHeaderView: UITableViewHeaderFooterView {
         contentView.addSubview(stocksNumberLabel)
     }
     
-    init(reuseIdentifier: String?, data: [(String, Double)] = [], colors: [UIColor] = []) {
+    init(reuseIdentifier: String?, data: [(String, Int)] = [], colors: [UIColor] = []) {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.addSubview(pieChartView)
         contentView.addSubview(stocksSumValueLabel)
@@ -51,8 +51,8 @@ class PieChartHeaderView: UITableViewHeaderFooterView {
         setData(data: data, colors: colors)
     }
     
-    func setData(data: [(String, Double)], colors: [UIColor]) {
-        let sumValue = (100 * round(data.reduce(into: 0) { $0 += $1.1 })) / 100
+    func setData(data: [(String, Int)], colors: [UIColor]) {
+        let sumValue = data.reduce(into: 0) { $0 += $1.1 }
         stocksSumValueLabel.text = "\(sumValue) км"
 //        stocksNumberLabel.text = stocksNumberStringFormatter(data: data, number: data.count)
         stocksSumValueLabel.sizeToFit()

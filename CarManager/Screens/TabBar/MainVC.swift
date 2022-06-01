@@ -37,7 +37,7 @@ extension MainViewController {
     func createTabBar() {
         let garageVC = DIContainer.garageScreenDIContainer.view
         let navigationGarageVC = UINavigationController(rootViewController: garageVC)
-        let statisticsVC = DIContainer.statisticsScreenDIContainer.view
+        let statisticsVC = DIContainer.statisticsScreenDIContainer.getView()
         let notificationsVC = DIContainer.notificationsScreenDIContainer.view
 
         let bold = UIImage.SymbolConfiguration(weight: .medium)

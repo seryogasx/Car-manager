@@ -17,7 +17,7 @@ protocol StatisticsViewControllerProtocol: UIViewController {
 final class StatisticsViewController: UIViewController, StatisticsViewControllerProtocol {
     var viewModel: StatisticsViewModelProtocol
     
-    var data: [(String, Double)] = [] {
+    var data: [(String, Int)] = [] {
         didSet {
             tableView.reloadData()
             header.setData(data: data, colors: dataColors)
@@ -80,8 +80,8 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .systemBackground
         setSubscribers()
+        self.view.backgroundColor = .systemBackground
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorColor = UIColor.clear
@@ -122,6 +122,20 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
 //        viewModel?.cashPublisher.sink { cash in
 //            self.cash = cash
 //        }.store(in: &allCancellables)
+        
+        viewModel.carSubject.asObservable().subscribe { [weak self] cars in
+            if let cars = cars.element {
+                if self?.segmentControl.selectedSegmentIndex == 0 {
+                    self?.data = cars.filter { $0.mileage != nil }.map { ($0.nickName ?? "", $0.mileage ?? 0) }
+                } else {
+                    let calendar = Calendar.current
+                    let currentYear = calendar.component(.year, from: Date())
+                    self?.data = cars
+                        .filter { $0.mileage != nil && $0.year != nil }
+                        .map { ($0.nickName ?? "", ($0.mileage ?? 0) / max(currentYear - ($0.year ?? currentYear), 1)) }
+                }
+            }
+        }.disposed(by: disposeBag)
     }
     
     private func stocksNumberStringFormatter(data: [(String, Double)], number: Int) -> String {
