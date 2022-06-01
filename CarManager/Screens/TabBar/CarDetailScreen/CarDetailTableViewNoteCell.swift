@@ -15,13 +15,12 @@ class CarDetailTableViewNoteCell: UITableViewCell, ReuseIdentifying {
     
     lazy var completeButton: CircularButton = {
         let completeButton = CircularButton()
-        completeButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        completeButton.frame = CGRect(x: 0, y: 0, width: 10, height: 44)
         return completeButton
     }()
     
     lazy var textView: UITextView = {
         let textView = UITextView()
-        textView.textColor = UIColor.lightGray
         textView.font = UIFont(name: "verdana", size: 16.0)
         textView.returnKeyType = .done
         textView.delegate = self
@@ -45,9 +44,11 @@ class CarDetailTableViewNoteCell: UITableViewCell, ReuseIdentifying {
         self.placeholder = placeholder
         if let note = note {
             self.placeholder = "Текст Заметки"
+            textView.textColor = UIColor.black
             self.textView.text = note.text
         } else {
             self.placeholder = "Текст новой заметки"
+            textView.textColor = UIColor.lightGray
             self.textView.text = ""
         }
     }
@@ -72,7 +73,7 @@ class CarDetailTableViewNoteCell: UITableViewCell, ReuseIdentifying {
         self.contentView.addSubview(completeButton)
         completeButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(20)
+            make.leading.equalToSuperview()
             make.top.equalToSuperview().offset(5)
             make.bottom.equalToSuperview().offset(-5)
         }

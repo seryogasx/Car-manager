@@ -75,10 +75,14 @@ class CarDetailTableHeader: UITableViewHeaderFooterView, ReuseIdentifying {
     
     init(car: Car) {
         self.car = car
-        self.yearLabel.text = "\(car.year)"
-        self.markLabel.text = car.mark
-        self.modelLabel.text = car.model
-        self.modificationLabel.text = car.engine
+        if let carYear = car.year {
+            self.yearLabel.text = "Год выпуска: \(carYear)"
+        } else {
+            self.yearLabel.text = "Год выпуска: -"
+        }
+        self.markLabel.text = "Марка: ".appending(car.mark ?? "-")
+        self.modelLabel.text = "Модель: ".appending(car.model ?? "-")
+        self.modificationLabel.text = "Двигатель: ".appending(car.engine ?? "-")
         super.init(reuseIdentifier: Self.reuseIdentifier)
     }
     

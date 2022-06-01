@@ -16,6 +16,17 @@ protocol StatisticsViewControllerProtocol: UIViewController {
 final class StatisticsViewController: UIViewController, StatisticsViewControllerProtocol {
     var viewModel: StatisticsViewModelProtocol
     
+    var label: UILabel = {
+        let label = UILabel()
+        label.text = "Скоро будет больше статистики"
+        label.textColor = .lightGray
+        return label
+    }()
+    
+//    var pieChartView: PieChartView = {
+//        
+//    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

@@ -20,7 +20,7 @@ class CarDetailTableViewAlertCell: UITableViewCell, ReuseIdentifying {
     
     lazy var completeButton: CircularButton = {
         let completeButton = CircularButton()
-        completeButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        completeButton.frame = CGRect(x: 0, y: 0, width: 10, height: 44)
         return completeButton
     }()
     
@@ -63,7 +63,7 @@ class CarDetailTableViewAlertCell: UITableViewCell, ReuseIdentifying {
         self.contentView.addSubview(completeButton)
         completeButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(20)
+            make.leading.equalToSuperview()
             make.top.equalToSuperview().offset(5)
             make.bottom.equalToSuperview().offset(-5)
         }

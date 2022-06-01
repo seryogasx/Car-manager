@@ -59,6 +59,7 @@ class NewCarViewController: UIViewController, NewCarViewControllerProtocol {
         newCarTableView.estimatedRowHeight = 150
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHasBeenShown), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHasBeenDismissed), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        addTestCar()
     }
     
     @objc private func keyboardHasBeenShown(notification: Notification) {
@@ -74,7 +75,7 @@ class NewCarViewController: UIViewController, NewCarViewControllerProtocol {
     }
     
 //    func addTestCar() {
-//        let newCar = Car()
+//        let newCar = viewModel.car
 //        newCar.nickName = "octaha"
 //        newCar.mark = "skoda"
 //        newCar.model = "octavia"
@@ -83,6 +84,30 @@ class NewCarViewController: UIViewController, NewCarViewControllerProtocol {
 //        newCar.transmissionType = .amt
 //        newCar.mileage = 100000
 //        newCar.tyreSeasonType = .summer
+//        let note1 = Note()
+//        let note2 = Note()
+//        note1.text = "Заменить колодки"
+//        note2.text = "Купить огнетушитель"
+//        let alert1 = Alert()
+//        alert1.text = "Заменить антифриз"
+//        newCar.notes.append(objectsIn: [note1, note2])
+//        newCar.alerts.append(alert1)
+//        viewModel.addCar() { result in
+//            switch result {
+//                case .success(let message):
+//                    let alert = UIAlertController(title: "Авто добавлено в гараж",
+//                                                  message: message,
+//                                                  preferredStyle: .actionSheet)
+//                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+//                    self.present(alert, animated: true)
+//                case .failure(let error):
+//                    let alert = UIAlertController(title: "Ошибка",
+//                                                  message: error.localizedDescription,
+//                                                  preferredStyle: .actionSheet)
+//                    alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+//                    self.present(alert, animated: true)
+//            }
+//        }
 //    }
     
     override func viewDidLayoutSubviews() {

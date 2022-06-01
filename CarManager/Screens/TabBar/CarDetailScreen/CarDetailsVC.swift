@@ -36,6 +36,8 @@ class CarDetailsViewController: UIViewController, CarDetailViewControllerProtoco
     override func viewDidLoad() {
         super.viewDidLoad()
         carDetailTableView.dataSource = self
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHasBeenShown), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHasBeenDismissed), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func setConstraints() {
@@ -75,6 +77,18 @@ class CarDetailsViewController: UIViewController, CarDetailViewControllerProtoco
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func keyboardHasBeenShown(notification: Notification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        self.view.frame.origin.y = 0 - keyboardSize.height
+    }
+    
+    @objc private func keyboardHasBeenDismissed(notification: Notification) {
+        self.view.frame.origin.y = 0
+        self.view.setNeedsDisplay()
     }
 }
 

@@ -141,10 +141,14 @@ extension CarCollectionViewCell: UITableViewDataSource {
                 return UITableViewCell()
             }
             cell.textView.font = UIFont(name: "verdana", size: 12.0)
-            cell.update(note: car.notes.isEmpty ? nil : car.notes[indexPath.row], placeholder: "Пока нет заметок")
-            cell.textView.text = "Пока нет заметок"
+            if car.notes.isEmpty {
+                cell.update(note: nil, placeholder: "Пока нет заметок")
+                cell.textView.text = "Пока нет заметок"
+            } else {
+                cell.update(note: car.notes[indexPath.row], placeholder: "Пока нет заметок")
+            }
             cell.textView.isUserInteractionEnabled = false
-            print(cell.frame)
+            cell.completeButton.isHidden = true
             return cell
         }
     }
