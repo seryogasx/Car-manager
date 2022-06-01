@@ -25,7 +25,7 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
         }
     }
     var cash: Decimal = 0
-    var dataColors: [UIColor] = []
+    var dataColors: [UIColor] = [.green, .blue]
     var disposeBag = DisposeBag()
     var showMoreCellsDidTapped = false
     
@@ -243,44 +243,44 @@ extension StatisticsViewController: UITableViewDelegate {
 
 extension StatisticsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      if data.count <= 8 || showMoreCellsDidTapped {
-        return data.count
-      } else {
-        return 8
-      }
+        if data.count <= 8 || showMoreCellsDidTapped {
+            return data.count
+        } else {
+            return 8
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: StatisticsTableViewCell.reuseIdentifier, for: indexPath) as? StatisticsTableViewCell else {
-        return UITableViewCell()
-      }
-      cell.configure(with: data.sorted(by: { $0.1 > $1.1 }), colors: dataColors, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: StatisticsTableViewCell.reuseIdentifier, for: indexPath) as? StatisticsTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.configure(with: data.sorted(by: { $0.1 > $1.1 }).map { ($0.0, Double($0.1)) }, colors: dataColors, for: indexPath)
         return cell
     }
   
-  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-    if showMoreCellsDidTapped || data.count <= 8 {
-      return nil
-    } else {
-      let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 30))
-      footerView.backgroundColor = .clear
-      footerView.addSubview(showMoreButton)
-      showMoreButton.frame = CGRect(
-        x: 0,
-        y: 0,
-        width: footerView.frame.size.width,
-        height: footerView.frame.size.height)
-      return footerView
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if showMoreCellsDidTapped || data.count <= 8 {
+            return nil
+        } else {
+            let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 30))
+            footerView.backgroundColor = .clear
+            footerView.addSubview(showMoreButton)
+            showMoreButton.frame = CGRect(
+                x: 0,
+                y: 0,
+                width: footerView.frame.size.width,
+                height: footerView.frame.size.height)
+            return footerView
+        }
     }
-  }
   
-  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    return showMoreCellsDidTapped == false ? 30 : 0
-  }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return showMoreCellsDidTapped == false ? 30 : 0
+    }
   
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 44
-  }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
 }
 
 extension StatisticsViewController {

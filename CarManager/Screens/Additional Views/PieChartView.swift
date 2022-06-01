@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class PieChartView: UIView {
-    private var data: [(String, Int)] = []
+    private var data: [(String, Double)] = []
     private var colors: [UIColor] = [.clear]
     private var strokeWidth: CGFloat = 1
     private var borderColor: UIColor = .black
@@ -22,9 +22,9 @@ class PieChartView: UIView {
     func setData(data: [(String, Int)], colors: [UIColor]) {
         let sum = data.reduce(into: 0) { $0 += $1.1 }
         if sum == 0 {
-            self.data = data.map { ($0.0, $0.1) }
+            self.data = data.map { ($0.0, Double($0.1)) }
         } else {
-            self.data = data.map { ($0.0, $0.1 / sum) }.sorted { $0.1 > $1.1 }
+            self.data = data.map { ($0.0, Double($0.1) / Double(sum)) }.sorted { $0.1 > $1.1 }
         }
         self.colors = colors.map { $0.withAlphaComponent(0.8) }
         setNeedsDisplay()
