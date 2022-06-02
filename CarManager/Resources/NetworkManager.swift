@@ -12,24 +12,23 @@ protocol NetworkManagerProtocol {
 }
 
 class NetworkManager: NetworkManagerProtocol {
-    
+
     static let shared = NetworkManager()
-    
+
     private let scheme = "https"
     private let host = "api.openweathermap.org"
     private let path = "/data/2.5/onecall"
-    
+
     private init() {  }
-    
+
     public func checkWeather() {
-        
+
 //        guard let location = LocationManager.shared.getCurrentLocation() else { return }
         var components = URLComponents()
         components.scheme = scheme
         components.host = host
         components.path = path
-        
-        
+
         let lat = URLQueryItem(name: "lat", value: "55.558741")
         let lon = URLQueryItem(name: "lon", value: "37.378847")
 //        let lat = URLQueryItem(name: "lat", value: location.latitude)
@@ -54,9 +53,9 @@ class NetworkManager: NetworkManagerProtocol {
             }
         }.resume()
     }
-    
+
     private func checkWeatherData(_ weatherData: WeatherData) {
-        let weekMedianTemeperature = weatherData.daily.reduce(0.0) { $0 + $1.temp.day } / Double(weatherData.daily.count)
+        _ = weatherData.daily.reduce(0.0) { $0 + $1.temp.day } / Double(weatherData.daily.count)
 //        if weekMedianTemeperature < 7.0 {
 //            carGateway.fetchCars { result in
 //                switch result {
@@ -69,7 +68,8 @@ class NetworkManager: NetworkManagerProtocol {
 //                                return false
 //                            }
 //                            if carsWithSummerTyres.count > 0 {
-//                                NotificationManager.shared.changeTiresNotification(carNickNames: carsWithSummerTyres, to: .winter, delay: 2)
+//                                NotificationManager.shared.changeTiresNotification(carNickNames: carsWithSummerTyres,
+//                                                                                   to: .winter, delay: 2)
 //                            }
 //                        }
 //                    case .failure(let error):
@@ -108,8 +108,16 @@ struct WeatherInfo: Codable {
     let dt: Int
     let temp: Temperature
     let clouds: Int
-    let wind_speed: Double
-    let wind_deg: Int
+    let windSpeed: Double
+    let windDeg: Int
+
+    enum CodingKeys: String, CodingKey {
+        case dt
+        case temp
+        case clouds
+        case windSpeed = "wind_speed"
+        case windDeg = "wind_deg"
+    }
 }
 
 struct Temperature: Codable {
@@ -128,10 +136,17 @@ struct Weather: Codable {
 }
 
 struct WeatherAlert: Codable {
-    let sender_name: String
+    let senderName: String
     let event: String
     let start: Int
     let end: Int
     let description: String
-}
 
+    enum CodingKeys: String, CodingKey {
+        case senderName = "sender_name"
+        case event
+        case start
+        case end
+        case description
+    }
+}

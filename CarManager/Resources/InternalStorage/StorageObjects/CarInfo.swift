@@ -7,7 +7,7 @@
 
 import Foundation
 
-//enum CarInputData {
+// enum CarInputData {
 //    enum EngineTypes: String {
 //        case atmo
 //        case turbo
@@ -50,4 +50,4 @@ import Foundation
 //    static var extinguisherAge: [Int16] {
 //        return Array<Int16>(0...10)
 //    }
-//}
+// }

@@ -15,7 +15,7 @@ enum VisibleCellType {
 }
 
 class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
-    
+
     var cellType: VisibleCellType = .carLogo
     var carLogoImage: PublishSubject<UIImage>?
     weak var viewController: NewCarViewControllerProtocol? {
@@ -24,7 +24,7 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         }
     }
     var imagePicker: ImagePicker?
-    
+
     lazy var carImageView: CircularImageView = {
         let carImageView = CircularImageView()
         carImageView.image = UIImage(named: "DefaultCarImage")
@@ -32,7 +32,7 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         carImageView.isUserInteractionEnabled = true
         return carImageView
     }()
-    
+
     lazy var textField: UITextField = {
         let textField = UITextField()
         textField.layer.cornerRadius = 10
@@ -40,7 +40,7 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         textField.layer.borderWidth = 1
         return textField
     }()
-    
+
     lazy var addButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
@@ -51,14 +51,14 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         button.sizeToFit()
         return button
     }()
-    
+
     lazy var attributeLabel: UILabel = {
         let attributeLabel = UILabel()
         return attributeLabel
     }()
-    
+
     var disposeBag: DisposeBag = DisposeBag()
-    
+
     @objc private func presentImagePicker(sender: UITapGestureRecognizer) {
         self.imagePicker?.present(from: self)
 //        print("kek")
@@ -74,8 +74,12 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         print("selected")
         // Configure the view for the selected state
     }
-    
-    func update(attributeText: String?, cellType: VisibleCellType, image: UIImage?, text: String?, placeholder: String?) {
+
+    func update(attributeText: String?,
+                cellType: VisibleCellType,
+                image: UIImage?,
+                text: String?,
+                placeholder: String?) {
         self.cellType = cellType
         if let attributeText = attributeText {
             self.attributeLabel.text = attributeText
@@ -93,7 +97,7 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         }
         layoutIfNeeded()
     }
-    
+
     override func layoutSubviews() {
         switch cellType {
             case .carLogo:
@@ -130,7 +134,7 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
                 }
         }
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         self.carImageView.removeFromSuperview()
@@ -144,7 +148,7 @@ class NewCarTableViewCell: UITableViewCell, ReuseIdentifying {
         carImageView.addGestureRecognizer(UITapGestureRecognizer(target: self,
                                                                  action: #selector(presentImagePicker(sender:))))
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

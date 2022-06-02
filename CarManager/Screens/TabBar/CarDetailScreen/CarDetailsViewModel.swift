@@ -17,7 +17,7 @@ protocol CarDetailsViewModelProtocol {
 }
 
 class CarDetailsViewModel: CarDetailsViewModelProtocol {
-    
+
     var carSubject: PublishSubject<Car> = PublishSubject<Car>()
     var car: Car? {
         didSet {

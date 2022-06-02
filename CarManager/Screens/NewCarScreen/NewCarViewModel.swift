@@ -19,13 +19,13 @@ protocol NewCarViewModelProtocol {
 }
 
 final class NewCarViewModel: NewCarViewModelProtocol {
-    
+
     var storageManager: StorageManagerProtocol
     var networkManager: NetworkManagerProtocol
-    
+
     var car: Car = Car()
     var carLogoImage: UIImage?
-    
+
     func addCar(completion: (Result<String, StorageError>) -> Void) {
         print("Add car! \(car)")
         if checkCarData() {
@@ -41,14 +41,14 @@ final class NewCarViewModel: NewCarViewModelProtocol {
             }
         }
     }
-    
+
     private func checkCarData() -> Bool {
         if let _ = self.car.nickName {
             return true
         }
         return false
     }
-    
+
     required init(storageManager: StorageManagerProtocol, networkManager: NetworkManagerProtocol) {
         self.storageManager = storageManager
         self.networkManager = networkManager

@@ -16,10 +16,10 @@ protocol StatisticsViewControllerProtocol: UIViewController {
 
 final class StatisticsViewController: UIViewController, StatisticsViewControllerProtocol {
     var viewModel: StatisticsViewModelProtocol
-    
+
     var carsSubject: PublishSubject<[Car]> = PublishSubject<[Car]>()
     var cars: [Car] = []
-    
+
     var displayData: [(String, Int)] = [] {
         didSet {
             if displayData.count > dataColors.count {
@@ -33,7 +33,7 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
     var dataColors: [UIColor] = []
     var disposeBag = DisposeBag()
     var showMoreCellsDidTapped = false
-    
+
     private var segmentControl: UISegmentedControl = {
         let segmentControl = UISegmentedControl()
         segmentControl.insertSegment(withTitle: "Общий пробег", at: 0, animated: false)
@@ -41,31 +41,31 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
         segmentControl.selectedSegmentIndex = 0
         return segmentControl
     }()
-    
+
     private var contentView: UIView = {
         let contentView = UIView()
         return contentView
     }()
-    
+
     private var tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(StatisticsTableViewCell.self, forCellReuseIdentifier: StatisticsTableViewCell.reuseIdentifier)
         tableView.register(PieChartHeaderView.self, forHeaderFooterViewReuseIdentifier: "header")
         return tableView
     }()
-    
+
     private var header: PieChartHeaderView = {
         let header = PieChartHeaderView(reuseIdentifier: nil)
         header.frame = CGRect(x: 0, y: 0, width: 250, height: 250)
         return header
     }()
-    
+
     private var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
-  
+
     private var showMoreButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("Показать больше", for: .normal)
@@ -75,14 +75,14 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
         btn.clipsToBounds = true
         return btn
     }()
-    
+
     var label: UILabel = {
         let label = UILabel()
         label.text = "Скоро будет больше статистики"
         label.textColor = .lightGray
         return label
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setSubscribers()
@@ -96,7 +96,7 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
         setupTableHeader()
 //        segmentControl.addTarget(self, action: #selector(switchSegment), for: .valueChanged)
     }
-    
+
     private func setSubscribers() {
 //        viewModel?.dataColorsPublisher.sink { colors in
 //            self.dataColors = colors
@@ -128,7 +128,7 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
 //        viewModel?.cashPublisher.sink { cash in
 //            self.cash = cash
 //        }.store(in: &allCancellables)
-        
+
 //        viewModel.carSubject.asObservable().subscribe { [weak self] cars in
 //            if let cars = cars.element {
 //                if self?.segmentControl.selectedSegmentIndex == 0 {
@@ -142,7 +142,7 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
 //                }
 //            }
 //        }.disposed(by: disposeBag)
-        
+
         viewModel
             .carSubject
             .observe(on: MainScheduler.instance)
@@ -168,18 +168,18 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
                     self?.setYearAverageMileage()
                 }
             }
-            
+
         }.disposed(by: disposeBag)
     }
-    
+
     private func stocksNumberStringFormatter(data: [(String, Double)], number: Int) -> String {
         return "\(cars.count) авто"
     }
-    
+
     func setSumMileage() {
         displayData = cars.filter { $0.mileage != nil }.map { ($0.nickName ?? "", $0.mileage ?? 0) }
     }
-    
+
     func setYearAverageMileage() {
         let calendar = Calendar.current
         let currentYear = calendar.component(.year, from: Date())
@@ -187,19 +187,19 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
             .filter { $0.mileage != nil && $0.year != nil }
             .map { ($0.nickName ?? "", ($0.mileage ?? 0) / max(currentYear - ($0.year ?? currentYear), 1)) }
     }
-    
+
     required init(viewModel: StatisticsViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 extension StatisticsViewController {
-    
+
     private func setupScrollView() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -232,7 +232,7 @@ extension StatisticsViewController {
 //            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
 //        ])
     }
-    
+
     private func setupConstraints() {
         contentView.addSubview(segmentControl)
         contentView.addSubview(tableView)
@@ -253,7 +253,7 @@ extension StatisticsViewController {
             make.top.equalTo(segmentControl.snp.bottom).offset(20)
             make.bottom.equalToSuperview().offset(-20)
         }
-        
+
 //        NSLayoutConstraint.activate([
 //            tableView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
 //            tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
@@ -262,18 +262,18 @@ extension StatisticsViewController {
 //            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
 //        ])
     }
-    
+
     func setupTableHeader() {
         tableView.tableHeaderView = header
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
 }
 
 extension StatisticsViewController: UITableViewDelegate {
-    
+
 }
 
 extension StatisticsViewController: UITableViewDataSource {
@@ -284,7 +284,7 @@ extension StatisticsViewController: UITableViewDataSource {
             return 8
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: StatisticsTableViewCell.reuseIdentifier, for: indexPath) as? StatisticsTableViewCell else {
             return UITableViewCell()
@@ -292,7 +292,7 @@ extension StatisticsViewController: UITableViewDataSource {
         cell.configure(with: displayData.sorted(by: { $0.1 > $1.1 }).map { ($0.0, Double($0.1)) }, colors: dataColors, for: indexPath)
         return cell
     }
-  
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if showMoreCellsDidTapped || displayData.count <= 8 {
             return nil
@@ -308,11 +308,11 @@ extension StatisticsViewController: UITableViewDataSource {
             return footerView
         }
     }
-  
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return showMoreCellsDidTapped == false ? 30 : 0
     }
-  
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
@@ -326,4 +326,3 @@ extension StatisticsViewController {
         }
     }
 }
-

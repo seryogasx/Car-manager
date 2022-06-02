@@ -18,36 +18,38 @@ protocol NotificationManagerProtocol: UNUserNotificationCenterDelegate {
 class NotificationManager: NSObject, NotificationManagerProtocol {
 
     private let notificationCenter = UNUserNotificationCenter.current()
-    
+
     static let shared = NotificationManager()
-    
+
     override private init() {
         super.init()
         notificationCenter.delegate = self
     }
-    
+
     public func requestAuth() {
-        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] (granted, error) in
+        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] (granted, _) in
             print("Permission granted: \(granted)")
-            
+
             guard granted else { return }
             self?.getNotificationSettings()
         }
     }
-    
+
     public func getNotificationSettings() {
         notificationCenter.getNotificationSettings { settings in
             print("Notification settigs: \(settings)")
         }
     }
-    
-    public func changeTiresNotification(carNickName: String, to tiresType: TyreSeasonType = .summer, delay: Double = 1) {
+
+    public func changeTiresNotification(carNickName: String,
+                                        to tiresType: TyreSeasonType = .summer,
+                                        delay: Double = 1) {
         let content = UNMutableNotificationContent()
         content.title = "Смените резину"
         content.body = "В ближайшее время на \(carNickName) необходимо сменить резину на \(tiresType == .summer ? "летнюю" : "зимнюю")!"
         content.sound = UNNotificationSound.default
         content.badge = 1
-        
+
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
         let identifier = "set\(tiresType == .summer ? "Summer" : "Winter")TiresIdentifier"
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
@@ -57,14 +59,14 @@ class NotificationManager: NSObject, NotificationManagerProtocol {
             }
         }
     }
-    
+
     public func changeTiresNotification(carNickNames: [Car], to tiresType: TyreSeasonType = .summer, delay: Double = 1) {
         let content = UNMutableNotificationContent()
         content.title = "Смените резину"
         content.body = "В ближайшее время на нескольких машинах необходимо сменить резину на \(tiresType == .summer ? "летнюю" : "зимнюю")!"
         content.sound = UNNotificationSound.default
         content.badge = 1
-        
+
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: delay, repeats: false)
         let identifier = "set\(tiresType == .summer ? "Summer" : "Winter")TiresIdentifier"
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
@@ -74,7 +76,7 @@ class NotificationManager: NSObject, NotificationManagerProtocol {
             }
         }
     }
-    
+
 //    public func changeAntifreezeNotification(carNickName: String) {
 //        let content = UNMutableNotificationContent()
 //        content.title = "Замените антифриз"
@@ -91,7 +93,7 @@ class NotificationManager: NSObject, NotificationManagerProtocol {
 //            }
 //        }
 //    }
-    
+
 //    public func changeAidKitNotification(carNickName: String) {
 //        let content = UNMutableNotificationContent()
 //        content.title = "Замените аптечку"
@@ -108,7 +110,7 @@ class NotificationManager: NSObject, NotificationManagerProtocol {
 //            }
 //        }
 //    }
-    
+
 //    public func changeExtinguisherNotification(carNickName: String) {
 //        let content = UNMutableNotificationContent()
 //        content.title = "Замените аптечку"
@@ -128,17 +130,21 @@ class NotificationManager: NSObject, NotificationManagerProtocol {
 }
 
 extension NotificationManager: UNUserNotificationCenterDelegate {
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+
         completionHandler([.alert])
     }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
         if response.notification.request.identifier == "Local notify" {
             print("Handle Local notify!")
         }
-        
+
         completionHandler()
     }
 }

@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 class CarCollectionLayout: UICollectionViewFlowLayout {
-    
+
     let activeDistance: CGFloat = 200
     let zoomFactor: CGFloat = 0.3
-    
+
     override init() {
         super.init()
         scrollDirection = .horizontal
@@ -20,11 +20,11 @@ class CarCollectionLayout: UICollectionViewFlowLayout {
         minimumInteritemSpacing = 10
         itemSize = CGSize(width: UIScreen.main.bounds.width - 150, height: UIScreen.main.bounds.height / 2)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func prepare() {
         guard let collectionView = collectionView else { fatalError() }
         let verticalInsets = (collectionView.frame.height - collectionView.adjustedContentInset.top - collectionView.adjustedContentInset.bottom - itemSize.height) / 2
@@ -32,10 +32,10 @@ class CarCollectionLayout: UICollectionViewFlowLayout {
         sectionInset = UIEdgeInsets(top: verticalInsets, left: horizontalInsets, bottom: verticalInsets, right: horizontalInsets)
         super.prepare()
     }
-    
+
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
             guard let collectionView = collectionView else { return nil }
-            let rectAttributes = super.layoutAttributesForElements(in: rect)!.map { $0.copy() as! UICollectionViewLayoutAttributes }
+            let rectAttributes = super.layoutAttributesForElements(in: rect)!.compactMap { $0.copy() as? UICollectionViewLayoutAttributes }
             let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.frame.size)
 
             // Make the cells be zoomed when they reach the center of the screen
@@ -52,7 +52,7 @@ class CarCollectionLayout: UICollectionViewFlowLayout {
 
             return rectAttributes
         }
-    
+
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
             guard let collectionView = collectionView else { return .zero }
 
@@ -72,14 +72,17 @@ class CarCollectionLayout: UICollectionViewFlowLayout {
 
             return CGPoint(x: proposedContentOffset.x + offsetAdjustment, y: proposedContentOffset.y)
         }
-    
+
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
             return true
         }
 
     override func invalidationContext(forBoundsChange newBounds: CGRect) -> UICollectionViewLayoutInvalidationContext {
-        let context = super.invalidationContext(forBoundsChange: newBounds) as! UICollectionViewFlowLayoutInvalidationContext
-        context.invalidateFlowLayoutDelegateMetrics = newBounds.size != collectionView?.bounds.size
-        return context
+        if let context = super.invalidationContext(forBoundsChange: newBounds) as? UICollectionViewFlowLayoutInvalidationContext {
+            context.invalidateFlowLayoutDelegateMetrics = newBounds.size != collectionView?.bounds.size
+            return context
+        } else {
+            return UICollectionViewFlowLayoutInvalidationContext()
+        }
     }
 }

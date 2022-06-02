@@ -17,11 +17,11 @@ protocol NewCarScreenDIContainerProtocol {
 
 class NewCarScreenDIContainer: NewCarScreenDIContainerProtocol {
     var viewModel: NewCarViewModelProtocol
-    
+
     func getView() -> NewCarViewControllerProtocol {
         return NewCarViewController(viewModel: viewModel)
     }
-    
+
     required init(storageManager: StorageManagerProtocol, networkManager: NetworkManagerProtocol) {
         viewModel = NewCarViewModel(storageManager: storageManager, networkManager: networkManager)
     }

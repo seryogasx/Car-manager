@@ -10,15 +10,15 @@ import UIKit
 class CarDetailTableViewNoteCell: UITableViewCell, ReuseIdentifying {
 
     var note: Note?
-    
+
     var placeholder: String?
-    
+
     lazy var completeButton: CircularButton = {
         let completeButton = CircularButton()
         completeButton.frame = CGRect(x: 0, y: 0, width: 10, height: 44)
         return completeButton
     }()
-    
+
     lazy var textView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont(name: "verdana", size: 16.0)
@@ -52,23 +52,23 @@ class CarDetailTableViewNoteCell: UITableViewCell, ReuseIdentifying {
             self.textView.text = ""
         }
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         self.note = nil
         self.placeholder = ""
         self.textView.text = ""
     }
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setConstraints()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setConstraints() {
         self.contentView.addSubview(completeButton)
         completeButton.snp.makeConstraints { make in
@@ -88,21 +88,21 @@ class CarDetailTableViewNoteCell: UITableViewCell, ReuseIdentifying {
 }
 
 extension CarDetailTableViewNoteCell: UITextViewDelegate {
-    
+
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == self.placeholder {
             textView.text = ""
             textView.textColor = .black
         }
     }
-    
+
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text == "" {
             textView.text = self.placeholder
             textView.textColor = .lightGray
         }
     }
-    
+
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if textView.text == "\n" {
             textView.resignFirstResponder()

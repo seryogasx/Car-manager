@@ -14,13 +14,13 @@ protocol LocationManagerProtocol: CLLocationManagerDelegate {
 }
 
 class LocationManager: NSObject, LocationManagerProtocol {
-    
+
     static let shared = LocationManager()
-    
+
     private let locationManager = CLLocationManager()
     private var latitude: String? = ""
     private var longitude: String? = ""
-    
+
     public func requestAccess() {
         locationManager.requestAlwaysAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -29,7 +29,7 @@ class LocationManager: NSObject, LocationManagerProtocol {
             locationManager.startUpdatingLocation()
         }
     }
-    
+
     public func getCurrentLocation() -> (latitude: String, longitude: String)? {
         guard let latitude = latitude, let longitude = longitude else {
             return nil

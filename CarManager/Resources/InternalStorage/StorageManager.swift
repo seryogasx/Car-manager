@@ -21,12 +21,12 @@ protocol StorageManagerProtocol {
 }
 
 final class StorageManager: StorageManagerProtocol {
-    
+
     static var shared: StorageManager = .init()
-    
+
     let imageDirectory = FileManager.default.urls(for: .documentDirectory,
                                                   in: .userDomainMask).first
-    
+
     lazy var storage: Realm? = {
         do {
             let realm = try Realm()
@@ -36,9 +36,9 @@ final class StorageManager: StorageManagerProtocol {
             return nil
         }
     }()
-    
+
     private init() { }
-    
+
     func addObject(object: Object, completion: (StorageError?) -> Void) {
         do {
             try storage?.write {
@@ -50,7 +50,7 @@ final class StorageManager: StorageManagerProtocol {
             completion(.internalError(message: "Ошибка добавления!"))
         }
     }
-    
+
     func deleteObject(object: Object, completion: (StorageError?) -> Void) {
         do {
             try storage?.write {
@@ -62,7 +62,7 @@ final class StorageManager: StorageManagerProtocol {
             completion(.internalError(message: "Ошибка удаления!"))
         }
     }
-    
+
     func updateObjects(_ block: () -> Void) {
         do {
             try storage?.write {
@@ -72,14 +72,14 @@ final class StorageManager: StorageManagerProtocol {
             print("fail to updateObjects!")
         }
     }
-    
+
     func fetchObjects(objectType: Object.Type) -> [Object]? {
         if let objects = storage?.objects(objectType) {
             return Array(objects)
         }
         return nil
     }
-    
+
     func saveImage(image: UIImage) -> URL? {
         if let pngData = image.pngData(),
            let path = imageDirectory?.appendingPathComponent(UUID().uuidString),
@@ -89,7 +89,7 @@ final class StorageManager: StorageManagerProtocol {
             return nil
         }
     }
-    
+
     func getImage(url: URL, completion: (Result<UIImage, StorageError>) -> Void) {
         if let image = UIImage(contentsOfFile: url.absoluteString) {
             completion(.success(image))
@@ -97,7 +97,7 @@ final class StorageManager: StorageManagerProtocol {
             completion(.failure(StorageError.noData(message: "Fail to get image by url: \(url.absoluteString)! ")))
         }
     }
-    
+
     func deleteImage(url: URL, completion: (StorageError?) -> Void) {
         if FileManager.default.fileExists(atPath: url.absoluteString),
            let _ = try? FileManager.default.removeItem(at: url) {

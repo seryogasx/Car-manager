@@ -8,22 +8,22 @@
 import UIKit
 
 class CarDetailTableViewAlertCell: UITableViewCell, ReuseIdentifying {
-    
+
     var alert: Alert?
-    
+
     lazy var alertLabel: UILabel = {
         let alertLabel = UILabel()
         alertLabel.numberOfLines = 0
         alertLabel.font = UIFont(name: "verdana", size: 16.0)
         return alertLabel
     }()
-    
+
     lazy var completeButton: CircularButton = {
         let completeButton = CircularButton()
         completeButton.frame = CGRect(x: 0, y: 0, width: 10, height: 44)
         return completeButton
     }()
-    
+
     let placeholder: String = "Пока нет предупреждений"
 
     override func awakeFromNib() {
@@ -36,7 +36,7 @@ class CarDetailTableViewAlertCell: UITableViewCell, ReuseIdentifying {
 
         // Configure the view for the selected state
     }
-    
+
     func update(alert: Alert?) {
         self.alert = alert
         if let alert = alert {
@@ -53,12 +53,12 @@ class CarDetailTableViewAlertCell: UITableViewCell, ReuseIdentifying {
         self.alertLabel.text = ""
         self.alert = nil
     }
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setConstraints()
     }
-    
+
     private func setConstraints() {
         self.contentView.addSubview(completeButton)
         completeButton.snp.makeConstraints { make in
@@ -75,7 +75,7 @@ class CarDetailTableViewAlertCell: UITableViewCell, ReuseIdentifying {
             make.trailing.equalToSuperview().offset(-5)
         }
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

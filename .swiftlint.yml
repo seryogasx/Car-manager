@@ -1,0 +1,10 @@
+disabled_rules:
+  - large_tuple
+  - identifier_name
+  - unused_optional_binding
+  - line_length
+
+excluded:
+  - Carthage
+  - Pods
+

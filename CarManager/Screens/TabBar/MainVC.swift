@@ -15,19 +15,19 @@ protocol MainViewControllerProtocol: UITabBarController {
 }
 
 class MainViewController: UITabBarController, MainViewControllerProtocol {
-    
+
     var DIContainer: MainScreenDIContainerProtocol
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         createTabBar()
     }
-    
+
     required init(mainScreenDIContainer: MainScreenDIContainerProtocol) {
         self.DIContainer = mainScreenDIContainer
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -44,11 +44,11 @@ extension MainViewController {
         garageVC.tabBarItem.image = UIImage(systemName: "bag.fill", withConfiguration: bold)
         statisticsVC.tabBarItem.image = UIImage(systemName: "chart.bar.fill", withConfiguration: bold)
         notificationsVC.tabBarItem.image = UIImage(systemName: "newspaper.fill", withConfiguration: bold)
-        
+
         garageVC.tabBarItem.title = "Гараж"
         statisticsVC.tabBarItem.title = "Статистика"
         notificationsVC.tabBarItem.title = "Уведомления"
-        
+
         viewControllers = [navigationGarageVC, statisticsVC, notificationsVC]
     }
 }

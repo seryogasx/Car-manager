@@ -28,21 +28,21 @@ protocol GarageViewControllerProtocol: UIViewController {
 }
 
 class GarageViewController: UIViewController, GarageViewControllerProtocol {
-    
+
     let collectionLayout = CarCollectionLayout()
     var carCollectionView: UICollectionView!
-    
+
     var newCarDIContainer: NewCarScreenDIContainerProtocol
     var carDetailsDIContainer: CarDetailsScreenDIContainerProtocol
-    
+
     var viewModel: GarageScreenViewModelProtocol
     var disposeBag: DisposeBag = DisposeBag()
-    
+
     var cars: PublishSubject<[Car]> = PublishSubject<[Car]>()
-    
+
     let cornerRadius: CGFloat = 20
     let gradientLayer = CAGradientLayer()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus.circle"),
@@ -67,7 +67,7 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
         carCollectionView.register(CarCollectionViewCell.self, forCellWithReuseIdentifier: CarCollectionViewCell.reuseIdentifier)
         NetworkManager.shared.checkWeather()
     }
-    
+
     private func setConstraints() {
         view.addSubview(carCollectionView)
         NSLayoutConstraint.activate([
@@ -77,7 +77,7 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
             carCollectionView.trailingAnchor.constraint(equalTo: carCollectionView.trailingAnchor)
         ])
     }
-    
+
     private func setBindings() {
 //        self.viewModel.cars.asObservable().subscribe(onNext: { newCars in
 //            self.cars = newCars
@@ -88,7 +88,7 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
             .bind(to: self.cars)
             .disposed(by: disposeBag)
         cars.bind(to: carCollectionView.rx.items(cellIdentifier: CarCollectionViewCell.reuseIdentifier,
-                                                 cellType: CarCollectionViewCell.self)) { [unowned self] (row, car, cell) in
+                                                 cellType: CarCollectionViewCell.self)) { [unowned self] (_, car, cell) in
             if let url = URL(string: car.photoURLString) {
                 cell.setup(car: car, image: self.viewModel.getCarLogo(url: url))
             } else {
@@ -106,23 +106,23 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
             }
         }).disposed(by: disposeBag)
     }
-    
+
     private func setLayer() {
         let color = UIColor(red: 242 / 255, green: 242 / 255, blue: 247 / 255, alpha: 1)
         self.view.layer.backgroundColor = color.cgColor
         self.carCollectionView.backgroundColor = color
     }
-    
+
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //    }
-    
+
     @objc
     func addCarButtonHandler() {
         let vc = newCarDIContainer.getView()
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
+
     required init(viewModel: GarageScreenViewModelProtocol,
                   newCarDIContainer: NewCarScreenDIContainerProtocol,
                   carDetailsDIContainer: CarDetailsScreenDIContainerProtocol) {
@@ -131,13 +131,13 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
         self.carDetailsDIContainer = carDetailsDIContainer
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-//extension GarageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+// extension GarageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 //
 //    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return 1
@@ -176,4 +176,4 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
 //            }
 //        }
 //    }
-//}
+// }

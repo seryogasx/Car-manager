@@ -16,11 +16,11 @@ protocol StatisticsScreenDIContainerProtocol {
 
 class StatisticsScreenDIContainer: StatisticsScreenDIContainerProtocol {
     var viewModel: StatisticsViewModelProtocol
-    
+
     func getView() -> StatisticsViewControllerProtocol {
         return StatisticsViewController(viewModel: viewModel)
     }
-    
+
     required init(storageManager: StorageManagerProtocol) {
         viewModel = StatisticsViewModel(storageManager: storageManager)
     }

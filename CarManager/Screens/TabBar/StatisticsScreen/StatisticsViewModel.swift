@@ -16,20 +16,20 @@ protocol StatisticsViewModelProtocol {
 }
 
 final class StatisticsViewModel: StatisticsViewModelProtocol {
-    
+
     var carSubject: PublishSubject<[Car]> = PublishSubject<[Car]>()
     var storage: StorageManagerProtocol {
         didSet {
             requestData()
         }
     }
-    
+
     func requestData() {
         if let fetchedCars = storage.fetchObjects(objectType: Car.self) as? [Car] {
             carSubject.onNext(fetchedCars)
         }
     }
-    
+
     init(storageManager: StorageManagerProtocol) {
         self.storage = storageManager
     }

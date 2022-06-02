@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Swinject
+// import Swinject
 import UIKit
 
 protocol GarageScreenDIContainerProtocol {
@@ -18,12 +18,12 @@ protocol GarageScreenDIContainerProtocol {
 }
 
 class GarageScreenDIContainer: GarageScreenDIContainerProtocol {
-    
+
     var view: GarageViewControllerProtocol
     var viewModel: GarageScreenViewModelProtocol
     var carDetailsDIContainer: CarDetailsScreenDIContainerProtocol
     var newCarScreenDIContainer: NewCarScreenDIContainerProtocol
-    
+
     required init(storageManager: StorageManagerProtocol, networkManager: NetworkManagerProtocol) {
         self.viewModel = GarageScreenViewModel(storage: storageManager)
         self.carDetailsDIContainer = CarDetailsScreenDIContainer(storageManager: storageManager)

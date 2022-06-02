@@ -12,9 +12,9 @@ extension UIColor {
     static func generateColors(count: Int) -> [UIColor] {
         var colors: [UIColor] = []
         for _ in 1...count {
-            colors.append(UIColor(red: .random(in: 0...CGFloat(arc4random()) / CGFloat(UInt32.max)),
-                                  green: .random(in: 0...CGFloat(arc4random()) / CGFloat(UInt32.max)),
-                                  blue: .random(in: 0...CGFloat(arc4random()) / CGFloat(UInt32.max)),
+            colors.append(UIColor(red: CGFloat.random(in: 0...1),
+                                  green: CGFloat.random(in: 0...1),
+                                  blue: CGFloat.random(in: 0...1),
                                   alpha: 1.0))
         }
         return colors

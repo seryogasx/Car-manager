@@ -8,9 +8,9 @@
 import Foundation
 
 protocol NotificationsViewModelProtocol {
-    
+
 }
 
 class NotificationsViewModel: NotificationsViewModelProtocol {
-    
+
 }

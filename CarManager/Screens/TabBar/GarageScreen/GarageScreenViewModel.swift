@@ -22,13 +22,13 @@ class GarageScreenViewModel: NSObject, GarageScreenViewModelProtocol, NSFetchedR
 
     var cars: PublishSubject<[Car]> = PublishSubject<[Car]>()
     var storage: StorageManagerProtocol
-    
+
     func requestData() {
         if let fetchedCars = storage.fetchObjects(objectType: Car.self) as? [Car] {
             cars.onNext(fetchedCars)
         }
     }
-    
+
     func getCarLogo(url: URL) -> UIImage {
         var logo: UIImage = UIImage(named: "DefaultCarImage")!
         storage.getImage(url: url) { result in
@@ -41,7 +41,7 @@ class GarageScreenViewModel: NSObject, GarageScreenViewModelProtocol, NSFetchedR
         }
         return logo
     }
-    
+
 //    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
 //        if controller.managedObjectContext.hasChanges {
 //            do {
@@ -52,10 +52,14 @@ class GarageScreenViewModel: NSObject, GarageScreenViewModelProtocol, NSFetchedR
 //        }
 //    }
 //    
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+//                    didChange anObject: Any,
+//                    at indexPath: IndexPath?,
+//                    for type: NSFetchedResultsChangeType,
+//                    newIndexPath: IndexPath?) {
 //        self.getCars()
 //    }
-    
+
     required init(storage: StorageManagerProtocol) {
         self.storage = storage
         super.init()

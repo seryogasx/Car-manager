@@ -24,7 +24,7 @@ class MainScreenDIContainer: MainScreenDIContainerProtocol {
     var garageScreenDIContainer: GarageScreenDIContainerProtocol
     var notificationsScreenDIContainer: NotificationsScreenDIContainerProtocol
     var statisticsScreenDIContainer: StatisticsScreenDIContainerProtocol
-    
+
     required init(storageManager: StorageManagerProtocol,
                   locationManager: LocationManagerProtocol,
                   networkManager: NetworkManagerProtocol,

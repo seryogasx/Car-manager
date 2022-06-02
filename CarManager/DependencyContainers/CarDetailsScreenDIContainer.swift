@@ -15,13 +15,13 @@ protocol CarDetailsScreenDIContainerProtocol {
 }
 
 class CarDetailsScreenDIContainer: CarDetailsScreenDIContainerProtocol {
-    
+
     var viewModel: CarDetailsViewModelProtocol
-    
+
     func getView(car: Car) -> CarDetailViewControllerProtocol {
         return CarDetailsViewController(viewModel: viewModel, car: car)
     }
-    
+
     required init(storageManager: StorageManagerProtocol) {
         viewModel = CarDetailsViewModel(storageManager: storageManager)
     }

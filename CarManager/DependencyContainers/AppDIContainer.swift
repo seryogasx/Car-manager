@@ -24,7 +24,7 @@ class AppDIContainer: AppDIContainerProtocol {
     var locationManager: LocationManagerProtocol = LocationManager.shared
     var notificationManager: NotificationManagerProtocol = NotificationManager.shared
     var mainScreenDIContainer: MainScreenDIContainerProtocol
-    
+
     init() {
         mainScreenDIContainer = MainScreenDIContainer(storageManager: storageManager,
                                                       locationManager: locationManager,

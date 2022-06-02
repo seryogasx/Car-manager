@@ -10,7 +10,7 @@ import UIKit
 
 class PieChartHeaderView: UITableViewHeaderFooterView {
     static let identifier = "TableHeader"
-    
+
     private var stocksSumValueLabel: UILabel = {
         let stockSumValueLabel = UILabel()
         stockSumValueLabel.text = "0 км"
@@ -24,7 +24,7 @@ class PieChartHeaderView: UITableViewHeaderFooterView {
         stocksNumberLabel.sizeToFit()
         return stocksNumberLabel
     }()
-    
+
     private var pieChartView: PieChartView = {
         let pieChartView = PieChartView(frame: CGRect(x: 0,
                                                       y: 0,
@@ -35,14 +35,14 @@ class PieChartHeaderView: UITableViewHeaderFooterView {
                                         secondRadiusMultiplier: 0.9)
         return pieChartView
     }()
-    
+
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.addSubview(pieChartView)
         contentView.addSubview(stocksSumValueLabel)
         contentView.addSubview(stocksNumberLabel)
     }
-    
+
     init(reuseIdentifier: String?, data: [(String, Int)] = [], colors: [UIColor] = []) {
         super.init(reuseIdentifier: reuseIdentifier)
         contentView.addSubview(pieChartView)
@@ -50,7 +50,7 @@ class PieChartHeaderView: UITableViewHeaderFooterView {
         contentView.addSubview(stocksNumberLabel)
         setData(data: data, colors: colors)
     }
-    
+
     func setData(data: [(String, Int)], colors: [UIColor]) {
         let sumValue = data.reduce(into: 0) { $0 += $1.1 }
         stocksSumValueLabel.text = "\(sumValue) км"
@@ -61,14 +61,14 @@ class PieChartHeaderView: UITableViewHeaderFooterView {
         pieChartView.setNeedsDisplay()
         self.setNeedsLayout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         pieChartView.frame = CGRect(x: 0,
                                     y: 0,
                                     width: contentView.bounds.width,
@@ -77,6 +77,6 @@ class PieChartHeaderView: UITableViewHeaderFooterView {
         stocksSumValueLabel.sizeToFit()
         stocksSumValueLabel.center = CGPoint(x: pieChartView.center.x, y: pieChartView.center.y)
         stocksNumberLabel.center = CGPoint(x: pieChartView.center.x, y: pieChartView.center.y + stocksSumValueLabel.frame.height)
-        
+
     }
 }

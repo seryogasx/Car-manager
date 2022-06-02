@@ -8,7 +8,7 @@
 import UIKit
 
 class CarDetailTableHeader: UITableViewHeaderFooterView, ReuseIdentifying {
-    
+
     var car: Car
 
     var carLogoImageView: CircularImageView = {
@@ -18,7 +18,7 @@ class CarDetailTableHeader: UITableViewHeaderFooterView, ReuseIdentifying {
         carLogoImageView.contentMode = .scaleAspectFill
         return carLogoImageView
     }()
-    
+
     var mainInfoStackView: UIStackView = {
         let mainInfoStackView = UIStackView()
         mainInfoStackView.axis = .vertical
@@ -27,34 +27,34 @@ class CarDetailTableHeader: UITableViewHeaderFooterView, ReuseIdentifying {
         mainInfoStackView.spacing = 10
         return mainInfoStackView
     }()
-    
+
     var markLabel: UILabel = {
         let markLabel = UILabel()
         return markLabel
     }()
-    
+
     var modelLabel: UILabel = {
         let modelLabel = UILabel()
         return modelLabel
     }()
-    
+
     var modificationLabel: UILabel = {
         let modificationLabel = UILabel()
         return modificationLabel
     }()
-    
+
     var yearLabel: UILabel = {
         let yearLabel = UILabel()
         return yearLabel
     }()
-    
+
     private func configureMainInfoStackView() {
         mainInfoStackView.addArrangedSubview(markLabel)
         mainInfoStackView.addArrangedSubview(modelLabel)
         mainInfoStackView.addArrangedSubview(modificationLabel)
         mainInfoStackView.addArrangedSubview(yearLabel)
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         configureMainInfoStackView()
@@ -72,7 +72,7 @@ class CarDetailTableHeader: UITableViewHeaderFooterView, ReuseIdentifying {
             make.centerY.equalTo(carLogoImageView.snp.centerY)
         }
     }
-    
+
     init(car: Car) {
         self.car = car
         if let carYear = car.year {
@@ -85,7 +85,7 @@ class CarDetailTableHeader: UITableViewHeaderFooterView, ReuseIdentifying {
         self.modificationLabel.text = "Двигатель: ".appending(car.engine ?? "-")
         super.init(reuseIdentifier: Self.reuseIdentifier)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

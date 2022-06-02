@@ -17,7 +17,7 @@ protocol NotificationsScreenDIContainerProtocol {
 class NotificationsScreenDIContainer: NotificationsScreenDIContainerProtocol {
     var view: NotificationsViewControllerProtocol
     var viewModel: NotificationsViewModelProtocol
-    
+
     required init(notificationManager: NotificationManagerProtocol) {
         viewModel = NotificationsViewModel()
         view = NotificationsViewController(viewModel: viewModel)
