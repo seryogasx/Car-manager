@@ -8,27 +8,38 @@
 import Foundation
 import CoreData
 import RxSwift
+import UIKit
 
 protocol GarageScreenViewModelProtocol: AnyObject {
     var cars: PublishSubject<[Car]> { get set }
     var storage: StorageManagerProtocol { get }
-    func getCars()
+    func requestData()
+    func getCarLogo(url: URL) -> UIImage
     init(storage: StorageManagerProtocol)
 }
 
 class GarageScreenViewModel: NSObject, GarageScreenViewModelProtocol, NSFetchedResultsControllerDelegate {
 
     var cars: PublishSubject<[Car]> = PublishSubject<[Car]>()
-    var storage: StorageManagerProtocol {
-        didSet {
-            getCars()
-        }
-    }
+    var storage: StorageManagerProtocol
     
-    func getCars() {
+    func requestData() {
         if let fetchedCars = storage.fetchObjects(objectType: Car.self) as? [Car] {
             cars.onNext(fetchedCars)
         }
+    }
+    
+    func getCarLogo(url: URL) -> UIImage {
+        var logo: UIImage = UIImage(named: "DefaultCarImage")!
+        storage.getImage(url: url) { result in
+            switch result {
+                case .success(let image):
+                    logo = image
+                case .failure(let error):
+                    print("fail to get car logo! \(error.localizedDescription)")
+            }
+        }
+        return logo
     }
     
 //    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

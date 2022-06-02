@@ -54,8 +54,8 @@ class PieChartHeaderView: UITableViewHeaderFooterView {
     func setData(data: [(String, Int)], colors: [UIColor]) {
         let sumValue = data.reduce(into: 0) { $0 += $1.1 }
         stocksSumValueLabel.text = "\(sumValue) км"
-//        stocksNumberLabel.text = stocksNumberStringFormatter(data: data, number: data.count)
         stocksSumValueLabel.sizeToFit()
+        stocksNumberLabel.text = "\(data.count) авто"
         stocksNumberLabel.sizeToFit()
         pieChartView.setData(data: data, colors: colors)
         pieChartView.setNeedsDisplay()

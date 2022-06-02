@@ -38,11 +38,7 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
     var viewModel: GarageScreenViewModelProtocol
     var disposeBag: DisposeBag = DisposeBag()
     
-    var cars: [Car] = [] {
-        didSet {
-            carCollectionView.reloadData()
-        }
-    }
+    var cars: PublishSubject<[Car]> = PublishSubject<[Car]>()
     
     let cornerRadius: CGFloat = 20
     let gradientLayer = CAGradientLayer()
@@ -59,14 +55,15 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
                                                            height: view.bounds.height),
                                              collectionViewLayout: CarCollectionLayout())
         setConstraints()
-        setSubscribes()
+        setBindings()
+        viewModel.requestData()
         setLayer()
         carCollectionView.becomeFirstResponder()
         carCollectionView.collectionViewLayout = collectionLayout
         carCollectionView.isPagingEnabled = true
         carCollectionView.contentInsetAdjustmentBehavior = .always
-        carCollectionView.delegate = self
-        carCollectionView.dataSource = self
+//        carCollectionView.delegate = self
+//        carCollectionView.dataSource = self
         carCollectionView.register(CarCollectionViewCell.self, forCellWithReuseIdentifier: CarCollectionViewCell.reuseIdentifier)
         NetworkManager.shared.checkWeather()
     }
@@ -81,10 +78,24 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
         ])
     }
     
-    private func setSubscribes() {
-        self.viewModel.cars.asObservable().subscribe(onNext: { newCars in
-            self.cars = newCars
-        }).disposed(by: disposeBag)
+    private func setBindings() {
+//        self.viewModel.cars.asObservable().subscribe(onNext: { newCars in
+//            self.cars = newCars
+//        }).disposed(by: disposeBag)
+        viewModel
+            .cars
+            .observe(on: MainScheduler.instance)
+            .bind(to: self.cars)
+            .disposed(by: disposeBag)
+        
+        cars.bind(to: carCollectionView.rx.items(cellIdentifier: CarCollectionViewCell.reuseIdentifier,
+                                                 cellType: CarCollectionViewCell.self)) { [unowned self] (row, car, cell) in
+            if let url = URL(string: car.photoURLString) {
+                cell.setup(car: car, image: self.viewModel.getCarLogo(url: url))
+            } else {
+                cell.setup(car: car, image: UIImage(named: "DefaultCarImage")!)
+            }
+        }.disposed(by: disposeBag)
     }
     
     private func setLayer() {
@@ -93,10 +104,9 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
         self.carCollectionView.backgroundColor = color
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.viewModel.getCars()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//    }
     
     @objc
     func addCarButtonHandler() {
@@ -118,59 +128,43 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
     }
 }
 
-extension GarageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return cars.isEmpty ? 1 : cars.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarCollectionViewCell.reuseIdentifier, for: indexPath) as? CarCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        let index = indexPath.section
-        let defaultImage = UIImage(named: "DefaultCarImage")!
-        if cars.isEmpty {
-            cell.setup(image: defaultImage)
-        } else {
-            guard let imageURL = URL(string: cars[index].photoURLString) else {
-                cell.setup(car: cars[index], image: defaultImage)
-                return cell
-            }
-            let carImage = (try? UIImage(data: Data(contentsOf: imageURL))) ?? defaultImage
-            cell.setup(car: cars[index], image: carImage)
-        }
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == collectionView.numberOfSections - 1 {
-            if cars.isEmpty {
-                self.navigationController?.pushViewController(newCarDIContainer.getView(), animated: true)
-            } else {
-                let detailsVC = carDetailsDIContainer.getView(car: cars[indexPath.section])
-                self.navigationController?.pushViewController(detailsVC, animated: true)
-            }
-        }
-    }
-}
-
-extension UIImage {
-    var averageColor: UIColor? {
-        guard let inputImage = CIImage(image: self) else { return nil }
-        let extentVector = CIVector(x: inputImage.extent.origin.x, y: inputImage.extent.origin.y,
-                                    z: inputImage.extent.size.width, w: inputImage.extent.size.height)
-        guard let filter = CIFilter(name: "CIAreaAverage",
-                                    parameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: extentVector])
-        else { return nil }
-        guard let outputImage = filter.outputImage else { return nil }
-        var bitmap = [UInt8](repeating: 0, count: 4)
-        let context = CIContext(options: [.workingColorSpace: kCFNull ?? 0])
-        context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
-        return UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[2]) / 255)
-    }
-}
+//extension GarageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 1
+//    }
+//
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return cars.isEmpty ? 1 : cars.count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarCollectionViewCell.reuseIdentifier, for: indexPath) as? CarCollectionViewCell else {
+//            return UICollectionViewCell()
+//        }
+//        let index = indexPath.section
+//        let defaultImage = UIImage(named: "DefaultCarImage")!
+//        if cars.isEmpty {
+//            cell.setup(image: defaultImage)
+//        } else {
+//            guard let imageURL = URL(string: cars[index].photoURLString) else {
+//                cell.setup(car: cars[index], image: defaultImage)
+//                return cell
+//            }
+//            let carImage = (try? UIImage(data: Data(contentsOf: imageURL))) ?? defaultImage
+//            cell.setup(car: cars[index], image: carImage)
+//        }
+//        return cell
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        if indexPath.section == collectionView.numberOfSections - 1 {
+//            if cars.isEmpty {
+//                self.navigationController?.pushViewController(newCarDIContainer.getView(), animated: true)
+//            } else {
+//                let detailsVC = carDetailsDIContainer.getView(car: cars[indexPath.section])
+//                self.navigationController?.pushViewController(detailsVC, animated: true)
+//            }
+//        }
+//    }
+//}

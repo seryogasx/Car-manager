@@ -11,6 +11,7 @@ import RxSwift
 protocol StatisticsViewModelProtocol {
     var carSubject: PublishSubject<[Car]> { get set }
     var storage: StorageManagerProtocol { get set }
+    func requestData()
     init(storageManager: StorageManagerProtocol)
 }
 
@@ -19,11 +20,11 @@ final class StatisticsViewModel: StatisticsViewModelProtocol {
     var carSubject: PublishSubject<[Car]> = PublishSubject<[Car]>()
     var storage: StorageManagerProtocol {
         didSet {
-            getCars()
+            requestData()
         }
     }
     
-    func getCars() {
+    func requestData() {
         if let fetchedCars = storage.fetchObjects(objectType: Car.self) as? [Car] {
             carSubject.onNext(fetchedCars)
         }
