@@ -159,8 +159,6 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
                     self?.setYearAverageMileage()
                 }
             }.disposed(by: disposeBag)
-
-
         carsSubject.asObservable().subscribe { [weak self] event in
             if let newCars = event.element {
                 self?.cars = newCars

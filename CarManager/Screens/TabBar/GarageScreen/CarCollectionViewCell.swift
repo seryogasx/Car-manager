@@ -113,10 +113,6 @@ extension CarCollectionViewCell: UITableViewDataSource {
         return carTableView.sectionsCount
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let car = car {
             if section == 0 {

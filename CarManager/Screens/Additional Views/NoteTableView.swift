@@ -18,4 +18,8 @@ class NoteTableView: UITableView {
         self.estimatedRowHeight = estimatedRowHeight
         self.rowHeight = rowHeight
     }
+    
+    override func selectRow(at indexPath: IndexPath?, animated: Bool, scrollPosition: UITableView.ScrollPosition) {
+//        super.selectRow(at: indexPath, animated: animated, scrollPosition: scrollPosition)
+    }
 }

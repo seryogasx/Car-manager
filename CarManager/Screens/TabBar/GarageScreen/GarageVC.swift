@@ -87,7 +87,6 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
             .observe(on: MainScheduler.instance)
             .bind(to: self.cars)
             .disposed(by: disposeBag)
-        
         cars.bind(to: carCollectionView.rx.items(cellIdentifier: CarCollectionViewCell.reuseIdentifier,
                                                  cellType: CarCollectionViewCell.self)) { [unowned self] (row, car, cell) in
             if let url = URL(string: car.photoURLString) {
@@ -96,6 +95,16 @@ class GarageViewController: UIViewController, GarageViewControllerProtocol {
                 cell.setup(car: car, image: UIImage(named: "DefaultCarImage")!)
             }
         }.disposed(by: disposeBag)
+        carCollectionView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
+            if let cell = self?.carCollectionView.cellForItem(at: indexPath) as? CarCollectionViewCell {
+                if let car = cell.car,
+                   let detailsVC = self?.carDetailsDIContainer.getView(car: car) {
+                    self?.navigationController?.pushViewController(detailsVC, animated: true)
+                } else if let newCarView = self?.newCarDIContainer.getView() {
+                    self?.navigationController?.pushViewController(newCarView, animated: true)
+                }
+            }
+        }).disposed(by: disposeBag)
     }
     
     private func setLayer() {
