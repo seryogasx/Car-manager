@@ -71,7 +71,6 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
         btn.setTitle("Показать больше", for: .normal)
         btn.setTitleColor(.link, for: .normal)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        btn.addTarget(self, action: #selector(loadMoreTap), for: .touchUpInside)
         btn.clipsToBounds = true
         return btn
     }()
@@ -85,6 +84,7 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        showMoreButton.addTarget(self, action: #selector(loadMoreTap), for: .touchUpInside)
         setSubscribers()
         self.view.backgroundColor = .systemBackground
         tableView.delegate = self
@@ -105,7 +105,7 @@ final class StatisticsViewController: UIViewController, StatisticsViewController
 //        viewModel?.dataPublisher.sink { companies in
 //            if self.segmentControl.selectedSegmentIndex == 0 {
 //                self.data = companies.reduce(into: [(String, Double)]()) { partialResult, company in
-////                    print(company.name)
+//                    print(company.name)
 //                    if let ticker = company.name,
 //                       let stockBatchesSumCost = company.stockBatches?
 //                        .compactMap({ $0 as? StockBatch })
@@ -286,10 +286,13 @@ extension StatisticsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: StatisticsTableViewCell.reuseIdentifier, for: indexPath) as? StatisticsTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: StatisticsTableViewCell.reuseIdentifier,
+                                                       for: indexPath) as? StatisticsTableViewCell else {
             return UITableViewCell()
         }
-        cell.configure(with: displayData.sorted(by: { $0.1 > $1.1 }).map { ($0.0, Double($0.1)) }, colors: dataColors, for: indexPath)
+        cell.configure(with: displayData.sorted(by: { $0.1 > $1.1 }).map { ($0.0, Double($0.1)) },
+                       colors: dataColors,
+                       for: indexPath)
         return cell
     }
 

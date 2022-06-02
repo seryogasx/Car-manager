@@ -88,7 +88,8 @@ class NetworkManager: NetworkManagerProtocol {
 //                                return false
 //                            }
 //                            if carsWithWinterTyres.count > 0 {
-//                                NotificationManager.shared.changeTiresNotification(carNickNames: carsWithWinterTyres, to: .summer, delay: 2)
+//                                NotificationManager.shared.changeTiresNotification(carNickNames: carsWithWinterTyres,
+//                                                                                   to: .summer, delay: 2)
 //                            }
 //                        }
 //                    case .failure(let error):

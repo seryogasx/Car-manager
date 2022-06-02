@@ -57,8 +57,14 @@ class NewCarViewController: UIViewController, NewCarViewControllerProtocol {
         newCarTableView.delegate = self
         newCarTableView.rowHeight = UITableView.automaticDimension
         newCarTableView.estimatedRowHeight = 150
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHasBeenShown), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHasBeenDismissed), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardHasBeenShown),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardHasBeenDismissed),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
 //        addTestCar()
     }
 
@@ -138,7 +144,8 @@ extension NewCarViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewCarTableViewCell.reuseIdentifier) as? NewCarTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewCarTableViewCell.reuseIdentifier)
+                as? NewCarTableViewCell else {
             print("nothing to reuse")
             return UITableViewCell()
         }

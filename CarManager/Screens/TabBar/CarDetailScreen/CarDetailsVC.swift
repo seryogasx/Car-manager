@@ -36,8 +36,14 @@ class CarDetailsViewController: UIViewController, CarDetailViewControllerProtoco
     override func viewDidLoad() {
         super.viewDidLoad()
         carDetailTableView.dataSource = self
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHasBeenShown), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHasBeenDismissed), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardHasBeenShown),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardHasBeenDismissed),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
 
     private func setConstraints() {
@@ -110,19 +116,22 @@ extension CarDetailsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewAlertCell.reuseIdentifier) as? CarDetailTableViewAlertCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewAlertCell.reuseIdentifier)
+                    as? CarDetailTableViewAlertCell else {
                 return UITableViewCell()
             }
             cell.update(alert: self.car.alerts.isEmpty ? nil : self.car.alerts[indexPath.row])
             return cell
         } else if indexPath.section == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewNoteCell.reuseIdentifier) as? CarDetailTableViewNoteCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewNoteCell.reuseIdentifier)
+                    as? CarDetailTableViewNoteCell else {
                 return UITableViewCell()
             }
             cell.update(note: self.car.notes[indexPath.row], placeholder: "Текст заметки")
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddNoteTableViewCell.reuseIdentifier) as? AddNoteTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddNoteTableViewCell.reuseIdentifier)
+                    as? AddNoteTableViewCell else {
                 return UITableViewCell()
             }
             cell.update(viewController: self)

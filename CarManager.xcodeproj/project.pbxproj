@@ -42,6 +42,8 @@
 		A68BF7CC28415A2500227123 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68BF7CB28415A2500227123 /* ImagePickerController.swift */; };
 		A68CE0F02848A1A900628391 /* ExtendedUIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68CE0EF2848A1A900628391 /* ExtendedUIImage.swift */; };
 		A68CE0F22848B10300628391 /* ExtendedUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68CE0F12848B10300628391 /* ExtendedUIColor.swift */; };
+		A68CE0F5284948BC00628391 /* Swinject.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A68CE0F4284948BC00628391 /* Swinject.xcframework */; };
+		A68CE0F6284948BC00628391 /* Swinject.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A68CE0F4284948BC00628391 /* Swinject.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A690E49128342F83005EDC0E /* CarDetailTableViewNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A690E49028342F83005EDC0E /* CarDetailTableViewNoteCell.swift */; };
 		A69A0BFC2846A64100C80E0C /* NoteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69A0BFB2846A64100C80E0C /* NoteTableView.swift */; };
 		A69A0BFE2846AC8000C80E0C /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69A0BFD2846AC8000C80E0C /* PieChartView.swift */; };
@@ -81,6 +83,7 @@
 				A601D3222811919600078D0B /* RealmSwift.xcframework in Embed Frameworks */,
 				A60A65822806CBE000C362C7 /* RxSwift.xcframework in Embed Frameworks */,
 				A60A657E2806CBE000C362C7 /* RxCocoa.xcframework in Embed Frameworks */,
+				A68CE0F6284948BC00628391 /* Swinject.xcframework in Embed Frameworks */,
 				A60A65802806CBE000C362C7 /* RxRelay.xcframework in Embed Frameworks */,
 				A601D3202811919600078D0B /* Realm.xcframework in Embed Frameworks */,
 			);
@@ -121,6 +124,7 @@
 		A68BF7CB28415A2500227123 /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
 		A68CE0EF2848A1A900628391 /* ExtendedUIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedUIImage.swift; sourceTree = "<group>"; };
 		A68CE0F12848B10300628391 /* ExtendedUIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedUIColor.swift; sourceTree = "<group>"; };
+		A68CE0F4284948BC00628391 /* Swinject.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Swinject.xcframework; path = Carthage/Build/Swinject.xcframework; sourceTree = "<group>"; };
 		A690E49028342F83005EDC0E /* CarDetailTableViewNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailTableViewNoteCell.swift; sourceTree = "<group>"; };
 		A69A0BFB2846A64100C80E0C /* NoteTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableView.swift; sourceTree = "<group>"; };
 		A69A0BFD2846AC8000C80E0C /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 				A601D3212811919600078D0B /* RealmSwift.xcframework in Frameworks */,
 				A60A65812806CBE000C362C7 /* RxSwift.xcframework in Frameworks */,
 				A60A657D2806CBE000C362C7 /* RxCocoa.xcframework in Frameworks */,
+				A68CE0F5284948BC00628391 /* Swinject.xcframework in Frameworks */,
 				A60A657F2806CBE000C362C7 /* RxRelay.xcframework in Frameworks */,
 				A601D31F2811919600078D0B /* Realm.xcframework in Frameworks */,
 			);
@@ -283,6 +288,7 @@
 		A692A05F2747CE13005962C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A68CE0F4284948BC00628391 /* Swinject.xcframework */,
 				A601D31D2811919600078D0B /* Realm.xcframework */,
 				A601D31E2811919600078D0B /* RealmSwift.xcframework */,
 				A60A65842806F45300C362C7 /* SnapKit.xcframework */,

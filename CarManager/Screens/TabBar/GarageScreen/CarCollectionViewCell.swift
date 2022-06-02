@@ -128,7 +128,8 @@ extension CarCollectionViewCell: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewAlertCell.reuseIdentifier) as? CarDetailTableViewAlertCell,
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewAlertCell.reuseIdentifier)
+                    as? CarDetailTableViewAlertCell,
                   let car = car else {
                 return UITableViewCell()
             }
@@ -136,7 +137,8 @@ extension CarCollectionViewCell: UITableViewDataSource {
             cell.update(alert: car.alerts.isEmpty ? nil : car.alerts[indexPath.row])
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewNoteCell.reuseIdentifier) as? CarDetailTableViewNoteCell,
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CarDetailTableViewNoteCell.reuseIdentifier)
+                    as? CarDetailTableViewNoteCell,
                   let car = car else {
                 return UITableViewCell()
             }

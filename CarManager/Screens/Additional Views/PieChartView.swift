@@ -44,7 +44,6 @@ class PieChartView: UIView {
         let mainRadius = min(frame.width / 2, frame.height / 2) - (strokeWidth / 2)
         let secondRadius = mainRadius * secondRadiusMultiplier
 
-        var currentAngle: CGFloat = -CGFloat.pi / 2
         borderColor.setStroke()
         drawContext.setLineWidth(strokeWidth)
         guard data.count > 0 else {
@@ -61,6 +60,13 @@ class PieChartView: UIView {
             drawInnerCircle(drawContext: drawContext, pieCenter: pieCenter, secondRadius: secondRadius)
             return
         }
+        drawMainCircle(drawContext: drawContext, pieCenter: pieCenter, mainRadius: mainRadius)
+        drawInnerCircle(drawContext: drawContext, pieCenter: pieCenter, secondRadius: secondRadius)
+    }
+
+    func drawMainCircle(drawContext: CGContext, pieCenter: CGPoint, mainRadius: CGFloat) {
+        let mainRadius = min(frame.width / 2, frame.height / 2) - (strokeWidth / 2)
+        var currentAngle: CGFloat = -CGFloat.pi / 2
         for (index, (_, value)) in data.enumerated() {
             let valueAngle = CGFloat(value) * 2.0 * CGFloat.pi
 
@@ -71,7 +77,11 @@ class PieChartView: UIView {
             let path = UIBezierPath()
             path.move(to: CGPoint.zero)
             path.addLine(to: CGPoint(x: mainRadius, y: 0))
-            path.addArc(withCenter: CGPoint.zero, radius: mainRadius, startAngle: 0, endAngle: CGFloat(valueAngle), clockwise: true)
+            path.addArc(withCenter: CGPoint.zero,
+                        radius: mainRadius,
+                        startAngle: 0,
+                        endAngle: CGFloat(valueAngle),
+                        clockwise: true)
             path.close()
 
             drawContext.addPath(path.cgPath)
@@ -83,13 +93,16 @@ class PieChartView: UIView {
             drawContext.restoreGState()
             currentAngle += valueAngle
         }
-        drawInnerCircle(drawContext: drawContext, pieCenter: pieCenter, secondRadius: secondRadius)
     }
 
     func drawInnerCircle(drawContext: CGContext, pieCenter: CGPoint, secondRadius: CGFloat) {
         drawContext.saveGState()
         drawContext.translateBy(x: pieCenter.x, y: pieCenter.y)
-        let path = UIBezierPath(arcCenter: CGPoint.zero, radius: secondRadius, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: true)
+        let path = UIBezierPath(arcCenter: CGPoint.zero,
+                                radius: secondRadius,
+                                startAngle: 0,
+                                endAngle: 2 * CGFloat.pi,
+                                clockwise: true)
         drawContext.addPath(path.cgPath)
         drawContext.strokePath()
         drawContext.addPath(path.cgPath)
